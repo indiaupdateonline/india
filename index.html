@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Statewise Weekly Current Affairs — India</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -21,7 +21,7 @@
   </div>
 
   <script type="module">
-    import { supabase } from '/assets/js/supabase-client.js';
+    import { supabase } from 'supabase-client.js';
 
     async function loadStates() {
       const { data, error } = await supabase.from('states').select('name_en,name_hi,slug,map_path').order('name_en');
@@ -38,7 +38,7 @@
         card.innerHTML = `
           <div class="map-thumb">${mapUrl?`<img src="${mapUrl}" alt="${s.name_en} map">`:''}</div>
           <h3>${s.name_hi || s.name_en}</h3>
-          <p><a class="btn" href="/states/state.html?name=${encodeURIComponent(s.name_en)}">View Current Affairs</a></p>
+          <p><a class="btn" href="state.html?name=${encodeURIComponent(s.name_en)}">View Current Affairs</a></p>
         `;
         grid.appendChild(card);
       }
