@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Dashboard</title><link rel="stylesheet" href="/assets/css/style.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Dashboard</title><link rel="stylesheet" href="style.css"></head>
 <body>
 <div class="container">
   <h2>Admin Dashboard</h2>
@@ -20,7 +20,7 @@
 </div>
 
 <script type="module">
-  import { supabase } from '/assets/js/supabase-client.js';
+  import { supabase } from 'supabase-client.js';
 
   const { data: { user }, error: userErr } = await supabase.auth.getUser();
   if (!user) { location.href = '/admin/login.html'; throw new Error('not logged in'); }
