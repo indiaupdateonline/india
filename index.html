@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Statewise Weekly Current Affairs — India</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Statewise Weekly Current Affairs</h1>
+      <div>
+        <input id="searchBox" class="search" placeholder="Search state..." />
+      </div>
+    </header>
+
+    <main>
+      <section id="statesGrid" class="grid"></section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { supabase } from '/assets/js/supabase-client.js';
+
+    async function loadStates() {
+      const { data, error } = await supabase.from('states').select('name_en,name_hi,slug,map_path').order('name_en');
+      const grid = document.getElementById('statesGrid');
+      if (error) { grid.innerHTML = '<p>Error loading states</p>'; console.error(error); return; }
+      grid.innerHTML = '';
+      for (const s of data) {
+        let mapUrl = '';
+        if (s.map_path) {
+          const { data: urlData } = supabase.storage.from('maps').getPublicUrl(s.map_path);
+          mapUrl = urlData?.publicUrl || '';
+        }
+        const card = document.createElement('div'); card.className='card';
+        card.innerHTML = `
+          <div class="map-thumb">${mapUrl?`<img src="${mapUrl}" alt="${s.name_en} map">`:''}</div>
+          <h3>${s.name_hi || s.name_en}</h3>
+          <p><a class="btn" href="/states/state.html?name=${encodeURIComponent(s.name_en)}">View Current Affairs</a></p>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    document.getElementById('searchBox').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('#statesGrid .card').forEach(card => {
+        const txt = card.innerText.toLowerCase();
+        card.style.display = txt.includes(q) ? '' : 'none';
+      });
+    });
+
+    loadStates();
+  </script>
+</body>
+</html>
