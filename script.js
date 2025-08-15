@@ -1,31 +1,51 @@
-// Supabase credentials
+// Supabase से कनेक्ट
+const { createClient } = supabase;
+
 const SUPABASE_URL = "https://frnzwjwdlymvxzjnbzfn.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZybnp3andkbHltdnh6am5iemZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyNzY5MDksImV4cCI6MjA3MDg1MjkwOX0.HbfY-_PPhXYXccmqjqBrIQm4LGcItzDre3rbLQACb5o";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZybnp3andkbHltdnh6am5iemZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyNzY5MDksImV4cCI6MjA3MDg1MjkwOX0.HbfY-_PPhXYXccmqjqBrIQm4LGcItzDre3rbLQACb5o";
 
-// Initialize Supabase client
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Fetch states and display
-async function loadStates() {
-    const { data, error } = await supabase
-        .from("states") // यहां अपनी टेबल का नाम डालें
-        .select("*");
+// URL से state पढ़ना
+const params = new URLSearchParams(window.location.search);
+const stateName = params.get("state");
 
-    if (error) {
-        console.error("Error fetching data:", error);
-        document.getElementById("states-list").innerHTML = "<p>Error loading data</p>";
+// डेटा लोड करना
+async function loadCurrentAffairs() {
+    if (!stateName) {
+        document.getElementById("content").innerHTML = "<p>No state selected.</p>";
         return;
     }
 
-    const container = document.getElementById("states-list");
-    container.innerHTML = "";
-    data.forEach(state => {
-        const card = document.createElement("div");
-        card.className = "state-card";
-        card.innerHTML = `<h2>${state.name}</h2><p>${state.description || "No details available"}</p>`;
-        container.appendChild(card);
+    const { data, error } = await supabaseClient
+        .from("current_affairs")
+        .select("*")
+        .eq("state", stateName)
+        .order("date", { ascending: false });
+
+    if (error) {
+        console.error("Error fetching data:", error);
+        document.getElementById("content").innerHTML = `<p>Error: ${error.message}</p>`;
+        return;
+    }
+
+    if (!data.length) {
+        document.getElementById("content").innerHTML = "<p>No current affairs found.</p>";
+        return;
+    }
+
+    let html = "";
+    data.forEach(row => {
+        html += `
+            <div class="affair">
+                <h3>${row.title}</h3>
+                <p>${row.description}</p>
+                <small>${new Date(row.date).toLocaleDateString()}</small>
+            </div>
+        `;
     });
+
+    document.getElementById("content").innerHTML = html;
 }
 
-// Load on page start
-loadStates();
+loadCurrentAffairs();
