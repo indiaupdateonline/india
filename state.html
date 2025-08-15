@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title id="title">State — Current Affairs</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -21,7 +21,7 @@
   </div>
 
   <script type="module">
-    import { supabase } from '/assets/js/supabase-client.js';
+    import { supabase } from 'supabase-client.js';
 
     const params = new URLSearchParams(location.search);
     const stateName = params.get('name');
