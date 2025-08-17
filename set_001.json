@@ -1,0 +1,11 @@
+{
+  "set_id": "set_001",
+  "title": "Basic nouns (Ainu)",
+  "language": "Ainu",
+  "words": [
+    { "id": "w0001", "word": "ramu", "english": "sun", "meanings": { "hi": "सूरज", "ar": "شمس", "zh": "太阳", "es": "sol", "en": "sun" }, "description_en": "The star at the center of the solar system.", "tags": ["nature", "astronomy"] },
+    { "id": "w0002", "word": "yakan", "english": "water", "meanings": { "hi": "पानी", "ar": "ماء", "zh": "水", "es": "agua", "en": "water" }, "description_en": "Fresh water used for drinking.", "tags": ["basic", "nature"] },
+    { "id": "w0003", "word": "huk", "english": "fire", "meanings": { "hi": "आग", "ar": "نار", "zh": "火", "es": "fuego", "en": "fire" }, "description_en": "Combustion flame.", "tags": ["element", "nature"] },
+    { "id": "w0004", "word": "itak", "english": "word", "meanings": { "hi": "शब्द", "ar": "كلمة", "zh": "词", "es": "palabra", "en": "word" }, "description_en": "A unit of language; speech or language itself.", "tags": ["linguistics"] }
+  ]
+}
