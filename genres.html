@@ -2,726 +2,365 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
   <title>Genres — Indian Literature Archive</title>
-  <meta name="description" content="Detailed guide to literary genres in the Indian Literature Archive: definitions, history, key works, editorial notes, research directions, and teaching resources." />
+  <meta name="description" content="Browse literary genres and discover books from India's classical and medieval traditions." />
+  <!-- Favicon & fonts follow site base -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Serif:400,700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root{
-      --accent:#0b6b6b;
-      --dark:#0b2b3a;
-      --muted:#6b7280;
-      --bg:#fbfefe;
-      --card:#ffffff;
-      --border:#e6eef0;
-      --radius:10px;
-      --max-width:1150px;
-    }
-    html,body{height:100%;margin:0;font-family:"Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased;line-height:1.6}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:var(--max-width);margin:0 auto;padding:18px}
-
-    /* Announcement, header */
-    .announcement-bar{background:var(--dark);color:#fff;padding:8px 0;font-size:14px}
-    .announcement-bar .container{display:flex;justify-content:space-between;align-items:center;gap:12px}
-    header.site-header{background:var(--dark);color:#fff;padding:12px 0}
-    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .branding{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo-symbol{width:44px;height:44px;border-radius:6px;background:#fff;color:var(--dark);display:flex;align-items:center;justify-content:center;font-weight:700}
-    .site-title{margin:0;font-size:16px;font-weight:700}
-    .site-tagline{margin:0;font-size:12px;color:#cfe7e7}
-    nav.main-navigation{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    nav.main-navigation a{color:#fff;padding:8px 10px;border-radius:6px;font-weight:600}
-    .mobile-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.12);padding:6px;border-radius:8px;color:#fff}
-
-    /* Hero */
-    .hero{background:linear-gradient(180deg, rgba(11,43,58,0.95), rgba(11,43,58,0.85));color:#fff;padding:28px 0;margin-bottom:14px}
-    .hero .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .hero h1{margin:0;font-size:22px}
-    .hero p{margin:6px 0;color:#d6f0f0}
-
-    /* Main layout */
-    main#main-content{padding-bottom:40px}
-    .layout{display:grid;grid-template-columns:1fr 350px;gap:18px;align-items:start}
-    @media (max-width:980px){ .layout{grid-template-columns:1fr} .mobile-toggle{display:inline-block} nav.main-navigation{display:none} }
-
-    /* Cards */
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:0 6px 18px rgba(11,43,58,0.06);padding:14px;border:1px solid var(--border)}
-    .muted{color:var(--muted);font-size:13px}
-    .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-
-    /* genre grid/list */
-    .genres-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    @media (max-width:980px){ .genres-grid{grid-template-columns:1fr} }
-    .genre-card{border-left:6px solid var(--accent);padding:14px;cursor:pointer}
-    .genre-title{display:flex;justify-content:space-between;align-items:center;gap:8px}
-    .genre-title h3{margin:0;font-size:18px}
-    .genre-meta{color:var(--muted);font-size:13px}
-    .genre-body{margin-top:10px}
-
-    /* accordion specifics */
-    .accordion{border-top:1px solid #f0f6f6}
-    .accordion-item{border-bottom:1px solid #f2f6f6}
-    .accordion-trigger{background:transparent;border:0;width:100%;text-align:left;padding:12px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
-    .accordion-panel{padding:6px 0 18px 0;display:none}
-    .accordion-panel.show{display:block}
-
-    /* small lists and chips */
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .chip{background:#e6f6f6;color:var(--accent);padding:5px 8px;border-radius:999px;font-weight:600;font-size:12px}
-
-    /* table */
-    table{width:100%;border-collapse:collapse;margin-top:10px}
-    th,td{padding:10px;border-bottom:1px solid #f1f5f9;text-align:left;font-size:14px}
-    th{background:#f8fafc;font-weight:700;color:var(--dark)}
-
-    /* search */
-    .search-row{display:flex;gap:10px;align-items:center}
-    .search-row input, .search-row select{padding:10px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;font-size:14px;min-width:120px}
-    .btn{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
-    .btn-ghost{background:transparent;border:1px solid #e6eef0;padding:8px;border-radius:8px;cursor:pointer}
-
-    /* right column detail */
-    .detail-title{font-weight:800}
-    .detail-content p{margin-top:8px}
-    .resource-list{list-style:none;padding-left:0;margin:0;display:flex;flex-direction:column;gap:8px}
-
-    footer.site-footer{background:var(--dark);color:#fff;padding:18px 0;margin-top:24px}
-    footer .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    footer a{color:#fff}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    /* small utilities */
-    .kbd{background:#f1f7f7;border-radius:4px;padding:3px 6px;font-size:12px;border:1px solid #e6f6f6}
+    /* Minimal page-specific styles so the page looks good inside your theme.
+       You can remove/replace with your full style.css rules. */
+    .genres-hero { padding: 48px 0; background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.05)); color: #111; }
+    .genres-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+    .genre-card { background: #fff; border: 1px solid #e6e6e6; padding: 18px; border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,.03); }
+    .genre-card h3 { margin: 0 0 8px 0; font-size: 1.05rem; }
+    .genre-card p { margin:0; color:#555; font-size: .95rem; }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 14px; margin-top:16px; }
+    .book-card { display:flex; gap:12px; background:#fff; padding:12px; align-items: flex-start; border-radius:8px; border:1px solid #eee;}
+    .book-cover { width:72px; height:100px; object-fit:cover; border-radius:4px; flex-shrink:0; background:#f0f0f0; }
+    .book-meta h4 { margin:0 0 6px 0; font-size:1rem; }
+    .controls { display:flex; gap:10px; align-items:center; margin:18px 0; flex-wrap:wrap;}
+    .chart-wrap { max-width:820px; margin:18px 0; }
+    .pagination { display:flex; gap:8px; align-items:center; margin-top:14px; flex-wrap:wrap; }
+    @media (max-width:600px){ .book-cover{width:60px;height:84px} }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <a class="sr-only" href="#main-content">Skip to main content</a>
-
-  <div class="announcement-bar" role="region" aria-label="Announcement">
-    <div class="container">
-      <div>New: Featured translations and curated teaching modules now available.</div>
-      <div class="muted">Browse by genre, period, or language.</div>
-    </div>
+  <!-- Top announcement & header (kept identical to main site) -->
+  <div class="announcement-bar">
+    <div class="container"><p>New: Complete translations of Silappadikaram now available! <a href="/tamil/silappadikaram" class="announcement-link">Explore now</a></p></div>
   </div>
 
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a class="branding" href="/" aria-label="Indian Literature Archive home">
-        <div class="logo-symbol" aria-hidden="true">IA</div>
-        <div>
-          <div class="site-title">Indian Literature Archive</div>
-          <div class="site-tagline">Ancient &amp; Medieval Texts</div>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-container">
+        <div class="branding">
+          <a href="/" class="logo-link">
+            <div class="logo-symbol">IA</div>
+            <div class="logo-text">
+              <h1 class="site-title">Indian Literature Archive</h1>
+              <p class="site-tagline">Ancient & Medieval Texts</p>
+            </div>
+          </a>
         </div>
-      </a>
-
-      <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
-        <a href="/">Home</a>
-        <a href="/languages">Languages</a>
-        <a href="/periods">Periods</a>
-        <a href="/genres" aria-current="page">Genres</a>
-        <a href="/resources">Resources</a>
-        <a href="/about">About</a>
-      </nav>
-
-      <button class="mobile-toggle" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false">Menu</button>
+        <nav class="main-navigation" aria-label="Main Navigation">
+          <!-- Keep your main nav markup (omitted here for brevity) -->
+          <ul class="nav-menu">
+            <li class="menu-item"><a href="/">Home</a></li>
+            <li class="menu-item has-dropdown current-menu-item"><a href="/genres">Genres</a></li>
+            <li class="menu-item"><a href="/periods">Periods</a></li>
+            <li class="menu-item"><a href="/languages">Languages</a></li>
+            <li class="menu-item"><a href="/resources">Resources</a></li>
+            <li class="menu-item"><a href="/about">About</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Mobile Menu" aria-expanded="false">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Mobile menu -->
-  <div id="mobileMenu" style="display:none;background:var(--dark);color:#fff;padding:12px">
-    <div class="container" style="display:flex;flex-direction:column;gap:8px">
-      <a href="/">Home</a>
-      <a href="/languages">Languages</a>
-      <a href="/periods">Periods</a>
-      <a href="/genres">Genres</a>
-      <a href="/resources">Resources</a>
-      <a href="/about">About</a>
-    </div>
-  </div>
-
-  <section class="hero" role="region" aria-label="Genres hero">
-    <div class="container hero-inner">
-      <div>
-        <h1>Genres — An Atlas of Literary Forms</h1>
-        <p>Explore detailed descriptions, history, key works, editorial notes, research directions and teaching resources for principal genres across the subcontinent.</p>
-      </div>
-
-      <div style="display:flex;gap:10px;align-items:center">
-        <div class="card" style="padding:10px;text-align:center;min-width:120px">
-          <div class="muted">Total genres</div>
-          <div id="totalGenres" style="font-weight:800;font-size:18px;margin-top:6px">—</div>
+  <main id="main-content">
+    <section class="hero-section genres-hero">
+      <div class="container">
+        <h2 class="hero-title">Explore by Genre</h2>
+        <p class="hero-subtitle">Browse our collection by literary genre — epics, poetry, drama, law, science and more. Data-driven: the page reads `genres.json` and renders the catalog in the browser.</p>
+        <div style="margin-top:12px">
+          <a class="btn btn-primary" href="#genres-list">Browse genres</a>
+          <a class="btn btn-secondary" href="/texts">All texts</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <main id="main-content" role="main">
-    <div class="container">
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <section id="genres-list" class="section">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
           <div>
-            <strong style="font-size:16px">Search & Filter Genres</strong>
-            <div class="muted">Type to filter genre names, or filter by broad scope (performance, devotional, technical).</div>
+            <h2 class="section-title">Genres</h2>
+            <p class="section-description">Click a genre to view books. The client loads `genres.json` (sample included) and displays charts, search and pagination.</p>
           </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button id="loadJsonBtn" class="btn-ghost" title="Load additional data from genres.json">Load genres.json</button>
-            <button id="resetBtn" class="btn-ghost" title="Reset filters">Reset</button>
+
+          <div style="min-width:280px">
+            <div class="controls" role="search" aria-label="Search and filters">
+              <input id="global-search" type="search" placeholder="Search titles, authors..." style="padding:8px;min-width:200px;" />
+              <select id="genre-filter" aria-label="Filter by genre">
+                <option value="">All genres</option>
+              </select>
+              <label for="per-page">Per page</label>
+              <select id="per-page" aria-label="Results per page">
+                <option>8</option><option>12</option><option>24</option><option>48</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="controls" style="margin-top:12px">
-          <div class="search-row" style="flex:1">
-            <input id="searchInput" type="search" placeholder="Search genres, works, keywords..." aria-label="Search genres" />
-            <select id="scopeFilter" aria-label="Scope filter">
-              <option value="">All scopes</option>
-              <option value="performative">Performative / Oral</option>
-              <option value="devotional">Devotional / Religious</option>
-              <option value="scholarly">Scholarly / Technical</option>
-              <option value="narrative">Narrative</option>
-            </select>
-            <select id="sortSelect" aria-label="Sort">
-              <option value="name-asc">Name A → Z</option>
-              <option value="name-desc">Name Z → A</option>
-            </select>
-            <button id="searchBtn" class="btn">Apply</button>
-          </div>
+        <!-- Chart -->
+        <div class="chart-wrap">
+          <canvas id="genresChart" aria-label="Books per genre"></canvas>
         </div>
+
+        <!-- Genres grid -->
+        <div class="genres-grid" id="genresGrid" aria-live="polite"></div>
+
+        <!-- Book results -->
+        <div id="booksPanel" style="margin-top:28px">
+          <h3 id="booksPanelTitle" style="margin:0 0 12px 0">All books</h3>
+          <div id="booksList" class="books-grid" aria-live="polite"></div>
+
+          <div class="pagination" id="pagination"></div>
+        </div>
+
       </div>
-
-      <div style="height:12px"></div>
-
-      <div class="layout">
-
-        <!-- LEFT: genres grid & accordion details -->
-        <section class="left-column">
-          <div class="card">
-            <strong>Genre Directory</strong>
-            <div class="muted" style="margin-top:6px">Click a genre to expand a full, richly annotated profile: history, subgenres, example texts, editorial issues, metadata recommendations, and suggested readings.</div>
-
-            <div class="genres-grid" id="genresGrid" style="margin-top:12px">
-              <!-- cards injected by JS -->
-            </div>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <div class="card">
-            <strong>Methodology & Editorial Practices</strong>
-            <div class="muted" style="margin-top:6px">How genres are defined here, handling cross-genre works, and editorial protocols used by the Archive.</div>
-            <div style="margin-top:10px">
-              <p><strong>Definition approach:</strong> We treat genres as pragmatic scholarly categories — they are descriptive and functional rather than rigid taxonomies. Each entry records historical range, typical forms, common scripts, representative manuscripts/editions, and digital/TEI recommendations.</p>
-
-              <p><strong>Cross-genre works:</strong> Many texts span genres (e.g., epic that contains devotional hymns). In such cases entries identify primary and secondary genre affiliations and provide recommended ways to cite and display multi-layered texts.</p>
-
-              <p><strong>Editorial standards:</strong> We recommend TEI encoding, detailed collation notes, and recording of witness-level metadata (copyist, colophon, repository shelfmark, digital object identifier where available). For translations, record translator's apparatus and editorial choices (diplomatic vs normalized text).</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- RIGHT: detail panel & resources -->
-        <aside class="right-column">
-          <div class="card" id="detailPanel" aria-live="polite">
-            <div class="detail-title">Selected Genre — details</div>
-            <div id="detailContent" class="detail-content">
-              <p class="muted">Select a genre card on the left to see the detailed profile here.</p>
-            </div>
-          </div>
-
-          <div class="card" style="margin-top:12px">
-            <strong>Resource & Teaching Pack Links</strong>
-            <div class="muted" style="margin-top:6px">Download curated reading lists and syllabi for teaching modules based on genre.</div>
-            <ul class="resource-list" style="margin-top:10px">
-              <li><a href="/resources/teaching/genres-syllabus.pdf" target="_blank">Syllabus: Genres & Methods (PDF)</a></li>
-              <li><a href="/resources/reading-lists/epic-poetry.csv" target="_blank">Reading list: Epics & Poetry (CSV)</a></li>
-              <li><a href="/resources/metadata/tei-guidelines.html" target="_blank">TEI Guidelines for Indian Texts</a></li>
-            </ul>
-          </div>
-
-          <div class="card" style="margin-top:12px">
-            <strong>Quick FAQ</strong>
-            <div class="muted" style="margin-top:6px">Some common questions about genre classification and the archive's approach.</div>
-            <ol style="margin-top:10px">
-              <li><strong>Q:</strong> How are dates attached to genres? <br><strong>A:</strong> Dates indicate typical composition or flourishing periods; they are heuristic ranges, not strict boundaries.</li>
-              <li><strong>Q:</strong> Can I suggest new genre entries? <br><strong>A:</strong> Yes — email <a href="mailto:info@indianliteraturearchive.org">info@indianliteraturearchive.org</a> with references and supporting manuscript/edition data.</li>
-              <li><strong>Q:</strong> Does the archive host full texts? <br><strong>A:</strong> Many. Each genre entry links to representative texts and to the full-text catalog where available.</li>
-            </ol>
-          </div>
-        </aside>
-      </div>
-
-      <div style="height:18px"></div>
-
-      <!-- In-depth genre encyclopedia (accordion) -->
-      <section class="card accordion" aria-label="Genre encyclopedia">
-        <strong>Genre Encyclopedia — Long-form profiles</strong>
-        <div class="muted" style="margin-top:6px">Below are extended, citable profiles for major genres. Use the search box above to filter.</div>
-
-        <div id="encyclopedia" style="margin-top:12px">
-          <!-- JS will populate long entries here -->
-        </div>
-      </section>
-
-    </div>
+    </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <div>
-        <div style="font-weight:700">Indian Literature Archive</div>
-        <div class="muted">A non-profit initiative dedicated to preserving and sharing India's literary heritage</div>
+  <footer class="site-footer">
+    <div class="footer-main container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3 class="footer-title">Indian Literature Archive</h3>
+          <p class="footer-description">A non-profit initiative...</p>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/periods">Periods</a></li></ul>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-title">Contact</h3>
+          <address class="footer-contact"><p><i class="fas fa-map-marker-alt"></i> 123 Literary Lane, New Delhi</p></address>
+        </div>
       </div>
-      <div style="text-align:right">
-        <div class="muted">© <span id="year"></span> Indian Literature Archive</div>
-        <div style="margin-top:6px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="accessibility.html">Accessibility</a></div>
-      </div>
+    </div>
+    <div class="footer-bottom container">
+      <div class="copyright">&copy; <span id="year"></span> Indian Literature Archive</div>
+      <div class="footer-legal"><a href="privacy.html">Privacy Policy</a> <a href="terms.html">Terms</a></div>
     </div>
   </footer>
 
-  <!-- Scripts: interactive behavior, datasource loading -->
+  <!-- Minimal JS to render the page by reading ./genres.json -->
   <script>
-    // Minimal interactive behavior:
-    // - Populate genre cards and encyclopedia entries
-    // - Search & filter in-page
-    // - Show details in right panel
-    // - Optional: load extended data from genres.json (button)
-
-    const GENRES = [
-      {
-        id: "epic",
-        name: "Epic (Mahākāvya, Itihāsa)",
-        scope: "narrative",
-        overview: "Large-scale narrative compositions that combine myth, history, ethics and ritual instruction. Epics often function as cultural repositories shaping religious and political memory. They include pan-Indic exemplars (Mahabharata, Ramayana) and regionally distinct epic cycles.",
-        keyFeatures: [
-          "Mixed genres: verse + prose, embedded didactic passages",
-          "Long narrative arc with multiple episodes and embedded sub-stories",
-          "Multiple recensions and regional adaptations",
-          "Strong role in performance traditions (recitation, theatre, puppetry)"
-        ],
-        historicalNotes: "Epic compositions emerged in the late first millennium BCE through early CE, with composite redaction continuing over centuries. Their textual histories include oral transmission, local interpolations, and late medieval commentaries.",
-        representativeWorks: [
-          { title: "Mahabharata", author: "Traditionally Vyasa", date: "c. -400–200 CE" },
-          { title: "Ramayana (Valmiki)", author: "Valmiki (trad.)", date: "c. -200–200 CE" }
-        ],
-        editorialIssues: "Recensional plurality is the central editorial problem: establish a stemma where possible, provide apparatus for major interpolations, and preserve regional variants rather than conflating them into a single 'normalized' text.",
-        researchDirections: "Comparative reception studies, performance history, legal and dharma studies through epic lawcodes, and digital collation of recensions.",
-        teaching: "Use episodic readings for students; pair with commentarial excerpts and performative recordings; assign textual comparison tasks across recensions.",
-        metadataRecommendation: ["TEI: critical apparatus + witness list", "Dublin Core: date ranges and language", "IIIF for manuscript images"],
-        furtherReading: [
-          "Romila Thapar — Studies in the Epics",
-          "A. K. Ramanujan — Structural readings of epic episodes"
-        ]
-      },
-
-      {
-        id: "poetry",
-        name: "Poetry (Kāvya, Lyric, Devotional)",
-        scope: "literary",
-        overview: "Poetry in Indian languages covers lyric, courtly kāvya, devotional (bhakti) verse, heroic poetry and later modernist experiments. Poetic composition relies on metrical schemes, rhetorical devices (alaṃkāra) and often performed musical settings.",
-        keyFeatures: [
-          "Metre and rule-based composition (e.g., Sanskrit chandas, Tamil venpa)",
-          "Dense use of simile, metaphor and technical terms",
-          "Strong oral-performative components (singing, recitation)",
-          "Close links to ritual and courtly patronage"
-        ],
-        historicalNotes: "Poetry is continuously produced across millennia — from Vedic hymns to Sangam anthologies to modernist verse. Each period develops distinct aesthetics and technical vocabularies.",
-        representativeWorks: [
-          { title: "Rigveda (selected hymns)", author: "Vedic seers", date: "c. -1500 to -1000" },
-          { title: "Meghaduta", author: "Kalidasa", date: "Classical period" },
-          { title: "Tiruvachakam", author: "Manikkavacakar", date: "Bhakti era (Tamil)"}
-        ],
-        editorialIssues: "Preserve original lineation and punctuation (or its absence); annotate metrical structure; provide scansion and morphological tagging for computational work.",
-        researchDirections: "Metric studies, performance practice reconstructions, intertextual influence across languages, and computational metrics for rhyme and rhythm.",
-        teaching: "Assign close readings with scansion practice; pair original text with interlinear glosses and melodic recordings.",
-        metadataRecommendation: ["TEI: line-level markup, scansion layers", "MODS/MARC for print editions"],
-        furtherReading: ["A. K. Ramanujan essays on Indian poetics", "Paṇini and later grammarians — morphological background"]
-      },
-
-      {
-        id: "drama",
-        name: "Drama & Performance (Nāṭya)",
-        scope: "performative",
-        overview: "Dramatic texts and their living performance traditions: classical Sanskrit drama (Nāṭya), regional theatre forms (Yatra, Ramlila), folk theatre and their scripts. Drama connects literary, music, and stagecraft traditions.",
-        keyFeatures: [
-          "Designed for performance: stage directions, role types, and musical interludes",
-          "Integration of prose, verse and song",
-          "Text often supplemented by choreography, music and stage traditions"
-        ],
-        historicalNotes: "Nāṭyaśāstra codified dramatic principles; classical plays (Kalidasa, Bhasa) flourished in royal courts. Regional forms developed local repertoires and incorporated folk elements.",
-        representativeWorks: [
-          { title: "Abhijnana Shakuntalam", author: "Kalidasa" },
-          { title: "Plays of Bhasa", author: "Bhasa (early dramatist)" }
-        ],
-        editorialIssues: "Critical editions should preserve performance cues and variant stage directions; where possible include audiovisual records of staged performances as part of the witness data.",
-        researchDirections: "Theatre anthropology, reconstruction of ancient staging, music-dramatic studies and dramaturgical comparisons with non-Indic traditions.",
-        teaching: "Use staged readings and workshops; analyze stage craft in tandem with textual analysis.",
-        metadataRecommendation: ["TEI + performance extensions", "Audio/video metadata, timecodes"],
-        furtherReading: ["Bharata's Nāṭyaśāstra — annotated translations", "Studies in folk theatre traditions"]
-      },
-
-      {
-        id: "philosophy",
-        name: "Philosophy & Sutra Literature",
-        scope: "scholarly",
-        overview: "Systematic philosophical works — sutras, commentaries, and treatises across schools (Vedanta, Nyaya, Samkhya, Buddhist Abhidharma). These texts are technical, often aphoristic (sutra) and accompanied by extensive commentarial traditions.",
-        keyFeatures: [
-          "Concise aphoristic base-texts (sutras) with expansive commentaries",
-          "Highly technical, specialized terminology",
-          "Dialogic or scholastic formats"
-        ],
-        historicalNotes: "Philosophical sutra literature emerges in the early centuries BCE/CE and continues with dynamic commentary traditions. Transmission is scholarly and manuscript-rich.",
-        representativeWorks: [
-          { title: "Bhagavadgita (philosophical substratum in Mahabharata)" },
-          { title: "Yoga Sutra (Patanjali)" }
-        ],
-        editorialIssues: "Maintain layered commentary structure; annotate logical argumentation and cross-reference citations across school traditions.",
-        researchDirections: "Comparative philosophy, translation of technical terms, reconstructing commentary chains, and integrating philosophical texts with ritual and literary contexts.",
-        teaching: "Seminar-style close reading and translation practice; compare primary sutra and multiple commentaries.",
-        metadataRecommendation: ["TEI with commentary linking", "Rich subject vocabulary (LC subject headings, annotated)"],
-        furtherReading: ["Robert Sharf — studies in Buddhist and Shaiva epistemology", "Philological editions of key sutra corpora"]
-      },
-
-      {
-        id: "puranas",
-        name: "Puranas & Mythographic Literature",
-        scope: "narrative",
-        overview: "Encyclopedic mythographic texts (Puranas) that compile cosmology, genealogy, rituals and local myths. The Puranas are composite and often serve as a textual bridge between court literature and local religious practice.",
-        keyFeatures: [
-          "Encyclopedic scope mixing myth, ritual and local legend",
-          "Multi-layered redactional histories",
-          "Strong role in legitimating kingship and temple cults"
-        ],
-        historicalNotes: "Puranic texts accreted over the early medieval period and were subject to continuous copying and local reworking. They are essential for religious history and regional cult studies.",
-        representativeWorks: [
-          { title: "Vishnu Purana" },
-          { title: "Bhagavata Purana" }
-        ],
-        editorialIssues: "Track redactional layers and cite colophons; preserve variant regional recensions rather than collapsing differences.",
-        researchDirections: "Redaction criticism, ritual transmission studies, mapping cult geography via Puranic place-lists.",
-        teaching: "Assign comparative readings of Puranic episodes with epigraphic evidence and local field reports.",
-        metadataRecommendation: ["TEI with redactional markup", "Place-name authority control (geographic gazetteers)"],
-        furtherReading: ["Works on Puranic studies and mythography"]
-      },
-
-      {
-        id: "biography",
-        name: "Biography & Hagiography",
-        scope: "narrative",
-        overview: "Lives of saints, poets, kings and eminent personalities. Hagiographies are devotional and often stylized; royal biographies may blend fact with legitimizing rhetoric.",
-        keyFeatures: [
-          "Didactic and exemplary tone (hagiography)",
-          "Use of miracle narratives and moral exempla",
-          "Important for social and religious history"
-        ],
-        historicalNotes: "Hagiographies proliferated with devotional movements (Bhakti, Sufi) and played a crucial role in saint cult formation and oral repertoires.",
-        representativeWorks: [
-          { title: "Chaitanya Charitamrita", author: "Krishnadasa Kaviraja" },
-          { title: "Lives of the Alvars and Nayanmars (Tamil hagiographies)" }
-        ],
-        editorialIssues: "Distinguish hagiographic motifs from verifiable historical details; annotate oral-source dependencies.",
-        researchDirections: "Study cult formation, saint networks, and the interplay of oral and manuscript traditions.",
-        teaching: "Combine textual analysis with anthropological readings of contemporary shrine practice.",
-        metadataRecommendation: ["Person authority control (VIAF/Local IDs)", "TEI prosopography extensions"],
-        furtherReading: ["Studies in hagiography and saint cults"]
-      },
-
-      {
-        id: "folk",
-        name: "Folk Literature & Oral Traditions",
-        scope: "performative",
-        overview: "Oral narratives, ballads, folktales, proverbs and local performing arts. Folk literature preserves communal memory and social values outside formal literary canons.",
-        keyFeatures: [
-          "Primarily oral transmission, performed in community contexts",
-          "Variants shaped by region, language and performer",
-          "Strong ties to ritual, seasonal festivals, and local identity"
-        ],
-        historicalNotes: "Much of India's popular narrative heritage survives in oral form; colonial-era collectors began transcribing folk corpora, but fieldwork remains essential for reliable documentation.",
-        representativeWorks: [
-          { title: "Folk ballads collected from Rajasthan, Punjab, Bengal (various)" }
-        ],
-        editorialIssues: "Document performance metadata (location, performer, date), record multiple variants, and capture audio/video alongside transcriptions.",
-        researchDirections: "Ethnopoetics, oral-formulaic studies, and digital archives of audio-visual performance.",
-        teaching: "Fieldwork modules and comparative folklore assignments; integrate audio archives into reading lists.",
-        metadataRecommendation: ["AV metadata standards (Dublin Core + PBCore), IIIF for images and scores"],
-        furtherReading: ["Classic works in folklore methodology and regional studies"]
-      },
-
-      {
-        id: "scientific",
-        name: "Scientific & Technical Literature (astronomy, medicine, mathematics)",
-        scope: "scholarly",
-        overview: "Treatises on mathematics, astronomy (Jyotisha), medicine (Ayurveda), architecture (Vastu), and various technical manuals. These texts combine procedural knowledge with theory and often include tables, diagrams and mnemonic devices.",
-        keyFeatures: [
-          "Practical/technical orientation with tabular data and formulae",
-          "Often produced in professional lineages (e.g., Ayurvedic families, astronomy schools)",
-          "Crossover with religious timing and ritual calendars"
-        ],
-        historicalNotes: "Indian technical literature is long-standing: medical and astronomical works were composed, commented upon, transmitted in manuscript and orally through teacher lineages.",
-        representativeWorks: [
-          { title: "Charaka Samhita (Ayurveda)" },
-          { title: "Aryabhatiya (astronomy/mathematics)" }
-        ],
-        editorialIssues: "Preserve numeric tables, diagrams and ensure accurate rendering of specialized notations; consider digitizing numeric tables as machine-readable CSV alongside TEI.",
-        researchDirections: "History of science, transmission of technical knowledge to Islamic scholars and later to Europe, and reconstruction of applied practices.",
-        teaching: "Practical lab translations of computational rules and comparative study with contemporary practices.",
-        metadataRecommendation: ["TEI for technical content, supplementary CSV/JSON for tables"],
-        furtherReading: ["Works on history of Indian mathematics and medicine"]
-      },
-
-      {
-        id: "legal",
-        name: "Law & Dharmashastra",
-        scope: "scholarly",
-        overview: "Corpus of legal and social-norm texts (Dharmaśāstras) that outline duties, legal procedure, and social codes. Also includes commentaries and practical law manuals used by courts and administrators.",
-        keyFeatures: [
-          "Prescriptive legal language and case exempla",
-          "Integration with religious, moral and ritual frameworks",
-          "Extensive commentary tradition interpreting rules in context"
-        ],
-        historicalNotes: "Dharma literature developed from early code-like passages in epics and became systematized in later medieval manuals consulted by rulers and judges.",
-        representativeWorks: [
-          { title: "Manusmriti (Laws of Manu)" },
-          { title: "Yajnavalkya Smriti and commentaries" }
-        ],
-        editorialIssues: "Annotate judicial usage vs prescriptive norms; compare manuscript variations and regional customary law records.",
-        researchDirections: "Legal anthropology, history of law, and comparison with contemporaneous legal texts in other cultures.",
-        teaching: "Case-study approach: compare prescriptions with epigraphic records and court documents.",
-        metadataRecommendation: ["TEI with legal markup, jurisdiction tagging"],
-        furtherReading: ["Scholarship on Dharmaśāstra and law history"]
-      }
-    ];
-
-    // Fill initial UI
-    const genresGrid = document.getElementById('genresGrid');
-    const encyclopedia = document.getElementById('encyclopedia');
-    const detailContent = document.getElementById('detailContent');
-    const totalGenresEl = document.getElementById('totalGenres');
-
-    function renderGenreCards(list){
-      genresGrid.innerHTML = '';
-      list.forEach(g => {
-        const el = document.createElement('article');
-        el.className = 'card genre-card';
-        el.setAttribute('data-id', g.id);
-        el.innerHTML = `
-          <div class="genre-title">
-            <h3>${escapeHtml(g.name)}</h3>
-            <div class="genre-meta">${escapeHtml(g.scope)}</div>
-          </div>
-          <div class="genre-body">
-            <div class="muted">${escapeHtml(g.overview.substring(0,220))}${g.overview.length>220 ? '…':''}</div>
-            <div class="chips">${(g.keyFeatures||[]).slice(0,3).map(k=>`<span class="chip">${escapeHtml(k.replace(/[^a-zA-Z0-9 ]/g,'').slice(0,28))}</span>`).join('')}</div>
-          </div>
-        `;
-        el.addEventListener('click', ()=> openGenreDetail(g));
-        el.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') openGenreDetail(g); });
-        genresGrid.appendChild(el);
-      });
-      totalGenresEl.textContent = list.length;
-    }
-
-    function openGenreDetail(g){
-      detailContent.innerHTML = `
-        <h3 style="margin:0">${escapeHtml(g.name)}</h3>
-        <div class="muted" style="margin-top:6px">${escapeHtml(g.scope)} — representative works and editorial guidance</div>
-        <div style="margin-top:10px">
-          <h4>Overview</h4>
-          <p>${escapeHtml(g.overview)}</p>
-
-          <h4>Key features</h4>
-          <ul>${(g.keyFeatures||[]).map(k => `<li>${escapeHtml(k)}</li>`).join('')}</ul>
-
-          <h4>Representative works</h4>
-          <ul>${(g.representativeWorks||[]).map(w=>`<li>${escapeHtml(w.title)}${w.author ? ' — '+escapeHtml(w.author):''}${w.date ? ' ('+escapeHtml(w.date)+')':''}</li>`).join('')}</ul>
-
-          <h4>Editorial issues & research directions</h4>
-          <p>${escapeHtml(g.editorialIssues || '')}</p>
-          <p>${escapeHtml(g.researchDirections || '')}</p>
-
-          <h4>Teaching suggestions</h4>
-          <p>${escapeHtml(g.teaching || '')}</p>
-
-          <h4>Metadata recommendations</h4>
-          <p class="small-muted">${(g.metadataRecommendation||[]).join(' • ')}</p>
-
-          <h4>Further reading</h4>
-          <ul>${(g.furtherReading||[]).map(r=>`<li>${escapeHtml(r)}</li>`).join('')}</ul>
-        </div>
-      `;
-      // Expand encyclopedia panel for same genre as long-form
-      openEncyclopediaFor(g.id);
-    }
-
-    // Long-form encyclopedia entries (accordion)
-    function renderEncyclopedia(list){
-      encyclopedia.innerHTML = '';
-      list.forEach(g => {
-        const item = document.createElement('div');
-        item.className = 'accordion-item';
-        item.innerHTML = `
-          <button class="accordion-trigger" aria-expanded="false" data-id="${escapeHtml(g.id)}">
-            <div style="display:flex;flex-direction:column;align-items:flex-start">
-              <strong>${escapeHtml(g.name)}</strong>
-              <span class="muted" style="font-size:13px">${escapeHtml(g.scope)}</span>
-            </div>
-            <span class="muted">Expand</span>
-          </button>
-          <div class="accordion-panel" id="panel-${escapeHtml(g.id)}">
-            <div>
-              <h4>Overview</h4>
-              <p>${escapeHtml(g.overview)}</p>
-
-              <h4>Historical development</h4>
-              <p>${escapeHtml(g.historicalNotes || 'Historical notes not provided.')}</p>
-
-              <h4>Key features & subgenres</h4>
-              <ul>${(g.keyFeatures||[]).map(k => `<li>${escapeHtml(k)}</li>`).join('')}</ul>
-
-              <h4>Representative texts</h4>
-              <ul>${(g.representativeWorks||[]).map(w => `<li><strong>${escapeHtml(w.title)}</strong>${w.author ? ' — ' + escapeHtml(w.author): ''}${w.date ? ' ('+escapeHtml(w.date)+')': ''}</li>`).join('')}</ul>
-
-              <h4>Editorial & archival considerations</h4>
-              <p>${escapeHtml(g.editorialIssues || '')}</p>
-
-              <h4>Research directions & pedagogy</h4>
-              <p>${escapeHtml(g.researchDirections || '')}</p>
-
-              <h4>Metadata & digital best practice</h4>
-              <p>${escapeHtml((g.metadataRecommendation||[]).join('; '))}</p>
-
-              <h4>Suggested readings</h4>
-              <ul>${(g.furtherReading||[]).map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul>
-            </div>
-          </div>
-        `;
-        encyclopedia.appendChild(item);
-      });
-
-      // wire up accordion triggers
-      encyclopedia.querySelectorAll('.accordion-trigger').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const panel = btn.nextElementSibling;
-          const expanded = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', String(!expanded));
-          btn.querySelector('span').textContent = expanded ? 'Expand' : 'Collapse';
-          panel.classList.toggle('show', !expanded);
-        });
-      });
-    }
-
-    // Filtering logic
-    const searchInput = document.getElementById('searchInput');
-    const scopeFilter = document.getElementById('scopeFilter');
-    const sortSelect = document.getElementById('sortSelect');
-    const searchBtn = document.getElementById('searchBtn');
-    const resetBtn = document.getElementById('resetBtn');
-
-    function applyFilters(){
-      let out = GENRES.slice();
-      const q = (searchInput.value || '').trim().toLowerCase();
-      const scope = (scopeFilter.value || '').trim().toLowerCase();
-      if(q){
-        out = out.filter(g => (g.name + ' ' + g.overview + ' ' + (g.keyFeatures||[]).join(' ') + ' ' + (g.representativeWorks||[]).map(r=>r.title).join(' '))
-          .toLowerCase().includes(q));
-      }
-      if(scope){
-        out = out.filter(g => (g.scope || '').toLowerCase().includes(scope) || (g.keyFeatures||[]).some(k => k.toLowerCase().includes(scope)));
-      }
-      if(sortSelect.value === 'name-asc') out.sort((a,b)=> a.name.localeCompare(b.name));
-      if(sortSelect.value === 'name-desc') out.sort((a,b)=> b.name.localeCompare(a.name));
-      renderGenreCards(out);
-      renderEncyclopedia(out);
-    }
-
-    searchBtn.addEventListener('click', applyFilters);
-    searchInput.addEventListener('keydown', (e)=> { if(e.key==='Enter') applyFilters(); });
-    resetBtn.addEventListener('click', ()=> { searchInput.value=''; scopeFilter.value=''; sortSelect.value='name-asc'; applyFilters(); });
-
-    // Load optional external genres.json and merge (if user hosts it)
-    document.getElementById('loadJsonBtn').addEventListener('click', async ()=>{
-      try{
-        const resp = await fetch('genres.json', {cache:'no-store'});
-        if(!resp.ok) throw new Error('genres.json not found or failed to load ('+resp.status+')');
-        const data = await resp.json();
-        const external = Array.isArray(data.genres) ? data.genres : (Array.isArray(data) ? data : []);
-        // Merge by id (external overrides if same id)
-        const map = new Map(GENRES.map(g=>[g.id,g]));
-        external.forEach(e => {
-          if(!e.id) return;
-          map.set(e.id, {
-            id: e.id,
-            name: e.name || e.id,
-            scope: e.scope || 'general',
-            overview: e.overview || e.description || '',
-            keyFeatures: e.keyFeatures || [],
-            historicalNotes: e.historicalNotes || '',
-            representativeWorks: e.keyWorks || e.representativeWorks || [],
-            editorialIssues: e.editorialIssues || '',
-            researchDirections: e.researchDirections || '',
-            teaching: e.teaching || '',
-            metadataRecommendation: e.metadataRecommendation || [],
-            furtherReading: e.furtherReading || []
-          });
-        });
-        // override GENRES data
-        const merged = Array.from(map.values());
-        // replace global GENRES content (not permanent across reloads)
-        while(GENRES.length) GENRES.pop();
-        merged.forEach(x => GENRES.push(x));
-        applyFilters();
-        alert('Loaded ' + external.length + ' records from genres.json and merged into the directory.');
-      }catch(err){
-        alert('Could not load genres.json: ' + err.message);
-      }
-    });
-
-    // Helper: escape HTML
-    function escapeHtml(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, (m)=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-
-    // Open long-form encyclopedia panel for a given id (if present)
-    function openEncyclopediaFor(id){
-      const trigger = document.querySelector('.accordion-trigger[data-id="'+id+'"]');
-      if(trigger){
-        const panel = trigger.nextElementSibling;
-        const expanded = trigger.getAttribute('aria-expanded') === 'true';
-        if(!expanded){
-          trigger.click();
-          panel.scrollIntoView({behavior:'smooth', block:'center'});
-        } else {
-          panel.scrollIntoView({behavior:'smooth', block:'center'});
-        }
-      }
-    }
-
-    // Mobile menu toggle
-    document.getElementById('mobileToggle').addEventListener('click', function(){
-      const mm = document.getElementById('mobileMenu');
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', String(!expanded));
-      mm.style.display = expanded ? 'none' : 'block';
-    });
-
-    // Initial render
-    renderGenreCards(GENRES);
-    renderEncyclopedia(GENRES);
-
-    // Year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Accessibility keyboard: focus search with Ctrl/Cmd+K
-    document.addEventListener('keydown', (e) => {
-      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); document.getElementById('searchInput').focus(); }
-    });
+    // State
+    let STATE = {
+      allBooks: [],
+      genres: {},
+      currentGenre: '',
+      filteredBooks: [],
+      page: 1,
+      perPage: 12,
+    };
 
+    // Helpers
+    const qs = sel => document.querySelector(sel);
+    const qsa = sel => Array.from(document.querySelectorAll(sel));
+    const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+
+    // Fetch genres.json and initialize
+    async function loadCatalog() {
+      try {
+        const resp = await fetch('./genres.json', {cache: "no-store"});
+        if (!resp.ok) throw new Error('Failed to load genres.json: ' + resp.status);
+        const data = await resp.json();
+        STATE.allBooks = data;
+        buildGenreIndex();
+        renderGenreCards();
+        renderChart();
+        applyFilters(); // initially render books
+        populateGenreFilter();
+      } catch (err) {
+        console.error(err);
+        document.getElementById('genresGrid').innerHTML = '<p style="color:#900">Could not load catalog. See console for details.</p>';
+      }
+    }
+
+    function buildGenreIndex() {
+      STATE.genres = {};
+      STATE.allBooks.forEach(book => {
+        const g = book.genre || 'Uncategorized';
+        if (!STATE.genres[g]) STATE.genres[g] = {count:0, sample:[]};
+        STATE.genres[g].count++;
+        if (STATE.genres[g].sample.length < 6) STATE.genres[g].sample.push(book);
+      });
+    }
+
+    function renderGenreCards() {
+      const container = qs('#genresGrid');
+      container.innerHTML = '';
+      const entries = Object.entries(STATE.genres).sort((a,b) => b[1].count - a[1].count);
+      entries.forEach(([genre, meta]) => {
+        const card = document.createElement('div');
+        card.className = 'genre-card';
+        card.innerHTML = `
+          <h3>${genre} <small style="color:#777;font-weight:400">(${meta.count})</small></h3>
+          <p>${meta.sample.map(s=>s.title).slice(0,3).join(' • ')}</p>
+          <div style="margin-top:10px">
+            <button class="btn btn-sm" data-genre="${genre}">View books</button>
+            <a class="btn btn-outline" href="/genres/${slugify(genre)}.html">Open genre page</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // attach click handlers
+      qsa('.genre-card button').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const g = e.currentTarget.getAttribute('data-genre');
+          STATE.currentGenre = g;
+          STATE.page = 1;
+          applyFilters();
+          window.scrollTo({top: qs('#booksPanel').offsetTop - 80, behavior:'smooth'});
+        });
+      });
+    }
+
+    // Chart rendering (books per genre)
+    function renderChart() {
+      const ctx = qs('#genresChart').getContext('2d');
+      const labels = Object.keys(STATE.genres);
+      const counts = labels.map(l => STATE.genres[l].count);
+      // destroy existing chart if exists
+      if (window._genresChart) window._genresChart.destroy();
+      window._genresChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ label: 'Books', data: counts }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { x: { ticks: { maxRotation:45, minRotation:0 } } }
+        }
+      });
+    }
+
+    // Populate filter dropdown
+    function populateGenreFilter() {
+      const sel = qs('#genre-filter');
+      Object.keys(STATE.genres).sort().forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g; opt.textContent = `${g} (${STATE.genres[g].count})`;
+        sel.appendChild(opt);
+      });
+      sel.addEventListener('change', () => {
+        STATE.currentGenre = sel.value;
+        STATE.page = 1;
+        applyFilters();
+      });
+    }
+
+    // Search / filters / pagination
+    function applyFilters() {
+      const q = qs('#global-search').value.trim().toLowerCase();
+      let list = STATE.allBooks.slice();
+      if (STATE.currentGenre) list = list.filter(b => b.genre === STATE.currentGenre);
+      if (q) list = list.filter(b => {
+        return (b.title && b.title.toLowerCase().includes(q)) ||
+               (b.author && b.author.toLowerCase().includes(q)) ||
+               (b.description && b.description.toLowerCase().includes(q));
+      });
+      STATE.filteredBooks = list;
+      renderBooks();
+      renderPagination();
+    }
+
+    function renderBooks() {
+      const container = qs('#booksList');
+      container.innerHTML = '';
+      const perPage = parseInt(qs('#per-page').value,10) || 12;
+      STATE.perPage = perPage;
+      const start = (STATE.page - 1) * perPage;
+      const pageItems = STATE.filteredBooks.slice(start, start + perPage);
+      if (!pageItems.length) {
+        container.innerHTML = '<p>No books found for this filter.</p>';
+        qs('#booksPanelTitle').textContent = (STATE.currentGenre ? `${STATE.currentGenre}` : 'All books') + ` — 0 results`;
+        return;
+      }
+      qs('#booksPanelTitle').textContent = (STATE.currentGenre ? `${STATE.currentGenre}` : 'All books') + ` — ${STATE.filteredBooks.length} results`;
+
+      pageItems.forEach(book => {
+        const c = document.createElement('article');
+        c.className = 'book-card';
+        const cover = book.cover_url ? `<img class="book-cover" loading="lazy" src="${book.cover_url}" alt="Cover of ${escapeHtml(book.title)}">` : `<div class="book-cover" aria-hidden="true"></div>`;
+        c.innerHTML = `
+          ${cover}
+          <div class="book-meta">
+            <h4><a href="${book.page_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(book.title)}</a></h4>
+            <div style="color:#666">${escapeHtml(book.author || 'Unknown')}</div>
+            <div style="font-size:.9rem;color:#888;margin-top:6px">${book.year || ''} — ${book.language || ''}</div>
+            <div style="margin-top:8px"><a href="/book/${slugify(book.title)}.html">Open book page</a></div>
+          </div>
+        `;
+        container.appendChild(c);
+      });
+    }
+
+    function renderPagination() {
+      const container = qs('#pagination');
+      container.innerHTML = '';
+      const total = STATE.filteredBooks.length;
+      const perPage = STATE.perPage;
+      const pages = Math.max(1, Math.ceil(total / perPage));
+      const createBtn = (label, onClick, disabled) => {
+        const b = document.createElement('button'); b.textContent = label;
+        b.disabled = !!disabled; b.className = 'btn btn-sm';
+        b.addEventListener('click', onClick);
+        return b;
+      };
+      // first / prev
+      container.appendChild(createBtn('First', () => { STATE.page = 1; applyFilters(); }, STATE.page===1));
+      container.appendChild(createBtn('Prev', () => { STATE.page = Math.max(1, STATE.page-1); applyFilters(); }, STATE.page===1));
+
+      // page numbers window
+      const windowSize = 7;
+      let start = Math.max(1, STATE.page - Math.floor(windowSize/2));
+      let end = Math.min(pages, start + windowSize - 1);
+      if (end - start < windowSize -1) start = Math.max(1, end - windowSize + 1);
+      for (let p = start; p <= end; p++) {
+        const btn = createBtn(p, () => { STATE.page = p; applyFilters(); }, false);
+        if (p === STATE.page) { btn.disabled = true; btn.style.fontWeight = '700'; }
+        container.appendChild(btn);
+      }
+
+      // next / last
+      container.appendChild(createBtn('Next', () => { STATE.page = Math.min(pages, STATE.page+1); applyFilters(); }, STATE.page===pages));
+      container.appendChild(createBtn('Last', () => { STATE.page = pages; applyFilters(); }, STATE.page===pages));
+
+      // goto
+      const goto = document.createElement('input');
+      goto.type='number'; goto.min=1; goto.max=pages; goto.placeholder='Go to';
+      goto.style.width='80px'; goto.addEventListener('change', (e)=> {
+        let v = parseInt(e.target.value,10);
+        if (isFinite(v) && v>=1 && v<=pages) { STATE.page = v; applyFilters(); }
+      });
+      container.appendChild(goto);
+    }
+
+    // Helpers: escape HTML
+    function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // UI wiring
+    qs('#global-search').addEventListener('input', debounce(()=>{ STATE.page = 1; applyFilters(); }, 300));
+    qs('#per-page').addEventListener('change', ()=>{ STATE.page = 1; applyFilters(); });
+
+    function debounce(fn, wait){ let t; return (...args)=>{ clearTimeout(t); t = setTimeout(()=>fn.apply(this,args), wait); } }
+
+    // Kick off
+    loadCatalog();
   </script>
 </body>
 </html>
