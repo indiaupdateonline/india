@@ -2,384 +2,365 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
   <title>Genres — Indian Literature Archive</title>
-  <meta name="description" content="Genres index for the Indian Literature Archive — detailed profiles, sample works and links to book pages." />
+  <meta name="description" content="Browse literary genres and discover books from India's classical and medieval traditions." />
+  <!-- Favicon & fonts follow site base -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Serif:400,700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root{--accent:#0b6b6b;--dark:#0b2b3a;--muted:#6b7280;--bg:#fbfefe;--card:#fff;--border:#e6eef0;--radius:10px;--max-width:1150px}
-    html,body{margin:0;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--dark)}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:var(--max-width);margin:0 auto;padding:18px}
-    header.site-header{background:var(--dark);color:#fff;padding:12px 0}
-    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .branding{display:flex;align-items:center;gap:12px;color:inherit}
-    .logo-symbol{width:44px;height:44px;border-radius:6px;background:#fff;color:var(--dark);display:flex;align-items:center;justify-content:center;font-weight:700}
-    nav.main-navigation a{color:#fff;padding:8px 10px;border-radius:6px;font-weight:600}
-    .mobile-toggle{display:none}
-    .hero{background:linear-gradient(180deg, rgba(11,43,58,0.95), rgba(11,43,58,0.85));color:#fff;padding:28px 0;margin-bottom:14px}
-    .hero h1{margin:0;font-size:22px}
-    main#main-content{padding-bottom:40px}
-    .layout{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
-    @media (max-width:980px){ .layout{grid-template-columns:1fr} nav.main-navigation{display:none} .mobile-toggle{display:inline-block} }
-
-    .card{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);box-shadow:0 6px 18px rgba(11,43,58,0.06)}
-    .muted{color:var(--muted);font-size:13px}
-    .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-
-    .genres-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    @media (max-width:980px){ .genres-grid{grid-template-columns:1fr} }
-    .genre-card{border-left:6px solid var(--accent);padding:14px;cursor:pointer;display:block}
-    .genre-title{display:flex;justify-content:space-between;align-items:center;gap:8px}
-    .genre-title h3{margin:0;font-size:18px}
-    .genre-meta{color:var(--muted);font-size:13px}
-    .genre-body{margin-top:10px}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .chip{background:#e6f6f6;color:var(--accent);padding:5px 8px;border-radius:999px;font-weight:600;font-size:12px}
-
-    .accordion{border-top:1px solid #f0f6f6;margin-top:12px}
-    .accordion-item{border-bottom:1px solid #f2f6f6}
-    .accordion-trigger{background:transparent;border:0;width:100%;text-align:left;padding:12px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
-    .accordion-panel{padding:6px 0 18px 0;display:none}
-    .accordion-panel.show{display:block}
-
-    table{width:100%;border-collapse:collapse;margin-top:10px}
-    th,td{padding:10px;border-bottom:1px solid #f1f5f9;text-align:left;font-size:14px}
-    th{background:#f8fafc;font-weight:700;color:var(--dark)}
-
-    .book-tile{display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid #f1f5f9;padding:10px 0}
-    .book-cover{width:72px;height:108px;border-radius:6px;object-fit:cover;border:1px solid #e6eef0}
-    .book-meta h4{margin:0;font-size:15px}
-    .book-meta p{margin:6px 0;color:var(--muted);font-size:13px}
-
-    .pagination{display:flex;gap:8px;align-items:center;justify-content:center;padding:12px 0;flex-wrap:wrap}
-    .btn{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
-    .btn-ghost{background:transparent;border:1px solid #e6eef0;padding:8px;border-radius:8px;cursor:pointer}
-    footer.site-footer{background:var(--dark);color:#fff;padding:18px 0;margin-top:24px}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    /* Minimal page-specific styles so the page looks good inside your theme.
+       You can remove/replace with your full style.css rules. */
+    .genres-hero { padding: 48px 0; background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.05)); color: #111; }
+    .genres-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+    .genre-card { background: #fff; border: 1px solid #e6e6e6; padding: 18px; border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,.03); }
+    .genre-card h3 { margin: 0 0 8px 0; font-size: 1.05rem; }
+    .genre-card p { margin:0; color:#555; font-size: .95rem; }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 14px; margin-top:16px; }
+    .book-card { display:flex; gap:12px; background:#fff; padding:12px; align-items: flex-start; border-radius:8px; border:1px solid #eee;}
+    .book-cover { width:72px; height:100px; object-fit:cover; border-radius:4px; flex-shrink:0; background:#f0f0f0; }
+    .book-meta h4 { margin:0 0 6px 0; font-size:1rem; }
+    .controls { display:flex; gap:10px; align-items:center; margin:18px 0; flex-wrap:wrap;}
+    .chart-wrap { max-width:820px; margin:18px 0; }
+    .pagination { display:flex; gap:8px; align-items:center; margin-top:14px; flex-wrap:wrap; }
+    @media (max-width:600px){ .book-cover{width:60px;height:84px} }
   </style>
 </head>
 <body>
-  <a class="sr-only" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a class="branding" href="/" aria-label="Indian Literature Archive home">
-        <div class="logo-symbol">IA</div>
-        <div>
-          <div style="font-weight:700">Indian Literature Archive</div>
-          <div style="font-size:12px;color:#cfe7e7">Ancient & Medieval Texts</div>
+  <!-- Top announcement & header (kept identical to main site) -->
+  <div class="announcement-bar">
+    <div class="container"><p>New: Complete translations of Silappadikaram now available! <a href="/tamil/silappadikaram" class="announcement-link">Explore now</a></p></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-container">
+        <div class="branding">
+          <a href="/" class="logo-link">
+            <div class="logo-symbol">IA</div>
+            <div class="logo-text">
+              <h1 class="site-title">Indian Literature Archive</h1>
+              <p class="site-tagline">Ancient & Medieval Texts</p>
+            </div>
+          </a>
         </div>
-      </a>
-
-      <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
-        <a href="/">Home</a>
-        <a href="/languages">Languages</a>
-        <a href="/periods">Periods</a>
-        <a href="/genres" aria-current="page">Genres</a>
-        <a href="/resources">Resources</a>
-        <a href="/about">About</a>
-      </nav>
-
-      <button class="mobile-toggle" aria-controls="mobileMenu" aria-expanded="false">Menu</button>
+        <nav class="main-navigation" aria-label="Main Navigation">
+          <!-- Keep your main nav markup (omitted here for brevity) -->
+          <ul class="nav-menu">
+            <li class="menu-item"><a href="/">Home</a></li>
+            <li class="menu-item has-dropdown current-menu-item"><a href="/genres">Genres</a></li>
+            <li class="menu-item"><a href="/periods">Periods</a></li>
+            <li class="menu-item"><a href="/languages">Languages</a></li>
+            <li class="menu-item"><a href="/resources">Resources</a></li>
+            <li class="menu-item"><a href="/about">About</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Mobile Menu" aria-expanded="false">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-        <div>
-          <h1 style="margin:0;color:#fff">Genres — An Atlas of Literary Forms</h1>
-          <p style="margin:6px 0;color:#d6f0f0">Profiles, representative works, editorial guidance, and direct links to book pages.</p>
-        </div>
-        <div style="display:flex;gap:10px;align-items:center">
-          <div class="card" style="padding:10px;text-align:center;min-width:120px">
-            <div class="muted" style="color:#d6f0f0">Total genres</div>
-            <div id="totalGenres" style="font-weight:800;font-size:18px;margin-top:6px;color:#fff">—</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <main id="main-content">
-    <div class="container">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <section class="hero-section genres-hero">
+      <div class="container">
+        <h2 class="hero-title">Explore by Genre</h2>
+        <p class="hero-subtitle">Browse our collection by literary genre — epics, poetry, drama, law, science and more. Data-driven: the page reads `genres.json` and renders the catalog in the browser.</p>
+        <div style="margin-top:12px">
+          <a class="btn btn-primary" href="#genres-list">Browse genres</a>
+          <a class="btn btn-secondary" href="/texts">All texts</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="genres-list" class="section">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
           <div>
-            <strong style="font-size:16px">Search & Filter Genres</strong>
-            <div class="muted">Filter by name, language, or scope. Click a genre to see detailed profile and sample books.</div>
+            <h2 class="section-title">Genres</h2>
+            <p class="section-description">Click a genre to view books. The client loads `genres.json` (sample included) and displays charts, search and pagination.</p>
           </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button id="loadBtn" class="btn-ghost">Load genres.json</button>
-            <button id="exportBtn" class="btn-ghost">Export view</button>
+
+          <div style="min-width:280px">
+            <div class="controls" role="search" aria-label="Search and filters">
+              <input id="global-search" type="search" placeholder="Search titles, authors..." style="padding:8px;min-width:200px;" />
+              <select id="genre-filter" aria-label="Filter by genre">
+                <option value="">All genres</option>
+              </select>
+              <label for="per-page">Per page</label>
+              <select id="per-page" aria-label="Results per page">
+                <option>8</option><option>12</option><option>24</option><option>48</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="controls" style="margin-top:12px">
-          <input id="searchInput" type="search" placeholder="Search genres, keywords, titles..." aria-label="Search genres" style="padding:10px;border-radius:8px;border:1px solid #e2e8f0;flex:1">
-          <select id="langFilter" style="padding:10px;border-radius:8px;border:1px solid #e2e8f0">
-            <option value="">All languages</option>
-          </select>
-          <select id="scopeFilter" style="padding:10px;border-radius:8px;border:1px solid #e2e8f0">
-            <option value="">All scopes</option>
-            <option value="performative">Performative/Oral</option>
-            <option value="scholarly">Scholarly/Technical</option>
-            <option value="narrative">Narrative</option>
-          </select>
-          <button id="applyBtn" class="btn">Apply</button>
+        <!-- Chart -->
+        <div class="chart-wrap">
+          <canvas id="genresChart" aria-label="Books per genre"></canvas>
         </div>
+
+        <!-- Genres grid -->
+        <div class="genres-grid" id="genresGrid" aria-live="polite"></div>
+
+        <!-- Book results -->
+        <div id="booksPanel" style="margin-top:28px">
+          <h3 id="booksPanelTitle" style="margin:0 0 12px 0">All books</h3>
+          <div id="booksList" class="books-grid" aria-live="polite"></div>
+
+          <div class="pagination" id="pagination"></div>
+        </div>
+
       </div>
-
-      <div style="height:12px"></div>
-
-      <div class="layout">
-        <section class="left-column">
-          <div class="card">
-            <strong>Genre Directory</strong>
-            <div class="muted" style="margin-top:6px">Click a genre to expand a full profile with representative works and book links.</div>
-
-            <div class="genres-grid" id="genresGrid" style="margin-top:12px">
-              <!-- populated by JS -->
-            </div>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <div class="card accordion" id="encyclopedia" aria-label="Genre encyclopedia">
-            <strong>Genre Encyclopedia — long profiles</strong>
-            <div class="muted" style="margin-top:6px">Extended entries appear here when you expand a genre.</div>
-            <!-- populated by JS -->
-          </div>
-        </section>
-
-        <aside class="right-column">
-          <div class="card" id="detailPanel">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <strong>Selected Genre — details</strong>
-              <div class="muted">Select a genre</div>
-            </div>
-            <div id="detailContent" style="margin-top:10px">
-              <p class="muted">No genre selected — select a card to view sample books and editorial notes.</p>
-            </div>
-          </div>
-
-          <div class="card" style="margin-top:12px">
-            <strong>Quick resources</strong>
-            <ul style="margin-top:8px">
-              <li><a href="/resources/metadata/tei-guidelines.html">TEI Guidelines for Indian Texts</a></li>
-              <li><a href="/resources/teaching/genres-syllabus.pdf">Teaching pack: Genres & Methods (PDF)</a></li>
-              <li><a href="/resources/reading-lists/epic-poetry.csv">Reading lists (CSV)</a></li>
-            </ul>
-          </div>
-        </aside>
-      </div>
-
-      <div style="height:18px"></div>
-    </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div>
-        <div style="font-weight:700">Indian Literature Archive</div>
-        <div class="muted">A non-profit initiative preserving India's literary heritage</div>
+    <div class="footer-main container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3 class="footer-title">Indian Literature Archive</h3>
+          <p class="footer-description">A non-profit initiative...</p>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/periods">Periods</a></li></ul>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-title">Contact</h3>
+          <address class="footer-contact"><p><i class="fas fa-map-marker-alt"></i> 123 Literary Lane, New Delhi</p></address>
+        </div>
       </div>
-      <div style="text-align:right">
-        <div class="muted">© <span id="year"></span> Indian Literature Archive</div>
-        <div style="margin-top:6px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
-      </div>
+    </div>
+    <div class="footer-bottom container">
+      <div class="copyright">&copy; <span id="year"></span> Indian Literature Archive</div>
+      <div class="footer-legal"><a href="privacy.html">Privacy Policy</a> <a href="terms.html">Terms</a></div>
     </div>
   </footer>
 
+  <!-- Minimal JS to render the page by reading ./genres.json -->
   <script>
-    // genres.html client-side script: fetches genres.json and renders UI.
-    const genresGrid = document.getElementById('genresGrid');
-    const encyclopedia = document.getElementById('encyclopedia');
-    const detailContent = document.getElementById('detailContent');
-    const totalGenres = document.getElementById('totalGenres');
-    const searchInput = document.getElementById('searchInput');
-    const langFilter = document.getElementById('langFilter');
-    const scopeFilter = document.getElementById('scopeFilter');
-    const loadBtn = document.getElementById('loadBtn');
-    const applyBtn = document.getElementById('applyBtn');
-    const exportBtn = document.getElementById('exportBtn');
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    let DATA = { genres: [], books_catalog: [] };
+    // State
+    let STATE = {
+      allBooks: [],
+      genres: {},
+      currentGenre: '',
+      filteredBooks: [],
+      page: 1,
+      perPage: 12,
+    };
 
-    function escapeHtml(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    // Helpers
+    const qs = sel => document.querySelector(sel);
+    const qsa = sel => Array.from(document.querySelectorAll(sel));
+    const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
 
-    // render genre cards
-    function renderGenreCards(list){
-      genresGrid.innerHTML = '';
-      if(!list.length){ genresGrid.innerHTML = '<div class="muted">No genres found.</div>'; totalGenres.textContent = 0; return; }
-      list.forEach(g => {
-        const el = document.createElement('article');
-        el.className = 'genre-card';
-        el.tabIndex = 0;
-        el.innerHTML = `
-          <div class="genre-title">
-            <h3>${escapeHtml(g.name)}</h3>
-            <div class="genre-meta">${escapeHtml(g.book_count || (g.books_refs && g.books_refs.length) || '—')} books</div>
-          </div>
-          <div class="genre-body">
-            <div class="muted">${escapeHtml((g.description||'').slice(0,220))}${(g.description && g.description.length>220 ? '…':'' )}</div>
-            <div class="chips">${(g.languages||[]).slice(0,4).map(l=>`<span class="chip">${escapeHtml(l)}</span>`).join('')}</div>
-          </div>
-        `;
-        el.addEventListener('click', ()=> openGenreDetail(g));
-        el.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') openGenreDetail(g); });
-        genresGrid.appendChild(el);
-      });
-      totalGenres.textContent = list.length;
+    // Fetch genres.json and initialize
+    async function loadCatalog() {
+      try {
+        const resp = await fetch('./genres.json', {cache: "no-store"});
+        if (!resp.ok) throw new Error('Failed to load genres.json: ' + resp.status);
+        const data = await resp.json();
+        STATE.allBooks = data;
+        buildGenreIndex();
+        renderGenreCards();
+        renderChart();
+        applyFilters(); // initially render books
+        populateGenreFilter();
+      } catch (err) {
+        console.error(err);
+        document.getElementById('genresGrid').innerHTML = '<p style="color:#900">Could not load catalog. See console for details.</p>';
+      }
     }
 
-    // render encyclopedia long entries
-    function renderEncyclopedia(list){
-      encyclopedia.innerHTML = '';
-      list.forEach(g=>{
-        const id = g.id || g.name.toLowerCase().replace(/\s+/g,'-');
-        const item = document.createElement('div');
-        item.className = 'accordion-item';
-        item.innerHTML = `
-          <button class="accordion-trigger" aria-expanded="false" data-id="${escapeHtml(id)}">
-            <div style="display:flex;flex-direction:column;align-items:flex-start">
-              <strong>${escapeHtml(g.name)}</strong>
-              <span class="muted">${escapeHtml((g.languages||[]).join(', '))}</span>
-            </div>
-            <span class="muted">Expand</span>
-          </button>
-          <div class="accordion-panel" id="panel-${escapeHtml(id)}">
-            <div>
-              <h4>Overview</h4>
-              <p>${escapeHtml(g.description || '')}</p>
-              <h4>Representative sample books</h4>
-              <div>${(g.books_sample||[]).map(b=>`<div class="book-tile">
-                <img class="book-cover" src="${escapeHtml(b.cover_url)}" alt="${escapeHtml(b.title)} cover" />
-                <div class="book-meta"><h4><a href="${escapeHtml(b.page_url)}">${escapeHtml(b.title)}</a></h4><p class="muted">${escapeHtml(b.author)} • ${escapeHtml(b.year)}</p></div>
-              </div>`).join('')}</div>
-              <h4 style="margin-top:12px">Research notes</h4>
-              <p class="muted">${escapeHtml(g.research_notes || '')}</p>
-              <h4>Full index</h4>
-              <p class="muted">This entry links to <strong>${escapeHtml(String(g.book_count || (g.books_refs||[]).length))}</strong> catalog records. Use the individual book pages for full bibliographic details.</p>
-            </div>
+    function buildGenreIndex() {
+      STATE.genres = {};
+      STATE.allBooks.forEach(book => {
+        const g = book.genre || 'Uncategorized';
+        if (!STATE.genres[g]) STATE.genres[g] = {count:0, sample:[]};
+        STATE.genres[g].count++;
+        if (STATE.genres[g].sample.length < 6) STATE.genres[g].sample.push(book);
+      });
+    }
+
+    function renderGenreCards() {
+      const container = qs('#genresGrid');
+      container.innerHTML = '';
+      const entries = Object.entries(STATE.genres).sort((a,b) => b[1].count - a[1].count);
+      entries.forEach(([genre, meta]) => {
+        const card = document.createElement('div');
+        card.className = 'genre-card';
+        card.innerHTML = `
+          <h3>${genre} <small style="color:#777;font-weight:400">(${meta.count})</small></h3>
+          <p>${meta.sample.map(s=>s.title).slice(0,3).join(' • ')}</p>
+          <div style="margin-top:10px">
+            <button class="btn btn-sm" data-genre="${genre}">View books</button>
+            <a class="btn btn-outline" href="/genres/${slugify(genre)}.html">Open genre page</a>
           </div>
         `;
-        encyclopedia.appendChild(item);
+        container.appendChild(card);
       });
 
-      // wire accordion
-      encyclopedia.querySelectorAll('.accordion-trigger').forEach(t=>{
-        t.addEventListener('click', ()=>{
-          const panel = t.nextElementSibling;
-          const expanded = t.getAttribute('aria-expanded') === 'true';
-          t.setAttribute('aria-expanded', String(!expanded));
-          t.querySelector('span').textContent = expanded ? 'Expand' : 'Collapse';
-          panel.classList.toggle('show', !expanded);
+      // attach click handlers
+      qsa('.genre-card button').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const g = e.currentTarget.getAttribute('data-genre');
+          STATE.currentGenre = g;
+          STATE.page = 1;
+          applyFilters();
+          window.scrollTo({top: qs('#booksPanel').offsetTop - 80, behavior:'smooth'});
         });
       });
     }
 
-    function openGenreDetail(g){
-      detailContent.innerHTML = `
-        <h3 style="margin:0">${escapeHtml(g.name)}</h3>
-        <div class="muted" style="margin-top:6px">${escapeHtml((g.languages||[]).join(', '))} • ${escapeHtml(String(g.book_count || (g.books_refs||[]).length))} books</div>
-        <p style="margin-top:10px">${escapeHtml(g.description || '')}</p>
-        <h4 style="margin-top:10px">Sample books</h4>
-        <div>${(g.books_sample||[]).map(b => `
-          <div class="book-tile">
-            <img class="book-cover" src="${escapeHtml(b.cover_url)}" alt="${escapeHtml(b.title)} cover" />
-            <div class="book-meta">
-              <h4><a href="${escapeHtml(b.page_url)}">${escapeHtml(b.title)}</a></h4>
-              <p class="muted">${escapeHtml(b.author)} • ${escapeHtml(String(b.year))}</p>
-              <p class="muted">${escapeHtml((b.summary||'').slice(0,120))}${b.summary && b.summary.length>120? '…':''}</p>
-            </div>
-          </div>` ).join('')}</div>
-        <h4 style="margin-top:10px">Access</h4>
-        <p class="muted">Click any book to open its page (example pages: <code>/books/&lt;slug&gt;.html</code>). Covers link to placeholder images (picsum.photos) as copyright-free placeholders.</p>
-      `;
-      // scroll into view for mobile
-      detailContent.scrollIntoView({behavior:'smooth', block:'nearest'});
+    // Chart rendering (books per genre)
+    function renderChart() {
+      const ctx = qs('#genresChart').getContext('2d');
+      const labels = Object.keys(STATE.genres);
+      const counts = labels.map(l => STATE.genres[l].count);
+      // destroy existing chart if exists
+      if (window._genresChart) window._genresChart.destroy();
+      window._genresChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ label: 'Books', data: counts }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { x: { ticks: { maxRotation:45, minRotation:0 } } }
+        }
+      });
     }
 
-    // simple filter & apply
-    function applyFilters(){
-      const q = (searchInput.value||'').trim().toLowerCase();
-      const lang = (langFilter.value||'').trim();
-      const scope = (scopeFilter.value||'').trim();
-      let list = DATA.genres.slice();
-      if(q){
-        list = list.filter(g => (g.name + ' ' + (g.description||'') + ' ' + (g.languages||[]).join(' ')).toLowerCase().includes(q));
-      }
-      if(lang){
-        list = list.filter(g => (g.languages||[]).includes(lang));
-      }
-      if(scope){
-        list = list.filter(g => (g.description||'').toLowerCase().includes(scope) || (g.name||'').toLowerCase().includes(scope));
-      }
-      renderGenreCards(list);
-      renderEncyclopedia(list);
+    // Populate filter dropdown
+    function populateGenreFilter() {
+      const sel = qs('#genre-filter');
+      Object.keys(STATE.genres).sort().forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g; opt.textContent = `${g} (${STATE.genres[g].count})`;
+        sel.appendChild(opt);
+      });
+      sel.addEventListener('change', () => {
+        STATE.currentGenre = sel.value;
+        STATE.page = 1;
+        applyFilters();
+      });
     }
 
-    // load genres.json (assumes server path /data/genres.json or root /genres.json)
-    async function loadJSON(urls = ['/data/genres.json','/genres.json','/mnt/data/genres.json','/site-data/genres.json']){
-      let res, data;
-      for(const u of urls){
-        try{
-          res = await fetch(u, {cache:'no-store'});
-          if(res.ok){ data = await res.json(); console.info('Loaded', u); break; }
-        }catch(e){}
-      }
-      if(!data){
-        // fallback: try root /mnt/data path (local dev)
-        try{
-          const r = await fetch('/mnt/data/genres.json', {cache:'no-store'});
-          if(r.ok) data = await r.json();
-        }catch(e){}
-      }
-      if(!data){
-        // graceful failure: inform user how to provide genres.json
-        genresGrid.innerHTML = '<div class="muted">Could not find genres.json automatically. Place the file at /genres.json or /data/genres.json. For demo, some sample entries are shown.</div>';
-        // small built-in demo fallback
-        DATA.genres = [{
-          id:'epic', name:'Epics', description:'Canonical epic narratives (Mahabharata, Ramayana).', languages:['Sanskrit'], book_count:3,
-          books_sample:[{id:'bk00001',title:'Mahabharata — Sample',author:'Vyasa',year:-200,page_url:'/books/mahabharata-sample.html',cover_url:'https://picsum.photos/seed/mahab/400/600',summary:'Sample'}],
-          books_refs:[{id:'bk00001',page_url:'/books/mahabharata-sample.html',title:'Mahabharata — Sample'}], research_notes:'Sample'
-        }];
-        renderGenreCards(DATA.genres);
-        renderEncyclopedia(DATA.genres);
+    // Search / filters / pagination
+    function applyFilters() {
+      const q = qs('#global-search').value.trim().toLowerCase();
+      let list = STATE.allBooks.slice();
+      if (STATE.currentGenre) list = list.filter(b => b.genre === STATE.currentGenre);
+      if (q) list = list.filter(b => {
+        return (b.title && b.title.toLowerCase().includes(q)) ||
+               (b.author && b.author.toLowerCase().includes(q)) ||
+               (b.description && b.description.toLowerCase().includes(q));
+      });
+      STATE.filteredBooks = list;
+      renderBooks();
+      renderPagination();
+    }
+
+    function renderBooks() {
+      const container = qs('#booksList');
+      container.innerHTML = '';
+      const perPage = parseInt(qs('#per-page').value,10) || 12;
+      STATE.perPage = perPage;
+      const start = (STATE.page - 1) * perPage;
+      const pageItems = STATE.filteredBooks.slice(start, start + perPage);
+      if (!pageItems.length) {
+        container.innerHTML = '<p>No books found for this filter.</p>';
+        qs('#booksPanelTitle').textContent = (STATE.currentGenre ? `${STATE.currentGenre}` : 'All books') + ` — 0 results`;
         return;
       }
-      DATA = data;
-      // populate language filter list
-      const langs = new Set();
-      (DATA.genres||[]).forEach(g => (g.languages||[]).forEach(l=>langs.add(l)));
-      langFilter.innerHTML = '<option value="">All languages</option>' + Array.from(langs).sort().map(l=>`<option value="${l}">${l}</option>`).join('');
-      renderGenreCards(DATA.genres || []);
-      renderEncyclopedia(DATA.genres || []);
+      qs('#booksPanelTitle').textContent = (STATE.currentGenre ? `${STATE.currentGenre}` : 'All books') + ` — ${STATE.filteredBooks.length} results`;
+
+      pageItems.forEach(book => {
+        const c = document.createElement('article');
+        c.className = 'book-card';
+        const cover = book.cover_url ? `<img class="book-cover" loading="lazy" src="${book.cover_url}" alt="Cover of ${escapeHtml(book.title)}">` : `<div class="book-cover" aria-hidden="true"></div>`;
+        c.innerHTML = `
+          ${cover}
+          <div class="book-meta">
+            <h4><a href="${book.page_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(book.title)}</a></h4>
+            <div style="color:#666">${escapeHtml(book.author || 'Unknown')}</div>
+            <div style="font-size:.9rem;color:#888;margin-top:6px">${book.year || ''} — ${book.language || ''}</div>
+            <div style="margin-top:8px"><a href="/book/${slugify(book.title)}.html">Open book page</a></div>
+          </div>
+        `;
+        container.appendChild(c);
+      });
     }
 
-    // event wiring
-    loadBtn.addEventListener('click', ()=> loadJSON());
-    applyBtn.addEventListener('click', applyFilters);
-    searchInput.addEventListener('keydown', (e)=> { if(e.key==='Enter') applyFilters(); });
-    exportBtn.addEventListener('click', ()=>{
-      // export currently visible genres to JSON
-      const visible = Array.from(document.querySelectorAll('.genre-card h3')).map(h=>h.textContent);
-      alert('You can export current view programmatically. Visible genres: ' + visible.length + ' (console). Check console for full dataset preview.');
-      console.log('Visible genres preview:', DATA.genres ? DATA.genres.slice(0,30) : []);
-    });
+    function renderPagination() {
+      const container = qs('#pagination');
+      container.innerHTML = '';
+      const total = STATE.filteredBooks.length;
+      const perPage = STATE.perPage;
+      const pages = Math.max(1, Math.ceil(total / perPage));
+      const createBtn = (label, onClick, disabled) => {
+        const b = document.createElement('button'); b.textContent = label;
+        b.disabled = !!disabled; b.className = 'btn btn-sm';
+        b.addEventListener('click', onClick);
+        return b;
+      };
+      // first / prev
+      container.appendChild(createBtn('First', () => { STATE.page = 1; applyFilters(); }, STATE.page===1));
+      container.appendChild(createBtn('Prev', () => { STATE.page = Math.max(1, STATE.page-1); applyFilters(); }, STATE.page===1));
 
-    // initial attempt to auto-load common path
-    loadJSON();
-    document.getElementById('year').textContent = new Date().getFullYear();
+      // page numbers window
+      const windowSize = 7;
+      let start = Math.max(1, STATE.page - Math.floor(windowSize/2));
+      let end = Math.min(pages, start + windowSize - 1);
+      if (end - start < windowSize -1) start = Math.max(1, end - windowSize + 1);
+      for (let p = start; p <= end; p++) {
+        const btn = createBtn(p, () => { STATE.page = p; applyFilters(); }, false);
+        if (p === STATE.page) { btn.disabled = true; btn.style.fontWeight = '700'; }
+        container.appendChild(btn);
+      }
+
+      // next / last
+      container.appendChild(createBtn('Next', () => { STATE.page = Math.min(pages, STATE.page+1); applyFilters(); }, STATE.page===pages));
+      container.appendChild(createBtn('Last', () => { STATE.page = pages; applyFilters(); }, STATE.page===pages));
+
+      // goto
+      const goto = document.createElement('input');
+      goto.type='number'; goto.min=1; goto.max=pages; goto.placeholder='Go to';
+      goto.style.width='80px'; goto.addEventListener('change', (e)=> {
+        let v = parseInt(e.target.value,10);
+        if (isFinite(v) && v>=1 && v<=pages) { STATE.page = v; applyFilters(); }
+      });
+      container.appendChild(goto);
+    }
+
+    // Helpers: escape HTML
+    function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // UI wiring
+    qs('#global-search').addEventListener('input', debounce(()=>{ STATE.page = 1; applyFilters(); }, 300));
+    qs('#per-page').addEventListener('change', ()=>{ STATE.page = 1; applyFilters(); });
+
+    function debounce(fn, wait){ let t; return (...args)=>{ clearTimeout(t); t = setTimeout(()=>fn.apply(this,args), wait); } }
+
+    // Kick off
+    loadCatalog();
   </script>
 </body>
 </html>
