@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accessibility Statement — Indian Literature Archive</title>
+  <meta name="description" content="Accessibility statement for Indian Literature Archive: commitment, standards (WCAG), assistive technologies, known limitations, remediation plan and contact." />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="js/app.js" as="script">
+  <link rel="preload" href="images/hero-bg.jpg" as="image" media="(min-width: 768px)">
+  <style>
+    /* Minimal inline styles so the page is legible even without external CSS */
+    body { font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height: 1.65; margin:0; color:#222; background:#fff; }
+    .container { max-width:1100px; margin:0 auto; padding:24px; }
+    header.site-header, .announcement-bar, footer.site-footer { background:#111; color:#fff; }
+    .announcement-bar .container { padding:8px 24px; }
+    .header-container { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 24px; }
+    .logo-symbol { background:#fff; color:#111; width:46px; height:46px; display:flex; align-items:center; justify-content:center; border-radius:6px; font-weight:700; }
+    .branding { display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit; }
+    .main-navigation .nav-menu { list-style:none; margin:0; padding:0; display:flex; gap:14px; align-items:center; }
+    .main-navigation a { color:#fff; text-decoration:none; }
+    .hero-section { background-image:url('/images/hero-bg.jpg'); background-size:cover; background-position:center; color:#fff; padding:48px 0; }
+    .hero-content { background:rgba(0,0,0,0.45); padding:24px; border-radius:8px; display:inline-block; }
+    main#main-content { padding:32px 24px; background:#f8f9fa; }
+    h1,h2,h3 { color:#0b2b3a; margin-top:0; }
+    h1 { font-size:28px; }
+    h2 { font-size:22px; margin-top:24px; }
+    p { margin:12px 0; }
+    ul, ol { margin:12px 0 12px 24px; }
+    table { width:100%; border-collapse:collapse; margin:12px 0; }
+    table, th, td { border:1px solid #ddd; }
+    th, td { padding:8px; text-align:left; }
+    .note { background:#fff5c2; padding:8px; border-left:4px solid #ffd34d; margin:12px 0; }
+    footer.site-footer { padding:24px 0; }
+    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; padding:24px; align-items:start; }
+    @media (max-width:900px){ .header-container{ flex-direction:column; align-items:flex-start } .main-navigation .nav-menu{ flex-wrap:wrap } .footer-grid{ grid-template-columns:1fr 1fr } }
+    .back-to-top{ position:fixed; right:20px; bottom:20px; display:none; background:#0b2b3a; color:#fff; border:none; padding:10px 12px; border-radius:6px;}
+    .back-to-top.show{ display:block; }
+    .sr-only{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    details summary{ cursor:pointer; padding:6px 8px; background:#eef6f6; border-radius:6px; margin:8px 0; }
+    .policy-elaboration p{ margin:10px 0; }
+  </style>
+</head>
+<body class="policy-accessibility">
+
+  <a class="skip-link sr-only" href="#main-content">Skip to main content</a>
+
+  <!-- Announcement -->
+  <div class="announcement-bar" role="region" aria-label="Top announcement">
+    <div class="container">
+      <p style="margin:0;">New: Complete translations of <em>Silappadikaram</em> now available! <a href="/tamil/silappadikaram" style="color:#ffd;">Explore now</a></p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <a class="branding" href="/" aria-label="Indian Literature Archive home">
+        <div class="logo-symbol" aria-hidden="true">IA</div>
+        <div>
+          <h1 class="site-title" style="margin:0;">Indian Literature Archive</h1>
+          <p class="site-tagline" style="margin:0; font-size:13px;">Ancient & Medieval Texts</p>
+        </div>
+      </a>
+
+      <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
+        <ul class="nav-menu" role="menubar" aria-hidden="false">
+          <li role="none"><a role="menuitem" href="/">Home</a></li>
+          <li role="none"><a role="menuitem" href="/languages">Languages</a></li>
+          <li role="none"><a role="menuitem" href="/periods">Periods</a></li>
+          <li role="none"><a role="menuitem" href="/resources">Resources</a></li>
+          <li role="none"><a role="menuitem" href="privacy.html">Privacy</a></li>
+          <li role="none"><a role="menuitem" href="terms.html">Terms</a></li>
+          <li role="none"><a role="menuitem" href="accessibility.html" aria-current="page">Accessibility</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-section" aria-hidden="false">
+    <div class="container">
+      <div class="hero-content" role="region" aria-label="Accessibility statement summary">
+        <h2 class="hero-title">Accessibility Statement</h2>
+        <p class="hero-subtitle">Our commitment to inclusive access, assistive technologies, and a concrete roadmap for continuous improvement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main id="main-content" role="main">
+    <div class="container">
+      <article class="accessibility-statement">
+
+        <header>
+          <h1>Digital Accessibility Statement — Indian Literature Archive</h1>
+          <p><strong>Effective date:</strong> 17 August 2025</p>
+          <p>This Accessibility Statement outlines our commitment to ensuring that our website, digital collections, and associated research tools are accessible, usable, and welcoming to everyone — including people who are blind or have low vision, deaf or hard of hearing, mobility impairments, cognitive or learning disabilities, or other access needs.</p>
+        </header>
+
+        <section aria-labelledby="commitment">
+          <h2 id="commitment">1. Our commitment</h2>
+          <p>We consider meaningful access to knowledge a core mission. The Archive aims to remove barriers and enable participation in scholarship regardless of physical, sensory, or cognitive differences. Accessibility guides our content strategy, product decisions, and partnerships. We treat accessibility as both an ethical responsibility and a practical feature, integrated into design, editorial, technical, and curatorial workflows.</p>
+        </section>
+
+        <section aria-labelledby="scope">
+          <h2 id="scope">2. Scope of this statement</h2>
+          <p>This statement applies to the primary public website (indianliteraturearchive.org) and its public subsites, the online catalogue, translation pages, metadata records, content discovery tools, newsletters originating from the Archive, and embedded multimedia hosted or published by the Archive. It covers text content, images, downloadable resources, audio/video content, search and navigation, interactive forms, APIs offered to bona fide researchers, and any third-party embeds we control directly.</p>
+          <p><strong>Note:</strong> Some legacy content (digitized scans, partner-hosted resources, or externally embedded widgets) may not fully conform to accessibility best practices; we describe those known limitations later and provide alternatives wherever possible.</p>
+        </section>
+
+        <section aria-labelledby="standards">
+          <h2 id="standards">3. Standards we follow</h2>
+          <p>We align our work with internationally recognized standards and guidance. Our present target is:</p>
+          <ul>
+            <li><strong>WCAG 2.1 Level AA</strong> as the baseline for content and interfaces.</li>
+            <li>We monitor developments in <strong>WCAG 2.2</strong> and plan staged adoption for relevant success criteria.</li>
+            <li>We use ARIA specifications for dynamic components where native semantics are insufficient.</li>
+            <li>We consider national guidance such as the <em>Rights of Persons with Disabilities Act (India)</em>, and international frameworks—ADA (U.S.), EN 301 549 (EU), and applicable regulations for partner institutions.</li>
+          </ul>
+          <p>Where specific content or formats are subject to different legal frameworks (for example, research data shared under grant conditions with different jurisdictional rules), we apply a harmonized approach that meets or exceeds the strictest applicable standard.</p>
+        </section>
+
+        <section aria-labelledby="measures">
+          <h2 id="measures">4. Measures we have implemented</h2>
+          <p>Accessibility is embedded across the project lifecycle. Key measures include:</p>
+
+          <ul>
+            <li><strong>Design & Content:</strong> Semantic HTML, clear heading structure, meaningful link text, descriptive image alt text, consistent navigation, simple language summaries for complex materials, and provision of multiple content formats (HTML, PDF with tagging, plain text excerpts).</li>
+
+            <li><strong>Keyboard Navigation:</strong> All interactive controls are operable via keyboard alone (Tab/Shift+Tab, Enter/Space, Arrow keys where applicable). Skip-links and landmarks enable fast navigation to main regions (main, nav, search, footer).</li>
+
+            <li><strong>ARIA & Roles:</strong> We use ARIA roles and attributes only to enhance native semantics (for example, role="dialog" for modals, aria-expanded for disclosure widgets), and avoid ARIA misuse that could confuse assistive technologies.</li>
+
+            <li><strong>Contrast & Visual Design:</strong> Color contrast meets or exceeds WCAG AA thresholds for text and user interface components. We offer a high-contrast mode and allow text scaling without loss of content or functionality.</li>
+
+            <li><strong>Multimedia:</strong> We provide captions and transcripts for lectures, talks, and video resources. Where possible, audio descriptions accompany complex visual materials. Time-coded transcripts are provided for research seminars.</li>
+
+            <li><strong>Images & Manuscripts:</strong> For digitized manuscripts and images we include robust descriptive metadata—title, date, provenance—plus an accessible, plain-language description and, where relevant, a scholarly caption that explains textual features important for research.</li>
+
+            <li><strong>Forms & Data Entry:</strong> Forms include labels, instructions, fieldset and legend where appropriate, error identification, and suggestions to correct. CAPTCHA alternatives are provided for users who cannot interact with visual CAPTCHAs.</li>
+
+            <li><strong>Search & Discovery:</strong> Search results are ordered with meaningful headings and offer accessible filtering controls that remain keyboard-operable and are readable by screen readers.</li>
+
+            <li><strong>Technical & Testing:</strong> Automated testing (AXE-core, pa11y), manual testing with screen readers (NVDA, VoiceOver), keyboard-only checks, and testing on mobile platforms. Accessibility checks are part of pull-request CI jobs for frontend code.</li>
+
+            <li><strong>Procurement & Vendor Management:</strong> Accessibility requirements are included in procurement for third-party tools and hosting; we require vendors to demonstrate conformance or provide remediation plans.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="assistive">
+          <h2 id="assistive">5. Assistive technologies we test with</h2>
+          <p>We test key user journeys using a range of assistive technologies and environments to reflect how our audience accesses content:</p>
+
+          <ul>
+            <li><strong>Screen readers:</strong> NVDA (Windows), VoiceOver (macOS, iOS), JAWS (Windows) — for page reading, heading navigation, table reading, and interactive component behavior.</li>
+            <li><strong>Screen magnifiers:</strong> Windows Magnifier, Zoom features in macOS and mobile platforms.</li>
+            <li><strong>Speech recognition:</strong> Dragon NaturallySpeaking and built-in OS recognition where feasible for form entry tests.</li>
+            <li><strong>Switch access and keyboard-only:</strong> Tests for full navigation using Tab, Enter, Arrow keys, and skip links.</li>
+            <li><strong>Braille displays:</strong> Basic checks to ensure content order and accessible labels are surfaced to braille devices via screen readers.</li>
+          </ul>
+
+          <p>We also test on a variety of browsers and devices (Chrome, Firefox, Edge, Safari; desktop and mobile) to capture real-world combinations of assistive tech + browser behavior.</p>
+        </section>
+
+        <section aria-labelledby="known">
+          <h2 id="known">6. Known limitations and exceptions</h2>
+          <p>We are transparent about known issues and where full conformance is not yet achieved. Typical areas of limitation and how we handle them are:</p>
+
+          <ul>
+            <li><strong>Legacy scanned images:</strong> Many early digitization efforts produced high-quality scans that lack embedded OCR text. For these, screen readers cannot access content unless OCR is performed. We prioritize OCR and human-verified transcriptions for high-use items and provide plain-text transcripts where available.</li>
+
+            <li><strong>Third-party embeds:</strong> Embedded widgets (legacy viewer, some publisher-hosted PDFs, or external interactive maps) may not meet our accessibility standards. Where a third-party cannot be replaced, we provide an accessible alternative (mirror content, static HTML summary, or downloadable text).</li>
+
+            <li><strong>Complex scholarly visualizations:</strong> Some research visualizations are dense (multi-layered maps, interactive stemmata). We supply static accessible summaries and long descriptions that explain structure, data, and how to interpret the visualization.</li>
+
+            <li><strong>PDFs and archival packages:</strong> Not all PDF documents are fully tagged. We maintain an inventory of untagged PDFs and either create tagged PDFs on request or provide text alternatives.</li>
+
+            <li><strong>OCR errors:</strong> OCR for some scripts (older orthography, mixed scripts, marginalia) can be imperfect. We flag OCR confidence levels and provide human-corrected transcriptions for core items.</li>
+          </ul>
+
+          <p class="note">If you encounter an inaccessible page or resource, please contact our Accessibility Officer (contact details below). We will work to provide a reasonable alternative promptly.</p>
+        </section>
+
+        <section aria-labelledby="remediation">
+          <h2 id="remediation">7. Remediation processes & priorities</h2>
+          <p>We maintain a prioritized remediation plan that balances user impact, legal obligations, research value, and resource constraints. Key elements include:</p>
+
+          <ol>
+            <li><strong>Inventory & Triage:</strong> Items are inventoried by type and user impact (e.g., core text vs. supplementary image). High-impact items are remediated first.</li>
+            <li><strong>Automated & Manual remediation:</strong> Automated tools surface common issues (contrast, missing labels) while manual review addresses semantics, alt text, and complex content.</li>
+            <li><strong>User requests:</strong> Individual requests for alternative formats receive expedited handling (see Contact section); where justified, documents are converted to accessible formats and returned within a defined SLA.</li>
+            <li><strong>Partner coordination:</strong> When content originates with a partner institution, we work collaboratively to remediate or provide alternatives.</li>
+          </ol>
+
+          <p>Remediation is documented, tracked in a ticketing system, and subject to periodic audits to verify that completed work meets acceptance criteria.</p>
+        </section>
+
+        <section aria-labelledby="feedback">
+          <h2 id="feedback">8. How to request alternative formats or report issues</h2>
+          <p>We welcome feedback and provide multiple channels so users can request assistance or report barriers. Our commitments:</p>
+
+          <ul>
+            <li>We will acknowledge accessibility reports within 3 business days.</li>
+            <li>We will provide a feasible alternative or workaround within 10 business days for most requests (timeline may vary for large or complex items).</li>
+            <li>We will keep requestors informed about status and expected resolution time.</li>
+          </ul>
+
+          <p><strong>Contact methods</strong>:</p>
+          <ul>
+            <li>Email: <a href="mailto:accessibility@indianliteraturearchive.org">accessibility@indianliteraturearchive.org</a></li>
+            <li>Phone: +91 11 2345 6789 (ask for Accessibility Officer)</li>
+            <li>Postal address: Accessibility Coordinator, Indian Literature Archive, 123 Literary Lane, New Delhi 110001, India</li>
+            <li>Feedback form: /accessibility-feedback (accessible web form)</li>
+          </ul>
+
+          <p>Please include the page URL, a brief description of the issue, your assistive technology (if any), and your preferred alternative format.</p>
+        </section>
+
+        <section aria-labelledby="policy">
+          <h2 id="policy">9. Policies that support accessibility</h2>
+          <p>Accessibility is supported by internal policies and processes:</p>
+
+          <ul>
+            <li><strong>Accessibility by Design:</strong> Accessibility checks are included at requirement-gathering and design stages for new features or content types.</li>
+            <li><strong>Procurement Policy:</strong> Contracts with vendors include accessibility clauses, remediation commitments, and reporting requirements.</li>
+            <li><strong>Content Publishing Policy:</strong> Editors and contributors follow an accessibility checklist before publishing: headings, alt text, transcripts, link text, and document tagging.</li>
+            <li><strong>Training:</strong> Staff and volunteers receive regular training on accessible authoring, alt-text writing, semantic markup, and user empathy.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="training">
+          <h2 id="training">10. Staff training and community capacity building</h2>
+          <p>Employees, contractors, and frequent volunteers participate in accessibility workshops covering:</p>
+          <ul>
+            <li>Accessible authoring (clear language, structuring documents for screen readers)</li>
+            <li>Writing useful alternative text for manuscripts and images</li>
+            <li>Designing accessible interactive components and forms</li>
+            <li>Interpreting WCAG success criteria in the context of textual scholarship</li>
+          </ul>
+          <p>We also collaborate with peer institutions to exchange best practices and test assistive-technology workflows for specialized academic content.</p>
+        </section>
+
+        <section aria-labelledby="thirdparty">
+          <h2 id="thirdparty">11. Third-party content and partners</h2>
+          <p>We host and link to materials provided by partner libraries, publishers, and scholars. While we specify accessibility expectations in our partnerships, some third-party content may not yet be fully accessible. In such cases we either:</p>
+          <ul>
+            <li>Host an equivalent accessible representation under license, or</li>
+            <li>Provide a detailed summary and alternative formats, or</li>
+            <li>Work with the partner to remediate the original content where possible.</li>
+          </ul>
+          <p>When third-party tools (e.g., external viewers, analytics widgets) are integrated, we evaluate accessibility during procurement and include fallback options where vendor functionality is lacking.</p>
+        </section>
+
+        <section aria-labelledby="techroad">
+          <h2 id="techroad">12. Technology roadmap for accessibility</h2>
+          <p>Planned improvements include:</p>
+          <ul>
+            <li><strong>Automated OCR & correction pipeline:</strong> Improved OCR for Indic scripts with human validation for high-value manuscripts.</li>
+            <li><strong>Enhanced transcripts & descriptions:</strong> Time-coded transcripts for recordings and extended long descriptions for complex images/diagrams.</li>
+            <li><strong>ARIA-first components:</strong> Build a component library with accessible patterns for search, faceted filters, tables, and modals.</li>
+            <li><strong>Voice & speech navigation:</strong> Explore voice interaction for search and discovery for users who prefer spoken navigation.</li>
+            <li><strong>Multi-language accessible content:</strong> Provide accessibility metadata and descriptions in Hindi, Tamil, Telugu, Bengali, and English where feasible.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="measurement">
+          <h2 id="measurement">13. Accessibility measurement and reporting</h2>
+          <p>We combine automated and manual audits to measure progress:</p>
+          <ul>
+            <li>Automated scans for common issues (missing alt text, color contrast, label association).</li>
+            <li>Manual sampling for content complexity, document tagging, and interactive behavior.</li>
+            <li>Periodic external audits by accessibility specialists and user testing with people with disabilities.</li>
+          </ul>
+          <p>Aggregate progress metrics (number of remediated PDFs, percentage of pages meeting WCAG AA criteria, average resolution time for accessibility requests) are published in our annual accessibility report.</p>
+        </section>
+
+        <section aria-labelledby="legal">
+          <h2 id="legal">14. Legal and regulatory context</h2>
+          <p>We respect and consider obligations under multiple legal regimes. Relevant frameworks include:</p>
+          <ul>
+            <li>India: Rights of Persons with Disabilities Act and related guidelines</li>
+            <li>European Union: EN 301 549 and the European Accessibility Act where relevant</li>
+            <li>United States: ADA Title III principles applied to digital services</li>
+            <li>International: UN Convention on the Rights of Persons with Disabilities (CRPD)</li>
+          </ul>
+          <p>Compliance is complex across jurisdictions; our approach is to meet high-quality technical standards (WCAG AA) and respond to legal obligations in partners' jurisdictions.</p>
+        </section>
+
+        <section aria-labelledby="privacy">
+          <h2 id="privacy">15. Interaction with privacy & data protection</h2>
+          <p>Accessibility data handling sometimes requires sensitive information (for example, when responding to a request for an alternative format or recording disability-related preferences). We process such information in accordance with our <a href="privacy.html">Privacy Policy</a>, limiting retention, securing communications, and using data only to provide requested accommodations.</p>
+        </section>
+
+        <section aria-labelledby="case-studies">
+          <h2 id="case-studies">16. Case studies & examples (practical illustrations)</h2>
+
+          <details>
+            <summary>Case study: Making a century-old manuscript accessible</summary>
+            <div class="policy-elaboration">
+              <p><strong>Problem:</strong> A 19th-century manuscript was available only as high-resolution scans with faded ink and marginalia. No embedded text existed, and OCR failed on mixed scripts.</p>
+              <p><strong>Approach:</strong> We prioritized the manuscript because of research demand. The approach combined AI-assisted OCR tuned for Devanagari and Dravidian script fragments, human correction by scholars, and layer-based delivery where the viewer exposes an accessible text layer and the original image layer separately. For people who could not use the multi-layer viewer, we provided a plain-text corrected transcription and an extended descriptive note explaining marginalia and layout that are important for philological analysis.</p>
+              <p><strong>Outcome:</strong> The manuscript became searchable, screen-reader-friendly, and usable for blind and low-vision researchers. Scholarly integrity was preserved through versioned transcriptions and provenance metadata.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Case study: Captioning early recorded lectures</summary>
+            <div class="policy-elaboration">
+              <p><strong>Problem:</strong> A series of digitized lectures in English and regional languages lacked captions, making them inaccessible to deaf and hard-of-hearing users.</p>
+              <p><strong>Approach:</strong> We created time-coded captions and bilingual transcripts. For regional languages, captions were created by native transcribers and synchronized with audio. When lectures contained dense quotations in Sanskrit/Tamil, we annotated transcripts with inline translations and speaker notes.</p>
+              <p><strong>Outcome:</strong> Lectures became accessible, indexable, and useful for hearing-impaired scholars. Transcripts supported text-mining and citation verification for broader research uses.</p>
+            </div>
+          </details>
+
+        </section>
+
+        <section aria-labelledby="faq">
+          <h2 id="faq">17. Frequently asked questions (FAQ)</h2>
+          <h3>Q: How long will it take to get an accessible copy of a document?</h3>
+          <p>A: For most single-page or short documents we aim to provide an alternative within 10 business days. Complex manuscripts or large corpora may take longer; we will agree timelines individually.</p>
+
+          <h3>Q: I use a screen reader and a page does not behave correctly — what should I report?</h3>
+          <p>A: Please include the page URL, the assistive technology (name and version), browser and OS, a short description of how the content is non-functional, and your preferred contact method. If comfortable, attach a short voice note outlining the issue.</p>
+
+          <h3>Q: Do you offer onsite or mediated access for physical collections?</h3>
+          <p>A: For physical collections we offer mediated access and research support on request, including staff-assisted reading for people with visual impairments and provision of digitized or alternative format outputs where permissions and conservation conditions allow.</p>
+        </section>
+
+        <section aria-labelledby="commitment2">
+          <h2 id="commitment2">18. Our pledges</h2>
+          <p>We pledge to:</p>
+          <ul>
+            <li>Respond to accessibility requests quickly and transparently.</li>
+            <li>Prioritize remediation when barriers affect research or participation.</li>
+            <li>Publish an annual accessibility progress report with measurable outcomes.</li>
+            <li>Continue working with the disability community to shape priorities and solutions.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="contact">
+          <h2 id="contact">19. Contact & escalation</h2>
+          <p>If you need immediate assistance or wish to escalate a concern, please use the following contacts:</p>
+          <ul>
+            <li><strong>Accessibility Officer:</strong> accessibility@indianliteraturearchive.org</li>
+            <li><strong>Phone:</strong> +91 11 2345 6789 (ask for Accessibility)</li>
+            <li><strong>Address:</strong> Accessibility Coordinator, Indian Literature Archive, 123 Literary Lane, Academic District, New Delhi 110001, India</li>
+          </ul>
+          <p>If you are not satisfied with our response, you may escalate to a relevant external body in your jurisdiction — for instance, the local equality commission or data protection authority where appropriate.</p>
+        </section>
+
+        <section aria-labelledby="updates">
+          <h2 id="updates">20. Updates to this statement</h2>
+          <p>This statement will be reviewed and updated regularly. Substantive changes will be reflected by an updated "effective date" at the top of this document. We encourage repeat visitors and users to check this page periodically for improvements and new accommodations.</p>
+        </section>
+
+        <section aria-labelledby="conclusion">
+          <h2 id="conclusion">21. Conclusion — inclusive scholarship</h2>
+          <p>Our work as an archive is to make cultural heritage available equitably. Accessibility is central to that mission. We commit human and technical resources to ensure that scholarship, discovery, and participation are open to all. We welcome partnership, critique, and collaboration from users and peer institutions as we pursue better, more inclusive digital scholarship.</p>
+        </section>
+
+        <footer class="statement-footer" style="margin-top:18px;">
+          <p><em>Published by Indian Literature Archive — August 17, 2025.</em></p>
+        </footer>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid" aria-hidden="false">
+        <div class="footer-column">
+          <h3>Indian Literature Archive</h3>
+          <p>A non-profit initiative dedicated to preserving and promoting India's rich literary heritage through accurate translations and scholarly research.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Quick links</h3>
+          <ul style="list-style:none; padding-left:0;">
+            <li><a href="index.html" style="color:#fff;">Home</a></li>
+            <li><a href="privacy.html" style="color:#fff;">Privacy Policy</a></li>
+            <li><a href="terms.html" style="color:#fff;">Terms &amp; Conditions</a></li>
+            <li><a href="resources.html" style="color:#fff;">Resources</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul style="list-style:none; padding-left:0;">
+            <li><a href="contribute.html" style="color:#fff;">Contribute</a></li>
+            <li><a href="volunteer.html" style="color:#fff;">Volunteer</a></li>
+            <li><a href="donate.html" style="color:#fff;">Donate</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <address style="font-style:normal;">
+            123 Literary Lane<br>
+            Academic District, New Delhi 110001, India<br>
+            <a href="tel:+911123456789" style="color:#fff;">+91 11 2345 6789</a><br>
+            <a href="mailto:info@indianliteraturearchive.org" style="color:#fff;">info@indianliteraturearchive.org</a>
+          </address>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:12px;">
+        &copy; <span id="year"></span> Indian Literature Archive. All content provided for educational and research purposes.
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top" id="backToTop">↑</button>
+
+  <script src="js/app.js" defer></script>
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple back-to-top behavior + show/hide
+    (function() {
+      const btn = document.getElementById('backToTop');
+      if(!btn) return;
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) btn.classList.add('show');
+        else btn.classList.remove('show');
+      });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    })();
+
+    // Progressive enhancement: accessible disclosure polyfill
+    document.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', () => {
+        // no-op: keeps native behavior; could add analytics or logging
+      });
+    });
+  </script>
+</body>
+</html>
