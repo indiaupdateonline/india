@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "Sangam Poetry and its Historical Significance",
+    "author": "Dr. R. Subramanian",
+    "year": "2021",
+    "excerpt": "An overview of Sangam poetry highlighting its cultural, historical, and linguistic value in early Tamil society.",
+    "link": "articles/sangam-poetry.html"
+  },
+  {
+    "id": 2,
+    "title": "Silappadikaram: The Epic of the Anklet",
+    "author": "Prof. Meenakshi Sundaram",
+    "year": "2019",
+    "excerpt": "A study of Silappadikaram, exploring themes of justice, fate, and society in classical Tamil literature.",
+    "link": "articles/silappadikaram.html"
+  },
+  {
+    "id": 3,
+    "title": "Bhakti Movement in Tamil Nadu",
+    "author": "Dr. Lakshmi Narayanan",
+    "year": "2020",
+    "excerpt": "The role of Tamil Alvars and Nayanmars in shaping devotional traditions and their poetic legacy.",
+    "link": "articles/bhakti-movement.html"
+  },
+  {
+    "id": 4,
+    "title": "Medieval Commentaries on Tolkappiyam",
+    "author": "Dr. V. Shankar",
+    "year": "2022",
+    "excerpt": "An analysis of medieval commentaries on Tolkappiyam and their role in interpreting Tamil grammar and poetics.",
+    "link": "articles/tolkappiyam-commentaries.html"
+  },
+  {
+    "id": 5,
+    "title": "Colonial Encounters with Tamil Literature",
+    "author": "Prof. Ananya Rao",
+    "year": "2023",
+    "excerpt": "Examines how Tamil literary works were translated, studied, and reinterpreted under colonial rule.",
+    "link": "articles/colonial-encounters.html"
+  },
+  {
+    "id": 6,
+    "title": "Modern Scholarship on Sangam Texts",
+    "author": "Dr. Arul Murugan",
+    "year": "2024",
+    "excerpt": "Surveys modern academic research on Sangam texts and the challenges of reconstructing ancient Tamil history.",
+    "link": "articles/modern-sangam-scholarship.html"
+  },
+  {
+    "id": 7,
+    "title": "The Role of Women in Tamil Epics",
+    "author": "Dr. Priya Natarajan",
+    "year": "2021",
+    "excerpt": "Highlights the representation of women in Tamil epics and their symbolic significance in literature.",
+    "link": "articles/women-in-tamil-epics.html"
+  }
+]
