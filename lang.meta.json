@@ -1,0 +1,17 @@
+{
+  "id": "ainu",
+  "name": "Ainu",
+  "region": "Japan",
+  "word_count": 2400,
+  "sets_count": 2,
+  "featured_image": "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=1200&auto=format&fit=crop",
+  "description": "Ainu language — sample meta with two demo sets. In production host many sets and a prebaked lunr index for fast search.",
+  "sample_words": [
+    { "id": "w0001", "word": "ramu", "english": "sun", "meanings": { "hi": "सूरज", "ar": "شمس", "zh": "太阳", "es": "sol", "en": "sun" }, "description_en": "The star at the center of the solar system.", "tags": ["nature", "astronomy"] },
+    { "id": "w0002", "word": "yakan", "english": "water", "meanings": { "hi": "पानी", "ar": "ماء", "zh": "水", "es": "agua", "en": "water" }, "description_en": "Fresh water used for drinking.", "tags": ["basic", "nature"] }
+  ],
+  "sets": [
+    { "set_id": "set_001", "title": "Basic nouns (Ainu)", "url": "/data/ainu/sets/set_001.json" },
+    { "set_id": "set_002", "title": "Nature & landscape (Ainu)", "url": "/data/ainu/sets/set_002.json" }
+  ]
+}
