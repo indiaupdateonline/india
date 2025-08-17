@@ -239,7 +239,7 @@
   <!-- Back to top -->
   <button class="back-to-top" aria-label="Back to top" id="backToTop" style="display:none; position:fixed; right:20px; bottom:20px; padding:10px; border-radius:6px; background:#0b6b6b; color:#fff; border:none;">↑</button>
 
-  <!-- App script: fetch period.json, render, charts, pagination, search, filters -->
+  <!-- App script: fetch periods.json, render, charts, pagination, search, filters -->
   <script>
     // Basic app state
     const STATE = {
@@ -271,7 +271,7 @@
     let timelineChart = null;
 
     // Fetch JSON and initialize
-    fetch('period.json')
+    fetch('periods.json')
       .then(r => {
         if(!r.ok) throw new Error('Failed to fetch period.json');
         return r.json();
