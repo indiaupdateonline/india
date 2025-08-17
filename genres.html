@@ -171,7 +171,7 @@
     // Fetch genres.json and initialize
     async function loadCatalog() {
       try {
-        const resp = await fetch('./genres.json', {cache: "no-store"});
+        const resp = await fetch('genres.json', {cache: "no-store"});
         if (!resp.ok) throw new Error('Failed to load genres.json: ' + resp.status);
         const data = await resp.json();
         STATE.allBooks = data;
