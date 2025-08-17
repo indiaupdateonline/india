@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Periods — Indian Literature Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Keep site's original assets & fonts -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Serif:400,700&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Minimal non-responsive (fixed layout) CSS tuned for desktop / preserved site look -->
+  <style>
+    /* Intentionally NOT responsive: fixed-width layout for desktop-first presentation */
+    :root {
+      --container-width: 1100px;
+      --muted: #6b7280;
+      --accent: #0b6b6b;
+      --card-bg: #f7f9fa;
+      --card-border: #e6eef0;
+      --shadow: 0 6px 18px rgba(11,43,58,0.06);
+      --radius: 8px;
+      --mono: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    html,body { height:100%; margin:0; font-family:var(--mono); background:#ffffff; color:#111827; }
+    .container { width: var(--container-width); margin: 28px auto; }
+    header.site-header, footer.site-footer { background:#0b2b3a; color:#fff; padding:18px 0; }
+    .header-grid { display:flex; align-items:center; justify-content:space-between; gap:12px; width:var(--container-width); margin:0 auto; padding:0 12px; }
+    .branding { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .logo-symbol { background:#fff; color:#0b2b3a; width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:6px; font-weight:700; }
+    nav.main-navigation a { color:#fff; text-decoration:none; margin-right:12px; font-weight:600; }
+    .hero { background: linear-gradient(180deg, rgba(11,43,58,0.92), rgba(11,43,58,0.82)); color:#fff; padding:24px 0; }
+    .hero .container { display:flex; align-items:center; justify-content:space-between; }
+    .hero h1 { margin:0; font-size:28px; letter-spacing: -0.4px; }
+    main#main-content { padding: 20px 0 80px 0; width:var(--container-width); margin:0 auto; }
+
+    /* Layout – two-column with stable widths */
+    .layout { display:flex; gap:24px; align-items:flex-start; }
+    .left-column { width: 720px; }
+    .right-column { width: 340px; }
+
+    /* Cards */
+    .card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); margin-bottom:18px; }
+    .period-card { padding:18px; border-left:6px solid var(--accent); }
+    .period-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .period-title h2 { margin:0; font-size:20px; color:#0b2b3a; }
+    .meta { color:var(--muted); font-size:13px; }
+
+    /* Controls area */
+    .controls { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+    .controls input[type="search"], .controls select { padding:8px 10px; border:1px solid #d1d5db; border-radius:6px; background:#fff; font-size:14px; }
+    .controls button { padding:8px 12px; border-radius:6px; border:none; background:var(--accent); color:#fff; cursor:pointer; font-weight:600; }
+
+    /* Pagination */
+    .pagination { display:flex; gap:6px; align-items:center; justify-content:center; margin-top:12px; }
+    .pagination button { padding:8px 10px; border-radius:6px; border:1px solid #d1d5db; background:#fff; cursor:pointer; }
+    .pagination button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+    /* Chart area */
+    .chart-wrap { margin-bottom:18px; }
+    .chart-card { padding:12px; }
+
+    /* table */
+    table { width:100%; border-collapse:collapse; margin-top:8px; }
+    th,td { padding:8px; border-bottom:1px solid #e6eef0; text-align:left; font-size:14px; }
+    th { background:#f1f5f9; font-weight:600; color:#0b2b3a; }
+
+    /* small helper */
+    .muted { color:var(--muted); font-size:13px; }
+    .tag { display:inline-block; padding:4px 8px; border-radius:999px; background:#e6f6f6; color:#0b6b6b; font-weight:600; font-size:12px; margin-right:6px; }
+
+    /* Footer */
+    footer .container { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    footer a { color:#fff; text-decoration:none; }
+
+    /* Ensure no responsiveness: prevent layout collapse */
+    @media (max-width:1200px) {
+      /* intentionally do not alter widths for smaller viewports per requirement */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / navigation - keep site layout same as other pages -->
+  <header class="site-header" role="banner">
+    <div class="header-grid">
+      <a class="branding" href="/" aria-label="Indian Literature Archive home">
+        <div class="logo-symbol" aria-hidden="true">IA</div>
+        <div>
+          <div style="font-weight:700; color:#fff;">Indian Literature Archive</div>
+          <div style="font-size:12px; color:#cfe7e7;">Ancient & Medieval Texts</div>
+        </div>
+      </a>
+      <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
+        <a href="/">Home</a>
+        <a href="/languages">Languages</a>
+        <a href="/periods" style="text-decoration:underline;">Periods</a>
+        <a href="/resources">Resources</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="region" aria-label="Periods hero">
+    <div class="container">
+      <div>
+        <h1>Explore Literature by Historical Period</h1>
+        <p class="muted" style="margin-top:6px;">Data loaded from <code>period.json</code>. Interactive charts, filters, and pagination let you explore canonical works, timelines, and statistics.</p>
+      </div>
+
+      <!-- Quick stats mini-cards on right of hero -->
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="card" style="padding:12px; width:220px;">
+          <div style="font-size:12px; color:#cfe7e7;">Total Periods</div>
+          <div id="stat-period-count" style="font-size:22px; font-weight:700; margin-top:6px;">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main id="main-content">
+    <div class="container">
+
+      <div class="layout">
+        <!-- LEFT: list of period cards, search, pagination -->
+        <div class="left-column">
+          <!-- Controls -->
+          <div class="card" aria-hidden="false">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong>Explore Periods</strong>
+                <div class="muted">Filter, search, sort and paginate through the archive's period metadata.</div>
+              </div>
+              <div class="muted">Data source: <code>period.json</code></div>
+            </div>
+
+            <div style="margin-top:12px;" class="controls" role="region" aria-label="Controls">
+              <input id="searchInput" type="search" placeholder="Search period name, key works, themes..." aria-label="Search periods">
+              <select id="filterSelect" aria-label="Filter by region">
+                <option value="">All regions</option>
+                <!-- Options populated dynamically -->
+              </select>
+              <select id="sortSelect" aria-label="Sort by">
+                <option value="name-asc">Name ↑</option>
+                <option value="name-desc">Name ↓</option>
+                <option value="start-asc">Start date ↑</option>
+                <option value="start-desc">Start date ↓</option>
+              </select>
+
+              <select id="pageSize" aria-label="Items per page">
+                <option value="3">3 / page</option>
+                <option value="5" selected>5 / page</option>
+                <option value="10">10 / page</option>
+              </select>
+
+              <button id="clearBtn" title="Clear filters">Clear</button>
+            </div>
+          </div>
+
+          <!-- Chart visualizations -->
+          <div class="chart-wrap card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>Visualizations</strong>
+              <div class="muted">Distribution & timeline overview</div>
+            </div>
+
+            <div style="display:flex; gap:12px; margin-top:12px;">
+              <div style="flex:1;">
+                <canvas id="periodDistributionChart" width="400" height="220"></canvas>
+                <div class="muted" style="font-size:12px; margin-top:6px;">Count by region / language family</div>
+              </div>
+              <div style="flex:1;">
+                <canvas id="periodTimelineChart" width="400" height="220"></canvas>
+                <div class="muted" style="font-size:12px; margin-top:6px;">Period start–end timeline (stacked)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Listing area where period cards will be rendered -->
+          <div id="periodList" aria-live="polite">
+            <!-- JS will insert .period-card elements here -->
+            <div class="card muted">Loading periods...</div>
+          </div>
+
+          <!-- Pagination control -->
+          <div id="pagination" class="pagination" role="navigation" aria-label="Pagination"></div>
+        </div>
+
+        <!-- RIGHT: detail panel, quick filters, recent updates -->
+        <aside class="right-column">
+          <div class="card" id="detailPanel" aria-live="polite">
+            <strong>Period details</strong>
+            <div class="muted" style="margin-top:8px;">Click any period card to see extended metadata, recommended editions, and research notes.</div>
+            <div id="detailContent" style="margin-top:12px;">
+              <p class="muted">No period selected.</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px;">
+            <strong>Quick filters</strong>
+            <div style="margin-top:8px;">
+              <div><label><input type="checkbox" class="quick-filter" value="epic"> Epic-related</label></div>
+              <div><label><input type="checkbox" class="quick-filter" value="devotional"> Devotional / Bhakti</label></div>
+              <div><label><input type="checkbox" class="quick-filter" value="drama"> Drama / Performance</label></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px;">
+            <strong>Recent additions</strong>
+            <div id="recentList" style="margin-top:8px;">
+              <div class="muted">Loading recent items...</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-weight:700;">Indian Literature Archive</div>
+          <div class="muted" style="font-size:13px;">A non-profit initiative — preserving & sharing Indian literary heritage</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="muted">© <span id="year"></span> Indian Literature Archive</div>
+          <div><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="accessibility.html">Accessibility</a></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" aria-label="Back to top" id="backToTop" style="display:none; position:fixed; right:20px; bottom:20px; padding:10px; border-radius:6px; background:#0b6b6b; color:#fff; border:none;">↑</button>
+
+  <!-- App script: fetch period.json, render, charts, pagination, search, filters -->
+  <script>
+    // Basic app state
+    const STATE = {
+      periods: [],           // full dataset from JSON
+      filtered: [],          // filtered/sorted list
+      currentPage: 1,
+      pageSize: 5,
+      sortKey: 'name-asc',
+      searchQuery: '',
+      regionFilter: '',
+      quickFilters: new Set()
+    };
+
+    // DOM refs
+    const periodListEl = document.getElementById('periodList');
+    const paginationEl = document.getElementById('pagination');
+    const searchInput = document.getElementById('searchInput');
+    const filterSelect = document.getElementById('filterSelect');
+    const sortSelect = document.getElementById('sortSelect');
+    const pageSizeSelect = document.getElementById('pageSize');
+    const clearBtn = document.getElementById('clearBtn');
+    const detailContent = document.getElementById('detailContent');
+    const recentList = document.getElementById('recentList');
+    const statPeriodCount = document.getElementById('stat-period-count');
+    const backToTopBtn = document.getElementById('backToTop');
+
+    // Chart instances
+    let distributionChart = null;
+    let timelineChart = null;
+
+    // Fetch JSON and initialize
+    fetch('period.json')
+      .then(r => {
+        if(!r.ok) throw new Error('Failed to fetch period.json');
+        return r.json();
+      })
+      .then(data => {
+        // expected: { periods: [ { id, name, start, end, region, languages, keyWorks:[], themes:[], description, stats:{texts:...,manuscripts:...}, recent: boolean, recommended: [ ... ] } ], meta: {...} }
+        STATE.periods = data.periods || [];
+        initFilterOptions(STATE.periods);
+        STATE.pageSize = parseInt(pageSizeSelect.value, 10);
+        applyAllTransforms();
+        renderCharts();
+        renderRecent();
+        statPeriodCount.textContent = STATE.periods.length;
+      })
+      .catch(err => {
+        periodListEl.innerHTML = '<div class="card">Error loading data: ' + err.message + '</div>';
+      });
+
+    // Initialize region filter options
+    function initFilterOptions(periods) {
+      const regions = Array.from(new Set(periods.map(p => p.region || 'Unknown'))).sort();
+      regions.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r;
+        opt.textContent = r;
+        filterSelect.appendChild(opt);
+      });
+    }
+
+    // Apply search/filter/sort then paginate
+    function applyAllTransforms() {
+      let list = STATE.periods.slice();
+
+      // quickFilters: if any selected, keep items that have any of those tags in themes
+      if(STATE.quickFilters.size > 0) {
+        list = list.filter(p => {
+          const themes = (p.themes || []).map(t => t.toLowerCase());
+          for(const q of STATE.quickFilters) {
+            if(themes.includes(q)) return true;
+          }
+          return false;
+        });
+      }
+
+      // region filter
+      if(STATE.regionFilter) {
+        list = list.filter(p => (p.region || '') === STATE.regionFilter);
+      }
+
+      // search
+      if(STATE.searchQuery) {
+        const q = STATE.searchQuery.toLowerCase();
+        list = list.filter(p => {
+          return (p.name && p.name.toLowerCase().includes(q)) ||
+                 (p.description && p.description.toLowerCase().includes(q)) ||
+                 (p.keyWorks && p.keyWorks.join(' ').toLowerCase().includes(q)) ||
+                 (p.themes && p.themes.join(' ').toLowerCase().includes(q));
+        });
+      }
+
+      // sort
+      switch(STATE.sortKey) {
+        case 'name-asc': list.sort((a,b)=> a.name.localeCompare(b.name)); break;
+        case 'name-desc': list.sort((a,b)=> b.name.localeCompare(a.name)); break;
+        case 'start-asc': list.sort((a,b)=> (a.start||0) - (b.start||0)); break;
+        case 'start-desc': list.sort((a,b)=> (b.start||0) - (a.start||0)); break;
+        default: break;
+      }
+
+      STATE.filtered = list;
+      STATE.currentPage = 1; // reset page to 1 when new filter applied
+      renderListPage();
+      renderPagination();
+    }
+
+    // Render current page
+    function renderListPage() {
+      const startIndex = (STATE.currentPage - 1) * STATE.pageSize;
+      const pageItems = STATE.filtered.slice(startIndex, startIndex + STATE.pageSize);
+
+      if(pageItems.length === 0) {
+        periodListEl.innerHTML = '<div class="card muted">No periods match your filters.</div>';
+        return;
+      }
+
+      periodListEl.innerHTML = '';
+      pageItems.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card period-card';
+        card.tabIndex = 0;
+        card.setAttribute('role','article');
+        card.innerHTML = `
+          <div class="period-title">
+            <h2>${escapeHtml(p.name)}</h2>
+            <div class="meta">${p.start || '?'} – ${p.end || '?'}</div>
+          </div>
+          <div style="margin-top:8px;" class="muted">${truncate(escapeHtml(p.description || ''), 240)}</div>
+          <div style="margin-top:10px;">
+            ${ (p.languages || []).slice(0,4).map(l=> `<span class="tag">${escapeHtml(l)}</span>`).join(' ') }
+          </div>
+          <table aria-hidden="false">
+            <thead><tr><th>Key works</th><th>Manuscripts</th></tr></thead>
+            <tbody>
+              <tr><td>${(p.keyWorks || []).slice(0,2).map(k => escapeHtml(k)).join('<br>') || '—'}</td>
+              <td>${(p.stats && p.stats.manuscripts) ? p.stats.manuscripts : '—'}</td></tr>
+            </tbody>
+          </table>
+        `;
+        // Click / keyboard handler to show details
+        card.addEventListener('click', ()=> showDetail(p));
+        card.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') showDetail(p); });
+        periodListEl.appendChild(card);
+      });
+    }
+
+    // Render pagination controls (smart: first/last + ellipses)
+    function renderPagination() {
+      const totalItems = STATE.filtered.length;
+      const totalPages = Math.max(1, Math.ceil(totalItems / STATE.pageSize));
+      const current = STATE.currentPage;
+      paginationEl.innerHTML = '';
+
+      function makeBtn(label, page, cls='') {
+        const b = document.createElement('button');
+        b.textContent = label;
+        if(page === current) b.classList.add('active');
+        b.disabled = (page === current);
+        b.addEventListener('click', ()=> { STATE.currentPage = page; renderListPage(); renderPagination();});
+        return b;
+      }
+
+      // first, prev
+      paginationEl.appendChild(makeBtn('« First', 1));
+      paginationEl.appendChild(makeBtn('‹ Prev', Math.max(1, current-1)));
+
+      // page numbers: show current +/- 2 with first/last anchors and ellipses
+      const pages = [];
+      const left = Math.max(1, current - 2);
+      const right = Math.min(totalPages, current + 2);
+
+      if(left > 1) { pages.push(1); if(left > 2) pages.push('...'); }
+      for(let i=left;i<=right;i++) pages.push(i);
+      if(right < totalPages) { if(right < totalPages -1) pages.push('...'); pages.push(totalPages); }
+
+      pages.forEach(p => {
+        if(p === '...') {
+          const span = document.createElement('span');
+          span.textContent = '...';
+          span.style.padding = '8px 10px';
+          paginationEl.appendChild(span);
+        } else {
+          paginationEl.appendChild(makeBtn(String(p), p));
+        }
+      });
+
+      // next, last
+      paginationEl.appendChild(makeBtn('Next ›', Math.min(totalPages, current+1)));
+      paginationEl.appendChild(makeBtn('Last »', totalPages));
+
+      // show small page summary
+      const summary = document.createElement('div');
+      summary.style.marginLeft = '12px';
+      summary.style.fontSize = '13px';
+      summary.style.color = '#475569';
+      const showingFrom = Math.min(totalItems, (current-1)*STATE.pageSize + 1);
+      const showingTo = Math.min(totalItems, current*STATE.pageSize);
+      summary.textContent = `Showing ${showingFrom}–${showingTo} of ${totalItems}`;
+      paginationEl.appendChild(summary);
+    }
+
+    // Show detail panel content for a period
+    function showDetail(p) {
+      detailContent.innerHTML = `
+        <h3 style="margin:0 0 6px 0;">${escapeHtml(p.name)}</h3>
+        <div class="muted">${p.start || '?'} – ${p.end || '?'}, ${escapeHtml(p.region || '—')}</div>
+        <p style="margin-top:10px;">${escapeHtml(p.description || 'No description available.')}</p>
+        <h4 style="margin-top:12px;">Key works</h4>
+        <ul>${(p.keyWorks || []).map(k => `<li>${escapeHtml(k)}</li>`).join('') || '<li>—</li>'}</ul>
+        <h4 style="margin-top:8px;">Research & notes</h4>
+        <p class="muted">${escapeHtml(p.researchNotes || 'No notes')}</p>
+        <h4 style="margin-top:8px;">Recommended editions</h4>
+        <ul>${(p.recommended || []).map(r => `<li><strong>${escapeHtml(r.title)}</strong>${r.edition ? ' — ' + escapeHtml(r.edition) : ''}${r.link ? ' — <a href="'+escapeAttr(r.link)+'" target="_blank">view</a>' : ''}</li>`).join('') || '<li>—</li>'}</ul>
+      `;
+      // scroll detail into view in case not visible
+      detailContent.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+
+    // Render recent additions (based on a `recent` flag)
+    function renderRecent() {
+      const recent = STATE.periods.filter(p => p.recent).slice(0,5);
+      if(recent.length === 0) {
+        recentList.innerHTML = '<div class="muted">No recent additions</div>';
+        return;
+      }
+      recentList.innerHTML = '<ul style="margin:0; padding-left:18px;">' + recent.map(r => `<li><a href="#" data-id="${escapeAttr(r.id)}">${escapeHtml(r.name)}</a></li>`).join('') + '</ul>';
+      // hook clicks
+      recentList.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = a.dataset.id;
+          const p = STATE.periods.find(x => String(x.id) === String(id));
+          if(p) showDetail(p);
+        });
+      });
+    }
+
+    // Charts rendering using Chart.js
+    function renderCharts() {
+      // Distribution by region
+      const byRegion = {};
+      STATE.periods.forEach(p => {
+        const r = p.region || 'Unknown';
+        byRegion[r] = (byRegion[r] || 0) + 1;
+      });
+      const labels = Object.keys(byRegion);
+      const values = labels.map(l => byRegion[l]);
+
+      const ctx1 = document.getElementById('periodDistributionChart').getContext('2d');
+      if(distributionChart) distributionChart.destroy();
+      distributionChart = new Chart(ctx1, {
+        type: 'pie',
+        data: {
+          labels,
+          datasets: [{ data: values, backgroundColor: generatePalette(labels.length) }]
+        },
+        options: {
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+
+      // Timeline chart (bar for each period with start/end)
+      const timelineCtx = document.getElementById('periodTimelineChart').getContext('2d');
+
+      // convert start/end years into durations; Chart.js doesn't natively do ranged bars across axis in v3: we'll render as horizontal bar with stacked start offsets and durations
+      const sorted = STATE.periods.slice().sort((a,b)=> (a.start||0)-(b.start||0));
+      const timelineLabels = sorted.map(s=> s.name);
+      const startOffsets = sorted.map(s=> (s.start || 0) - Math.min(...(STATE.periods.map(p => p.start || 0))));
+      const durations = sorted.map(s => ( (s.end || (s.start || 0)) - (s.start || 0) ));
+      // fallback small duration for single-year items
+      for(let i=0;i<durations.length;i++) if(durations[i] <= 0) durations[i] = 1;
+
+      if(timelineChart) timelineChart.destroy();
+      timelineChart = new Chart(timelineCtx, {
+        type: 'bar',
+        data: {
+          labels: timelineLabels,
+          datasets: [
+            { label: 'Offset', data: startOffsets, backgroundColor: 'rgba(0,0,0,0)', stack: 'timeline', barThickness: 12 },
+            { label: 'Duration (years)', data: durations, backgroundColor: 'rgba(11,107,107,0.9)', stack: 'timeline', barThickness: 12 }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { stacked: true, title: { display:true, text:'Years (relative)' } },
+            y: { stacked: true }
+          },
+          plugins: { legend: { display:false } }
+        }
+      });
+    }
+
+    // Utility: generate palette
+    function generatePalette(n) {
+      const base = ['#0b6b6b','#0b9b9b','#00b4a2','#7ad3c4','#a7f3d0','#ffd166','#ff8a66','#f27a9b','#b28bff','#8fb3ff'];
+      const arr = [];
+      for(let i=0;i<n;i++) arr.push(base[i % base.length]);
+      return arr;
+    }
+
+    // Helpers & event wiring
+    function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+    function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;'); }
+    function truncate(s, n){ if(!s) return ''; return s.length > n ? s.slice(0,n-1) + '…' : s; }
+
+    // Event listeners for controls
+    searchInput.addEventListener('input', debounce(function(e){
+      STATE.searchQuery = e.target.value.trim();
+      applyAllTransforms();
+    }, 300));
+
+    filterSelect.addEventListener('change', function(e){
+      STATE.regionFilter = e.target.value;
+      applyAllTransforms();
+    });
+
+    sortSelect.addEventListener('change', function(e){
+      STATE.sortKey = e.target.value;
+      applyAllTransforms();
+    });
+
+    pageSizeSelect.addEventListener('change', function(e){
+      STATE.pageSize = parseInt(e.target.value, 10);
+      applyAllTransforms();
+      renderPagination();
+    });
+
+    document.querySelectorAll('.quick-filter').forEach(cb => {
+      cb.addEventListener('change', function(e){
+        if(e.target.checked) STATE.quickFilters.add(e.target.value);
+        else STATE.quickFilters.delete(e.target.value);
+        applyAllTransforms();
+      });
+    });
+
+    clearBtn.addEventListener('click', function(){
+      searchInput.value = '';
+      filterSelect.value = '';
+      sortSelect.value = 'name-asc';
+      pageSizeSelect.value = '5';
+      STATE.searchQuery=''; STATE.regionFilter=''; STATE.sortKey='name-asc'; STATE.pageSize=5; STATE.quickFilters.clear();
+      applyAllTransforms();
+    });
+
+    // Debounce utility
+    function debounce(fn, wait=200) {
+      let t;
+      return function(...args) {
+        clearTimeout(t);
+        t = setTimeout(()=> fn.apply(this, args), wait);
+      };
+    }
+
+    // Back to top show/hide
+    window.addEventListener('scroll', ()=> {
+      const btn = document.getElementById('backToTop');
+      if(window.pageYOffset > 300) btn.style.display = 'block'; else btn.style.display = 'none';
+    });
+    document.getElementById('backToTop').addEventListener('click', (e)=> { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+
+    // Accessibility: keyboard focus for pagination via keyboard
+    paginationEl.addEventListener('keydown', (e)=> {
+      if(e.key === 'ArrowLeft') {
+        const btn = paginationEl.querySelector('button:not(:disabled)');
+        if(btn) btn.focus();
+      }
+    });
+
+    // Small polyfill for older browsers — optional: ensure Promise and fetch exist
+    (function(){
+      if(!window.fetch) console.warn('Fetch API not available — periods page may not function properly in older browsers.');
+    })();
+
+  </script>
+</body>
+</html>
