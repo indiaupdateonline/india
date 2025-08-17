@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "Tolkappiyam",
+    "author": "Tolkappiyar",
+    "period": "c. 5th century BCE",
+    "excerpt": "The earliest extant Tamil grammatical work, covering phonology, morphology, syntax, and poetics.",
+    "link": "books/tolkappiyam.html"
+  },
+  {
+    "id": 2,
+    "title": "Silappadikaram",
+    "author": "Ilango Adigal",
+    "period": "c. 5th century CE",
+    "excerpt": "An epic that narrates the tragic tale of Kannagi and Kovalan, symbolizing justice and dharma.",
+    "link": "books/silappadikaram.html"
+  },
+  {
+    "id": 3,
+    "title": "Manimekalai",
+    "author": "Sattanar",
+    "period": "c. 6th century CE",
+    "excerpt": "A continuation of Silappadikaram, focusing on Buddhist philosophy and moral teachings.",
+    "link": "books/manimekalai.html"
+  },
+  {
+    "id": 4,
+    "title": "Purananuru",
+    "author": "Multiple Sangam Poets",
+    "period": "c. 300 BCE – 200 CE",
+    "excerpt": "A collection of 400 poems describing war, kingship, valor, and the ethics of ancient Tamil society.",
+    "link": "books/purananuru.html"
+  },
+  {
+    "id": 5,
+    "title": "Thirukkural",
+    "author": "Thiruvalluvar",
+    "period": "c. 1st century BCE",
+    "excerpt": "One of the most celebrated Tamil classics, consisting of 1330 couplets on ethics, polity, and love.",
+    "link": "books/thirukkural.html"
+  },
+  {
+    "id": 6,
+    "title": "Naladiyar",
+    "author": "Anonymous",
+    "period": "c. 3rd century CE",
+    "excerpt": "A didactic Tamil text of moral aphorisms composed in quatrains, part of post-Sangam literature.",
+    "link": "books/naladiyar.html"
+  },
+  {
+    "id": 7,
+    "title": "Paripadal",
+    "author": "Multiple Sangam Poets",
+    "period": "c. 100 CE – 300 CE",
+    "excerpt": "A Sangam anthology of devotional poems dedicated to Vishnu, Murugan, and the Vaigai river.",
+    "link": "books/paripadal.html"
+  }
+]
