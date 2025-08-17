@@ -649,4 +649,50 @@
                         <h3 class="footer-title">Contact</h3>
                         <address class="footer-contact">
                             <p><i class="fas fa-map-marker-alt"></i> 123 Literary Lane, Academic District, New Delhi 110001, India</p>
-                            <p><i class="fas fa-phone
+                            <p><i class="fas fa-phone"></i> <a href="tel:+911123456789">+91 11 2345 6789</a></p>
+                            <p><i class="fas fa-envelope"></i> <a href="mailto:info@indianliteraturearchive.org">info@indianliteraturearchive.org</a></p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        &copy; <span id="year"></span> Indian Literature Archive. All content provided for educational and research purposes.
+                    </div>
+                    <div class="footer-legal">
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/terms">Terms of Use</a>
+                        <a href="/accessibility">Accessibility</a>
+                        <a href="/sitemap">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Scripts -->
+    <script src="js/app.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script>
+        // Current year for copyright
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
