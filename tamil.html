@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Tamil Literature — Indian Literature Archive</title>
+  <meta name="description" content="Digital archive of Tamil literature with scholarly articles, reports, and books in English translation.">
+  <meta name="keywords" content="Tamil literature, Sangam, Silappadikaram, classical Tamil, medieval Tamil, Tamil epics, Tamil poetry, Tamil books, translations">
+  <meta name="author" content="Indian Literature Archive">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="preload" href="app.js" as="script">
+</head>
+<body>
+  <!-- Header (same as main site) -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-container">
+        <div class="branding">
+          <a href="/" class="logo-link">
+            <div class="logo-symbol">IA</div>
+            <div class="logo-text">
+              <h1 class="site-title">Indian Literature Archive</h1>
+              <p class="site-tagline">Ancient & Medieval Texts</p>
+            </div>
+          </a>
+        </div>
+        <nav class="main-navigation" aria-label="Main Navigation">
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="tamil.html" class="active">Tamil</a></li>
+            <li><a href="languages.html">Languages</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-section tamil-hero">
+    <div class="container">
+      <h2 class="hero-title">Tamil Literature</h2>
+      <p class="hero-subtitle">Explore Articles, Reports, and Books from Ancient & Medieval Tamil Traditions</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Tamil Articles & Reports -->
+    <section id="tamil-articles" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Articles & Reports on Tamil Literature</h2>
+          <p class="section-description">Research articles, historical reports, and scholarly essays on Tamil texts.</p>
+        </div>
+
+        <div id="articles-list" class="cards-grid"></div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button id="prev-articles" disabled>Previous</button>
+          <span id="articles-page-info"></span>
+          <button id="next-articles">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tamil Books -->
+    <section id="tamil-books" class="section alt-bg">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Tamil Literature Library</h2>
+          <p class="section-description">Browse classical and medieval Tamil books with translations.</p>
+        </div>
+
+        <div id="books-list" class="cards-grid"></div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button id="prev-books" disabled>Previous</button>
+          <span id="books-page-info"></span>
+          <button id="next-books">Next</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Indian Literature Archive — Tamil Section</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Pagination config
+    const itemsPerPage = 6;
+    let articlePage = 1, bookPage = 1;
+
+    // Load Articles
+    async function loadArticles(page = 1) {
+      const res = await fetch('tamil-article.json');
+      const data = await res.json();
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const items = data.slice(start, end);
+
+      const list = document.getElementById('articles-list');
+      list.innerHTML = items.map(a => `
+        <article class="card">
+          <h3 class="card-title">${a.title}</h3>
+          <p class="card-meta">By ${a.author} • ${a.year}</p>
+          <p class="card-excerpt">${a.excerpt}</p>
+          <a href="${a.link}" class="btn btn-primary">Read Article</a>
+        </article>
+      `).join('');
+
+      document.getElementById('articles-page-info').textContent = 
+        \`Page \${page} of \${Math.ceil(data.length / itemsPerPage)}\`;
+      document.getElementById('prev-articles').disabled = page === 1;
+      document.getElementById('next-articles').disabled = end >= data.length;
+    }
+
+    // Load Books
+    async function loadBooks(page = 1) {
+      const res = await fetch('tamil-books.json');
+      const data = await res.json();
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const items = data.slice(start, end);
+
+      const list = document.getElementById('books-list');
+      list.innerHTML = items.map(b => `
+        <article class="card">
+          <h3 class="card-title">${b.title}</h3>
+          <p class="card-meta">By ${b.author} • ${b.period}</p>
+          <p class="card-excerpt">${b.excerpt}</p>
+          <a href="${b.link}" class="btn btn-secondary">View Book</a>
+        </article>
+      `).join('');
+
+      document.getElementById('books-page-info').textContent = 
+        \`Page \${page} of \${Math.ceil(data.length / itemsPerPage)}\`;
+      document.getElementById('prev-books').disabled = page === 1;
+      document.getElementById('next-books').disabled = end >= data.length;
+    }
+
+    // Pagination events
+    document.getElementById('prev-articles').addEventListener('click', () => {
+      if(articlePage > 1) loadArticles(--articlePage);
+    });
+    document.getElementById('next-articles').addEventListener('click', () => {
+      articlePage++; loadArticles(articlePage);
+    });
+
+    document.getElementById('prev-books').addEventListener('click', () => {
+      if(bookPage > 1) loadBooks(--bookPage);
+    });
+    document.getElementById('next-books').addEventListener('click', () => {
+      bookPage++; loadBooks(bookPage);
+    });
+
+    // Initial load
+    loadArticles();
+    loadBooks();
+  </script>
+</body>
+</html>
