@@ -1,0 +1,150 @@
+{
+  "generated": "2025-08-17T00:00:00Z",
+  "source": "Indian Literature Archive - period metadata export",
+  "periods": [
+    {
+      "id": "vedic",
+      "name": "Vedic Period",
+      "start": -1500,
+      "end": -500,
+      "region": "All-Indian (North-focused scholarship)",
+      "languages": ["Vedic Sanskrit"],
+      "keyWorks": ["Rigveda", "Yajurveda", "Samaveda", "Atharvaveda", "Brahmanas", "Aranyakas", "Early Upanishads"],
+      "themes": ["ritual", "sacrificial", "hymnody", "early-philosophy"],
+      "description": "The Vedic Period marks the composition of the Vedas and associated ritual literature. Oral mnemonic traditions, sacrificial praxis, and the earliest philosophical questions (proto-Upanishadic thought) are central.",
+      "stats": { "texts": 120, "manuscripts": 240 },
+      "recommended": [
+        { "title": "Rigveda: A Critical Edition", "edition": "Vols. 1–4", "link": "" },
+        { "title": "Shatapatha Brahmana: Translation & Notes", "edition": "Selected chapters", "link": "" }
+      ],
+      "researchNotes": "Focus on oral-formulaic features, accentuation, comparative Indo-European correspondences, and ritual praxis. Paleolinguistic and archaeological correlations may refine dating.",
+      "recent": false
+    },
+    {
+      "id": "epic",
+      "name": "Epic Period",
+      "start": -400,
+      "end": 400,
+      "region": "Pan-Indian",
+      "languages": ["Sanskrit", "Pali", "Prakrit"],
+      "keyWorks": ["Mahabharata", "Ramayana (Valmiki)"],
+      "themes": ["epic-narrative", "dharma", "politics", "myth-history"],
+      "description": "Epic narratives such as the Mahabharata and Ramayana consolidate mytho-historical frameworks, combined ritual material and social codes into epic genres that informed law, polity, and narrative traditions.",
+      "stats": { "texts": 85, "manuscripts": 420 },
+      "recommended": [
+        { "title": "Critical Edition of the Mahabharata", "edition": "Poona/Bhandarkar", "link": "" },
+        { "title": "Valmiki Ramayana: Translation & Critical Notes", "edition": "", "link": "" }
+      ],
+      "researchNotes": "High interest in recensional variation, interpolations, and oral/performance traditions. Use comparative philological methods for textual layers.",
+      "recent": false
+    },
+    {
+      "id": "classical",
+      "name": "Classical Period",
+      "start": -200,
+      "end": 1200,
+      "region": "Sanskrit cultural sphere (wider subcontinental influence)",
+      "languages": ["Sanskrit"],
+      "keyWorks": ["Abhijnanasakuntalam (Kalidasa)", "Meghaduta (Kalidasa)", "Kavyas", "Bharata's Natyashastra"],
+      "themes": ["courtly poetry", "drama", "poetics", "grammar"],
+      "description": "Classical Sanskrit saw the flowering of kavya poetry, dramatic traditions, and treatises on poetics and grammar, including seminal figures like Kalidasa, Bharata, and Pāṇini.",
+      "stats": { "texts": 460, "manuscripts": 3200 },
+      "recommended": [
+        { "title": "Kalidasa: Selected Works", "edition": "Translated & annotated", "link": "" },
+        { "title": "Bharata Natyashastra (Critical Edition)", "edition": "", "link": "" }
+      ],
+      "researchNotes": "Study poetic devices, metre, and dramaturgy; compare with regional classical developments in Tamil and Prakrit traditions.",
+      "recent": false
+    },
+    {
+      "id": "medieval",
+      "name": "Medieval Period",
+      "start": 600,
+      "end": 1600,
+      "region": "Regional—South, East, North",
+      "languages": ["Tamil", "Kannada", "Telugu", "Sanskrit", "Marathi", "Bengali"],
+      "keyWorks": ["Silappadikaram (Tamil epic, earlier composition, medieval commentary tradition)", "Ramcharitmanas (Tulsidas)"],
+      "themes": ["vernacularization", "bhakti", "regional epics", "courtly literatures"],
+      "description": "A period of intense regional literary activity: vernacular literatures matured, devotional currents flourished, and manuscript cultures diversified across polities.",
+      "stats": { "texts": 1300, "manuscripts": 8600 },
+      "recommended": [
+        { "title": "Silappadikaram: Critical Edition & Translation", "edition": "", "link": "" },
+        { "title": "Ramcharitmanas: Annotated Edition", "edition": "", "link": "" }
+      ],
+      "researchNotes": "Manuscript collation is essential; region-specific palaeography and scripts must be considered. Interreligious dialogues (Bhakti/Sufi) are a growing research field.",
+      "recent": true
+    },
+    {
+      "id": "bhakti",
+      "name": "Bhakti Movement",
+      "start": 700,
+      "end": 1700,
+      "region": "Pan-Indian (regional loci)",
+      "languages": ["Tamil", "Telugu", "Kannada", "Hindi/Awadhi", "Bengali", "Marathi"],
+      "keyWorks": ["Tiruvacakam", "Vachana literature", "Ramcharitmanas", "Vaishnava texts"],
+      "themes": ["devotional poetry", "vernacular devotion", "social reform"],
+      "description": "The Bhakti movement produced vernacular devotional poetry and practices that emphasized personal devotion and often challenged social hierarchies.",
+      "stats": { "texts": 820, "manuscripts": 4500 },
+      "recommended": [
+        { "title": "Selected Bhakti Poems (Multilingual Anthology)", "edition": "", "link": "" }
+      ],
+      "researchNotes": "Performance contexts and oral transmission are crucial. Investigate musical settings and kirtan traditions alongside textual versions.",
+      "recent": false
+    },
+    {
+      "id": "sufi",
+      "name": "Sufi & Perso-Arabic Traditions",
+      "start": 1200,
+      "end": 1800,
+      "region": "North-West & Pan-Indic Persianate spheres",
+      "languages": ["Persian", "Punjabi", "Urdu", "Sindhi"],
+      "keyWorks": ["Ghazals of Amir Khusrau", "Punjabi Sufi poetry (Bulleh Shah)", "Masnavi traditions"],
+      "themes": ["mysticism", "syncretism", "court & devotional poetry"],
+      "description": "Sufi poets and Persian literary traditions influenced subcontinental languages, producing mystical lyricism and hybrid literary cultures.",
+      "stats": { "texts": 420, "manuscripts": 3100 },
+      "recommended": [
+        { "title": "Amir Khusrau: Selected Works", "edition": "", "link": "" }
+      ],
+      "researchNotes": "Translation from Persian and Urdu requires sensitivity to demographic performance contexts; examine khanqah/ shrine based transmission.",
+      "recent": false
+    },
+    {
+      "id": "earlymodern",
+      "name": "Early Modern & Colonial",
+      "start": 1700,
+      "end": 1947,
+      "region": "All regions (print expansion)",
+      "languages": ["Bengali", "Marathi", "Hindi", "Tamil", "Urdu", "English"],
+      "keyWorks": ["Early newspapers, reformist tracts, early novels & periodical literature"],
+      "themes": ["print culture", "translation into English", "modern genres", "reform & public sphere"],
+      "description": "The arrival of print and colonial institutions transformed textual economies: newspapers, periodicals, and modern literary genres emerged, reshaping readership and textual authority.",
+      "stats": { "texts": 950, "manuscripts": 1800 },
+      "recommended": [
+        { "title": "Selected Colonial-Era Periodicals: Archive & Index", "edition": "", "link": "" }
+      ],
+      "researchNotes": "Newspapers and periodicals are essential for social history; digitization projects often yield fragmented runs—work with library holdings to reconstruct serials.",
+      "recent": false
+    },
+    {
+      "id": "modern",
+      "name": "Modern & Contemporary",
+      "start": 1947,
+      "end": 2025,
+      "region": "Pan-Indian & global diasporas",
+      "languages": ["Multiple regional languages", "English"],
+      "keyWorks": ["Modern poetry, novelistic traditions, translation movements, digital humanities outputs"],
+      "themes": ["postcoloniality", "translation studies", "digital editions", "canon formation"],
+      "description": "Contemporary literatures are plural; digital methods (TEI, corpora, DH) and debates about translation ethics and canonization shape current research.",
+      "stats": { "texts": 2100, "manuscripts": 600 },
+      "recommended": [
+        { "title": "Contemporary Indian Literature: Annotated Bibliography", "edition": "", "link": "" }
+      ],
+      "researchNotes": "Digital humanities tools are central—consider data licensing and ethical reuse when working with modern corpora.",
+      "recent": true
+    }
+  ],
+  "meta": {
+    "count": 8,
+    "notes": "This JSON is a curated sample. Fields: id, name, start (year CE; negative for BCE), end (year), region, languages, keyWorks (array), themes (array), description, stats (texts/manuscripts), recommended (array of {title,edition,link}), researchNotes, recent (boolean)."
+  }
+}
