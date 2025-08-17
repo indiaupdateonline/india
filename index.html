@@ -1,29 +1,640 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian States - Current Affairs</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LinguaVault — Endangered Languages — Dictionary & Research</title>
+<meta name="description" content="LinguaVault — JSON-driven dictionary and research vault for endangered languages. Advanced search, per-language sets, server-driven pagination."/>
+<link rel="preconnect" href="https://images.unsplash.com">
+<style>
+  /* ---------- Theme & Utilities ---------- */
+  :root{
+    --maxw:1150px;
+    --accent:#0b63ff;
+    --muted:#6b7280;
+    --bg:#ffffff;
+    --card:#ffffff;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(12,18,40,0.06);
+    --serif: Georgia, 'Times New Roman', serif;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color-scheme: light;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:#0b1220;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none}
+  img{max-width:100%;height:auto;display:block;border-radius:8px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:18px}
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="script.js" defer></script>
+  /* ---------- Splash ---------- */
+  #splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#f7fbff);z-index:9999}
+  .splash-card{display:flex;flex-direction:column;align-items:center;padding:28px;border-radius:18px;box-shadow:0 30px 80px rgba(11,94,255,0.08)}
+  .logo-big{width:110px;height:110px;border-radius:18px;background:linear-gradient(135deg,var(--accent),#00b3ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:34px;font-family:var(--serif)}
+  .splash-title{font-size:20px;margin-top:8px;font-weight:800}
+  .splash-sub{color:var(--muted);font-size:13px;margin-top:4px}
+  .splash-bar{width:280px;height:8px;background:rgba(11,99,255,0.08);border-radius:999px;margin-top:16px;overflow:hidden}
+  .splash-bar > i{height:100%;display:block;background:linear-gradient(90deg,var(--accent),#00b3ff);width:0;animation:loadbar 5s linear forwards}
+  @keyframes loadbar{0%{width:0}100%{width:100%}}
+
+  /* ---------- Header ---------- */
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid #eef3ff}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00b3ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;font-family:var(--serif)}
+  .brand h1{margin:0;font-size:18px;font-weight:700}
+  .brand p{margin:0;color:var(--muted);font-size:13px}
+
+  nav{display:flex;gap:10px;align-items:center}
+  nav button{background:transparent;border:none;padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:700}
+  nav button:hover{color:var(--accent);background:rgba(11,99,255,0.04)}
+
+  /* ---------- Hero / Search ---------- */
+  .hero{display:grid;grid-template-columns:1fr 380px;gap:18px;align-items:start;margin-top:20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #eef6ff;box-shadow:var(--shadow)}
+  .hero h2{font-family:var(--serif);font-size:24px;margin:0 0 6px 0}
+  .meta{color:var(--muted);font-size:13px}
+  .search-row{display:flex;gap:10px;margin-top:12px}
+  .search-row input, .search-row select{padding:12px;border-radius:10px;border:1px solid #e8eefb;flex:1}
+  .btn{padding:11px 14px;border-radius:10px;border:none;background:var(--accent);color:white;font-weight:800;cursor:pointer}
+
+  /* ---------- Layout ---------- */
+  .layout{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:18px}
+  .results{display:grid;gap:12px}
+  .result-item{display:flex;flex-direction:column;padding:12px;border-radius:10px;border:1px solid #f1f6ff;background:#fff}
+  .result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .result-title{font-weight:800;font-family:var(--serif)}
+  .result-sub{color:var(--muted);font-size:13px;margin-top:6px}
+
+  /* ---------- Pagination (advanced) ---------- */
+  .pagination{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  .page-btn{padding:8px 10px;border-radius:8px;border:1px solid #eef2ff;background:white;cursor:pointer;font-weight:700}
+  .page-input{width:64px;padding:6px;border-radius:8px;border:1px solid #eef2ff;text-align:center}
+
+  /* ---------- Detail & translations ---------- */
+  .detail h3{margin:0;font-family:var(--serif)}
+  .translations{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
+  .translation{padding:10px;border-radius:8px;border:1px solid #f3f6fb;background:#fbfeff}
+
+  /* ---------- Sidebar languages & images ---------- */
+  .languages-list{max-height:520px;overflow:auto;padding-right:6px}
+  .lang-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px}
+  .featured-images{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+
+  /* ---------- Ads ---------- */
+  .ad-slot{height:110px;border-radius:10px;border:1px solid #eef3ff;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+  /* ---------- Footer ---------- */
+  footer{margin-top:22px;padding:18px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid #eef3ff}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .hero{grid-template-columns:1fr 320px}
+    .layout{grid-template-columns:1fr 320px}
+  }
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr}
+    .hero > aside{order:2}
+    .layout{grid-template-columns:1fr}
+    .brand h1{font-size:16px}
+    .brand p{display:none}
+  }
+</style>
 </head>
 <body>
+  <!-- SPLASH (5 seconds) -->
+  <div id="splash" role="status" aria-live="polite">
+    <div class="splash-card" aria-hidden="false">
+      <div class="logo-big">LV</div>
+      <div class="splash-title">LinguaVault</div>
+      <div class="splash-sub">Preserve • Research • Translate — preparing the vault</div>
+      <div class="splash-bar"><i></i></div>
+    </div>
+  </div>
 
-    <h1>India States</h1>
-    <div id="state-list"></div>
-
-
+  <!-- APP -->
+  <div class="wrap" id="app" style="opacity:0;transform:translateY(12px);transition:all .45s ease">
     <header>
-        <h1>India Current Affairs</h1>
+      <div class="brand">
+        <div class="logo">LV</div>
+        <div>
+          <h1>LinguaVault</h1>
+          <p class="meta">Endangered Languages — Dictionary & Research Vault</p>
+        </div>
+      </div>
+      <nav aria-label="Main">
+        <button id="nav-home">Home</button>
+        <button id="nav-dictionary">Dictionary</button>
+        <button id="nav-resources">Resources</button>
+        <button id="nav-contribute">Contribute</button>
+      </nav>
     </header>
 
-    <main>
-        <div id="states-list"></div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card">
+        <h2>Search across 100 endangered languages</h2>
+        <p class="meta">Only pointers are in the page. Actual word JSON and large indexes live on backend endpoints.</p>
+
+        <div class="search-row" style="margin-top:12px">
+          <input id="q" placeholder="Search words, translations, tags or descriptions…" aria-label="Search"/>
+          <select id="filter-language" aria-label="Filter by language"><option value="">All languages</option></select>
+          <button id="search-btn" class="btn">Search</button>
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+          <select id="search-mode" aria-label="Search mode"><option value="full">Full-text</option><option value="word">Word</option><option value="translation">Translation</option><option value="desc">Description</option></select>
+          <select id="per-page" aria-label="Results per page"><option>10</option><option>20</option><option>40</option></select>
+          <div style="margin-left:auto" class="meta">Server-driven search: <code>/api/search?q=&lang=&page=&per=</code></div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h4>Featured Images</h4>
+          <div class="featured-images" id="featured-images"></div>
+          <p class="meta" style="margin-top:10px">Images: Unsplash (copyright-free links provided).</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- MAIN -->
+    <main class="layout" style="margin-top:18px">
+      <section>
+        <div class="card">
+          <h3>Results</h3>
+          <div id="results" class="results"><div class="meta">Enter a query to begin.</div></div>
+          <div id="pagination" class="pagination" aria-label="Pagination"></div>
+        </div>
+
+        <div class="card" id="word-detail" style="margin-top:12px">
+          <h3>Word Detail</h3>
+          <div class="meta">Select a result to open detail view.</div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h4>Languages (100)</h4>
+          <div id="languages-list" class="languages-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4>Advertisements</h4>
+          <div style="display:grid;gap:8px">
+            <div id="ad-1" class="ad-slot"></div>
+            <div id="ad-2" class="ad-slot"></div>
+            <div id="ad-3" class="ad-slot"></div>
+          </div>
+        </div>
+      </aside>
     </main>
 
-    <script src="https://unpkg.com/@supabase/supabase-js"></script>
-    <script src="script.js"></script>
+    <footer>
+      © 2025 LinguaVault — Data hosted as backend JSON endpoints • Built with vanilla JS
+    </footer>
+  </div>
+
+<script>
+/* ==========================
+   MASTER & IMAGE LIST (pointers only)
+   - Put the real JSON data on backend endpoints under /data/ or /api/
+   - For demonstration, we include sample pointers; ainu meta + two sets are linked below
+   ========================== */
+
+const MASTER = {
+  meta: {
+    title: "LinguaVault Master Index",
+    description: "Pointers to 100 endangered languages; each language links to many word-set JSON files hosted on backend.",
+    languages_count: 100
+  },
+  languages: [
+    // For clarity: ainu contains explicit sets; others list meta endpoints only (pattern)
+    {
+      id: "ainu",
+      name: "Ainu",
+      region: "Japan",
+      meta: "lang.meta.json",
+      sets_pattern: "set_<NNN>.json",
+      sets: [
+        "set_001.json",
+        "set_002.json"
+      ]
+    },
+    /* --- the following are representative; in production add all 100 --- */
+    {id:"manx", name:"Manx", region:"Isle of Man", meta:"/api/lang/manx/meta", sets_pattern:"/data/manx/sets/set_<NNN>.json"},
+    {id:"livonian", name:"Livonian", region:"Latvia", meta:"/api/lang/livonian/meta", sets_pattern:"/data/livonian/sets/set_<NNN>.json"},
+    {id:"cornish", name:"Cornish", region:"UK", meta:"/api/lang/cornish/meta", sets_pattern:"/data/cornish/sets/set_<NNN>.json"},
+    {id:"breton", name:"Breton", region:"France", meta:"/api/lang/breton/meta", sets_pattern:"/data/breton/sets/set_<NNN>.json"},
+    {id:"nahuatl", name:"Nahuatl", region:"Mexico", meta:"/api/lang/nahuatl/meta"},
+    {id:"quechua", name:"Quechua", region:"Andes", meta:"/api/lang/quechua/meta"},
+    {id:"guarani", name:"Guaraní", region:"Paraguay", meta:"/api/lang/guarani/meta"},
+    {id:"yiddish", name:"Yiddish", region:"Europe", meta:"/api/lang/yiddish/meta"},
+    {id:"khanty", name:"Khanty", region:"Siberia", meta:"/api/lang/khanty/meta"},
+    {id:"maithili", name:"Maithili", region:"India/Nepal", meta:"/api/lang/maithili/meta"},
+    {id:"mapudungun", name:"Mapudungun", region:"Chile/Argentina", meta:"/api/lang/mapudungun/meta"},
+    {id:"navajo", name:"Navajo", region:"USA", meta:"/api/lang/navajo/meta"},
+    {id:"haida", name:"Haida", region:"Canada", meta:"/api/lang/haida/meta"},
+    {id:"inuktitut", name:"Inuktitut", region:"Canada", meta:"/api/lang/inuktitut/meta"},
+    /* ... continue until 100 entries ... */
+  ]
+};
+
+/* ====== copyright-free images (Unsplash sample links) ====== */
+const UNSPLASH_IMAGES = [
+  "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1528747045269-390fe33c19d6?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1526318472351-c75fcf070b9f?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1497493292307-31c376b6e479?q=80&w=1200&auto=format&fit=crop"
+];
+
+/* ========= Ads (clean) ========= */
+const ADS = [
+  {id:"ad_top", image:"https://via.placeholder.com/1200x200?text=Sponsor+1", link:"#"},
+  {id:"ad_side_1", image:"https://via.placeholder.com/600x200?text=Sponsor+2", link:"#"},
+  {id:"ad_side_2", image:"https://via.placeholder.com/600x200?text=Sponsor+3", link:"#"}
+];
+
+/* ========= State ========= */
+const state = {
+  master: MASTER,
+  languages: MASTER.languages,
+  perPage: 10,
+  currentPage: 1,
+  lastResults: [],
+  totalCount: 0,
+  demoMode: true  // if backend endpoints (/api/...) not present, demo fallback will work
+};
+
+/* ========= Init UI ========= */
+document.addEventListener('DOMContentLoaded', ()=> {
+  renderFeaturedImages();
+  renderLanguagesList();
+  placeAds();
+  populateLanguageFilter();
+  attachHandlers();
+
+  // Splash hide after 5s (then reveal app)
+  setTimeout(()=> {
+    const s = document.getElementById('splash');
+    s.style.transition = "opacity .6s ease";
+    s.style.opacity = 0;
+    document.getElementById('app').style.opacity = 1;
+    document.getElementById('app').style.transform = "none";
+    setTimeout(()=> s.remove(), 800);
+  }, 5000);
+});
+
+/* ===== UI Renderers ===== */
+function renderFeaturedImages(){
+  const el = document.getElementById('featured-images');
+  UNSPLASH_IMAGES.slice(0,4).forEach(url => {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = "Lingua image";
+    el.appendChild(img);
+  });
+}
+
+function renderLanguagesList(){
+  const wrap = document.getElementById('languages-list'); wrap.innerHTML = "";
+  state.languages.forEach(l => {
+    const div = document.createElement('div'); div.className = "lang-row";
+    div.innerHTML = `<div><strong>${escapeHtml(l.name)}</strong><div class="meta">${escapeHtml(l.region)}</div></div>
+      <div><button class="btn" onclick="openLanguage('${escapeHtml(l.id)}')">Open</button></div>`;
+    wrap.appendChild(div);
+  });
+}
+
+function populateLanguageFilter(){
+  const sel = document.getElementById('filter-language'); sel.innerHTML = '<option value="">All languages</option>';
+  state.languages.forEach(l => {
+    const o = document.createElement('option'); o.value = l.id; o.textContent = `${l.name} — ${l.region}`;
+    sel.appendChild(o);
+  });
+}
+
+function placeAds(){
+  // place three ads into ad slots
+  const slots = ['ad-1','ad-2','ad-3'];
+  for(let i=0;i<slots.length;i++){
+    const ad = ADS[i] || ADS[0];
+    const el = document.getElementById(slots[i]);
+    el.innerHTML = `<a href="${ad.link}" target="_blank"><img src="${ad.image}" alt="ad"></a>`;
+  }
+}
+
+/* ========= Handlers ========= */
+function attachHandlers(){
+  document.getElementById('search-btn').addEventListener('click', onSearch);
+  document.getElementById('q').addEventListener('keydown', e => { if(e.key === 'Enter') onSearch(); });
+  document.getElementById('per-page').addEventListener('change', e => {
+    state.perPage = parseInt(e.target.value, 10) || 10; renderResults(state.lastResults, 1, state.totalCount);
+  });
+}
+
+/* ========= Search flow =========
+   Preferred: server-driven API:
+     GET /api/search?q=...&lang=...&mode=...&page=...&per=...
+   Response expected:
+     { results: [ {id, word, english, language, lang_id, meanings:{hi,ar,zh,es,en}, description_en } ], total_count: N }
+   Fallback: demo local search (for UI testing)
+*/
+async function onSearch(page=1){
+  const q = document.getElementById('q').value.trim();
+  const lang = document.getElementById('filter-language').value;
+  const mode = document.getElementById('search-mode').value;
+  const per = state.perPage || parseInt(document.getElementById('per-page').value||10,10);
+  if(!q){ document.getElementById('results').innerHTML = '<div class="meta">Please enter a search term.</div>'; return; }
+
+  // show loading
+  document.getElementById('results').innerHTML = '<div class="meta">Searching…</div>';
+  document.getElementById('pagination').innerHTML = '';
+
+  // server API URL (deployer must implement)
+  const apiUrl = `/api/search?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}&mode=${encodeURIComponent(mode)}&page=${page}&per=${per}`;
+
+  try {
+    const resp = await fetch(apiUrl);
+    if(resp.ok){
+      const payload = await resp.json();
+      state.lastResults = payload.results || [];
+      state.totalCount = payload.total_count || state.lastResults.length;
+      state.currentPage = page;
+      state.demoMode = false;
+      renderResults(state.lastResults, page, state.totalCount);
+      return;
+    }
+  } catch(e){
+    console.warn('Server search failed or not present, falling back to demo.', e);
+  }
+
+  // Demo fallback (local synthetic results across pointers and sample sets)
+  demoFallbackSearch(q, lang, page, per);
+}
+
+/* ===== Demo fallback: simulate results from MASTER & the provided sample JSONs ===== */
+async function demoFallbackSearch(q, lang, page, per){
+  // If user searches ainu and demo sets exist at /data/ainu/..., try to fetch them to provide realistic demo.
+  const results = [];
+  const lower = q.toLowerCase();
+  // First check ainu sets (we included sample JSONs separately — deployer can host them)
+  if(!lang || lang === 'ainu'){
+    try {
+      const metaResp = await fetch('/data/ainu/lang.meta.json'); // sample meta file (developer must host)
+      if(metaResp.ok){
+        const meta = await metaResp.json();
+        // scan sample sets provided in meta
+        for(const s of (meta.sets||[])){
+          try {
+            const setResp = await fetch(s.url);
+            if(setResp.ok){
+              const setJ = await setResp.json();
+              for(const w of (setJ.words || [])){
+                if((w.word || "").toLowerCase().includes(lower) || (w.english || "").toLowerCase().includes(lower) || (w.description_en || "").toLowerCase().includes(lower)){
+                  results.push({
+                    id: w.id,
+                    word: w.word,
+                    english: w.english,
+                    language: meta.name,
+                    lang_id: meta.id,
+                    meanings: w.meanings,
+                    description_en: w.description_en
+                  });
+                }
+              }
+            }
+          } catch(e) { /* ignore per-set errors */ }
+        }
+      }
+    } catch(e) { /* ignore meta fetch */ }
+  }
+
+  // If still empty, fake some hits from master language names to demonstrate UI
+  if(results.length === 0){
+    for(let i=1; i<=40; i++){
+      const L = state.languages[i % state.languages.length];
+      if(L && (L.name.toLowerCase().includes(lower) || i < 8)){
+        results.push({
+          id: `demo-${i}`,
+          word: `${q}-sample-${i}`,
+          english: `Meaning of ${q}-sample-${i}`,
+          language: L.name,
+          lang_id: L.id,
+          meanings: {en: `Meaning ${i}`}
+        });
+      }
+    }
+  }
+
+  state.lastResults = results;
+  state.totalCount = results.length;
+  state.currentPage = page;
+  state.demoMode = true;
+  renderResults(state.lastResults, page, state.totalCount);
+}
+
+/* ========= Render results + advanced pagination (window + jump) ========= */
+function renderResults(results, page=1, totalCount){
+  const wrap = document.getElementById('results'); wrap.innerHTML = '';
+  state.currentPage = page;
+  const per = state.perPage || parseInt(document.getElementById('per-page').value||10,10);
+  const total = totalCount || results.length;
+  if(!results || results.length === 0){ wrap.innerHTML = '<div class="meta">No results.</div>'; document.getElementById('pagination').innerHTML = ''; return; }
+
+  const start = (page - 1) * per;
+  const pageItems = results.slice(start, start + per);
+
+  pageItems.forEach(item => {
+    const div = document.createElement('div'); div.className = 'result-item';
+    div.innerHTML = `<div class="result-top">
+        <div>
+          <div class="result-title">${escapeHtml(item.word)}</div>
+          <div class="result-sub">${escapeHtml(item.english || '')} • ${escapeHtml(item.language || item.lang_id || '')}</div>
+        </div>
+        <div><button class="btn" onclick='openWordDetail(${JSON.stringify(JSON.stringify(item))})'>Open</button></div>
+      </div>`;
+    wrap.appendChild(div);
+  });
+
+  // pagination control (windowed)
+  const pages = Math.max(1, Math.ceil(total / per));
+  const pagWrap = document.getElementById('pagination'); pagWrap.innerHTML = '';
+
+  // first / prev
+  if(page > 1){
+    const f = createPageBtn('First', ()=> gotoPage(1)); pagWrap.appendChild(f);
+    const p = createPageBtn('Prev', ()=> gotoPage(page - 1)); pagWrap.appendChild(p);
+  }
+
+  const windowSize = 7;
+  let startPage = Math.max(1, page - Math.floor(windowSize/2));
+  let endPage = Math.min(pages, startPage + windowSize - 1);
+  if(endPage - startPage < windowSize -1) startPage = Math.max(1, endPage - windowSize +1);
+
+  for(let p = startPage; p <= endPage; p++){
+    const btn = document.createElement('button');
+    btn.className = 'page-btn';
+    btn.textContent = p;
+    if(p === page) btn.style.fontWeight = '900';
+    btn.addEventListener('click', ()=> gotoPage(p));
+    pagWrap.appendChild(btn);
+  }
+
+  if(page < pages){
+    const n = createPageBtn('Next', ()=> gotoPage(page + 1)); pagWrap.appendChild(n);
+    const l = createPageBtn('Last', ()=> gotoPage(pages)); pagWrap.appendChild(l);
+  }
+
+  // page jump
+  const jump = document.createElement('div'); jump.style.display='flex'; jump.style.gap='8px'; jump.style.alignItems='center';
+  jump.style.marginLeft = '10px';
+  const input = document.createElement('input'); input.className='page-input'; input.type='number'; input.min = 1; input.max = pages; input.placeholder = page;
+  const go = document.createElement('button'); go.className = 'page-btn'; go.textContent = 'Go';
+  go.addEventListener('click', ()=> {
+    const v = parseInt(input.value,10);
+    if(v >=1 && v <= pages) gotoPage(v);
+  });
+  jump.appendChild(input); jump.appendChild(go);
+  pagWrap.appendChild(jump);
+
+  function createPageBtn(label, cb){ const b=document.createElement('button'); b.className='page-btn'; b.textContent = label; b.addEventListener('click', cb); return b; }
+}
+
+function gotoPage(p){
+  // If server-side search available, request that page. Otherwise, local slice
+  const q = document.getElementById('q').value.trim();
+  if(!q){ return; }
+  // try server fetch
+  (async ()=>{
+    const lang = document.getElementById('filter-language').value;
+    const mode = document.getElementById('search-mode').value;
+    const per = state.perPage || parseInt(document.getElementById('per-page').value||10,10);
+    const apiUrl = `/api/search?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}&mode=${encodeURIComponent(mode)}&page=${p}&per=${per}`;
+    try {
+      const resp = await fetch(apiUrl);
+      if(resp.ok){
+        const payload = await resp.json();
+        state.lastResults = payload.results || [];
+        state.totalCount = payload.total_count || state.lastResults.length;
+        renderResults(state.lastResults, p, state.totalCount);
+        return;
+      }
+    } catch(e){ /* ignore */ }
+    // fallback: local pagination
+    renderResults(state.lastResults, p, state.totalCount);
+  })();
+}
+
+/* ========= Open language (per-language page) =========
+   - Preferred: GET /api/lang/<id>/meta  -> returns meta with sets array and featured image
+   - To view a set: GET /api/lang/<id>/sets/<set_id>?page=&per=
+   - We'll attempt to fetch meta; fallback will show pointer info.
+*/
+async function openLanguage(langId){
+  const lang = state.languages.find(l=>l.id === langId);
+  if(!lang) return alert('Language not found');
+  const detail = document.getElementById('word-detail');
+  detail.innerHTML = `<div class="meta">Loading ${escapeHtml(lang.name)}…</div>`;
+  // Try fetch meta
+  try {
+    const metaUrl = lang.meta || lang.metaUrl || (`/api/lang/${langId}/meta`);
+    const resp = await fetch(metaUrl);
+    if(resp.ok){
+      const meta = await resp.json();
+      showLangMeta(lang, meta);
+      return;
+    }
+  } catch(e){ console.warn('meta fetch failed', e) }
+  // Fallback: show master pointers pattern
+  detail.innerHTML = `
+    <h3>${escapeHtml(lang.name)}</h3>
+    <div class="meta">Region: ${escapeHtml(lang.region || '—')}</div>
+    <div class="meta" style="margin-top:10px">No backend meta found. Expected meta endpoint: <code>${escapeHtml(lang.meta || `/api/lang/${langId}/meta`)}</code></div>
+    <div style="margin-top:10px"><strong>Sets pattern</strong>: <code>${escapeHtml(lang.sets_pattern || '/data/<lang>/sets/set_<NNN>.json')}</code></div>
+    <div style="margin-top:8px"><small class="meta">You can add many sets; each set must follow schema: { set_id, title, language, words:[ ... ] }</small></div>
+  `;
+}
+
+function showLangMeta(lang, meta){
+  const detail = document.getElementById('word-detail');
+  const html = [];
+  html.push(`<h3>${escapeHtml(meta.name || lang.name)}</h3>`);
+  html.push(`<div class="meta">Region: ${escapeHtml(meta.region || lang.region || '')} • Words: ${meta.word_count || '—'} • Sets: ${meta.sets_count || (meta.sets && meta.sets.length) || '—'}</div>`);
+  if(meta.featured_image) html.push(`<div style="margin-top:10px"><img src="${escapeHtml(meta.featured_image)}" alt="${escapeHtml(meta.name)}"></div>`);
+  if(meta.description) html.push(`<div style="margin-top:8px" class="meta">${escapeHtml(meta.description)}</div>`);
+  if(meta.sets && meta.sets.length){
+    html.push('<hr><div><strong>Sets (first 100)</strong></div><ul>');
+    meta.sets.slice(0,100).forEach(s => {
+      html.push(`<li><a href="#" onclick="fetchSet('${escapeHtml(s.url)}');return false">${escapeHtml(s.title)}</a> <span class="meta">${escapeHtml(s.set_id)}</span></li>`);
+    });
+    html.push('</ul>');
+  } else {
+    html.push('<div class="meta" style="margin-top:8px">No sets listed in meta.</div>');
+  }
+  detail.innerHTML = html.join('');
+}
+
+/* ========= Fetch set (set JSON contains words[]) =========
+   Expected set schema:
+   { set_id, title, language, words: [{ id, word, english, meanings:{hi,ar,zh,es,en}, description_en, tags[] }] }
+*/
+async function fetchSet(url, page=1){
+  const detail = document.getElementById('word-detail');
+  detail.innerHTML = `<div class="meta">Loading set…</div>`;
+  try {
+    const resp = await fetch(url);
+    if(!resp.ok) throw new Error('not found');
+    const set = await resp.json();
+    // show set meta and first page of words with advanced pagination (client-side)
+    const words = set.words || [];
+    detail.innerHTML = `<h3>${escapeHtml(set.title)} <small class="meta">(${escapeHtml(set.language || '')})</small></h3>
+      <div class="meta">Words in set: ${words.length}</div>
+      <div id="set-words" style="margin-top:10px"></div>
+    `;
+    state.lastResults = words.map(w => ({...w, language: set.language}));
+    state.totalCount = words.length;
+    renderResults(state.lastResults, 1, state.totalCount);
+  } catch(e) {
+    detail.innerHTML = `<div class="meta">Could not load set: ${escapeHtml(url)}</div>`;
+  }
+}
+
+/* ========= Word detail (opens in detail panel) ========= */
+function openWordDetailJsonStr(str){
+  try {
+    const obj = JSON.parse(str);
+    showWordDetail(obj);
+  } catch(e){ console.warn(e) }
+}
+function openWordDetail(jsonStr){
+  // jsonStr already stringified by render; need to parse
+  openWordDetailJsonStr(jsonStr);
+}
+function showWordDetail(obj){
+  const cont = document.getElementById('word-detail');
+  const html = [];
+  html.push(`<h3>${escapeHtml(obj.word)}</h3>`);
+  if(obj.english) html.push(`<div class="meta">${escapeHtml(obj.english)}</div>`);
+  if(obj.language) html.push(`<div class="meta">${escapeHtml(obj.language)}</div>`);
+  html.push('<div class="translations">');
+  const ms = obj.meanings || {};
+  ['en','hi','ar','zh','es'].forEach(k => {
+    html.push(`<div class="translation"><div class="meta">${k.toUpperCase()}</div><div style="font-weight:700">${escapeHtml(ms[k] || '—')}</div></div>`);
+  });
+  html.push('</div>');
+  if(obj.description_en) html.push(`<div style="margin-top:12px" class="meta">${escapeHtml(obj.description_en)}</div>`);
+  if(obj.tags && obj.tags.length) html.push(`<div style="margin-top:8px" class="meta">Tags: ${escapeHtml(obj.tags.join(', '))}</div>`);
+  cont.innerHTML = html.join('');
+}
+
+/* ========= Utilities ========= */
+function escapeHtml(s){
+  if(s===undefined||s===null) return '';
+  return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+}
+</script>
 </body>
 </html>
