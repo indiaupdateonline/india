@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Mahabharata",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/59/Bhishma_on_the_bed_of_arrows.jpg",
+    "description": "The great Sanskrit epic narrating the Kurukshetra war and the fate of the Kaurava and Pandava princes.",
+    "category": "Epic",
+    "url": "mahabharat.html"
+  },
+  {
+    "name": "Ramayana",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Rama_Sita_Lakshmana_in_forest.jpg",
+    "description": "The story of Rama, his exile, the abduction of Sita, and the battle with Ravana.",
+    "category": "Epic",
+    "url": "ramayana.html"
+  },
+  {
+    "name": "Bhagavad Gita",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/88/Krishna_and_Arjuna.jpg",
+    "description": "A dialogue between Arjuna and Krishna on duty, righteousness, and devotion.",
+    "category": "Philosophy",
+    "url": "bhagavadgita.html"
+  },
+  {
+    "name": "Rigveda",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Rigveda_MS.jpg",
+    "description": "The oldest of the four Vedas, a collection of hymns in early Sanskrit.",
+    "category": "Veda",
+    "url": "rigveda.html"
+  },
+  {
+    "name": "Atharvaveda",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Atharvaveda_manuscript.jpg",
+    "description": "A Vedic collection of hymns, spells, and incantations.",
+    "category": "Veda",
+    "url": "atharvaveda.html"
+  },
+  {
+    "name": "Sangam Literature — Ettuthokai",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/TamilSangamText.jpg",
+    "description": "Eight anthologies of classical Tamil poetry from the Sangam age.",
+    "category": "Tamil Sangam",
+    "url": "ettuthokai.html"
+  },
+  {
+    "name": "Silappatikaram",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Silappatikaram_text.jpg",
+    "description": "An ancient Tamil epic telling the story of Kannagi and Kovalan.",
+    "category": "Tamil Epic",
+    "url": "silappatikaram.html"
+  },
+  {
+    "name": "Manimekalai",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/77/Manimekalai_Tamil_text.jpg",
+    "description": "A Buddhist Tamil epic poem, sequel to the Silappatikaram.",
+    "category": "Tamil Epic",
+    "url": "manimekalai.html"
+  },
+  {
+    "name": "Bhagavata Purana",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Krishna_dances_with_gopis.jpg",
+    "description": "A major Purana devoted to Krishna and the Vaishnava tradition.",
+    "category": "Purana",
+    "url": "bhagavatapurana.html"
+  },
+  {
+    "name": "Padmavat (Malik Muhammad Jayasi)",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/55/Padmavat_illustration.jpg",
+    "description": "A 16th-century Awadhi Sufi epic poem about Rani Padmavati.",
+    "category": "Sufi-Medieval",
+    "url": "padmavat.html"
+  }
+]
