@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्वयंसेवक बनें | भारतीय साहित्य संग्रह</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;700&family=Noto+Serif+Tamil:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional Hindi-specific styles */
+        .hindi-text {
+            font-family: 'Noto Serif Devanagari', serif;
+            line-height: 1.8;
+        }
+        .bilingual {
+            display: flex;
+            flex-direction: column;
+        }
+        .english-text {
+            font-style: italic;
+            color: #555;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top announcement bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <p>नया: तमिल महाकाव्य सिलप्पदिकारम के पूर्ण अनुवाद उपलब्ध! <a href="/tamil/silappadikaram" class="announcement-link">अभी देखें <i class="fas fa-arrow-right"></i></a></p>
+        </div>
+    </div>
+
+    <!-- Main Header with Navigation -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Logo and site title -->
+                <div class="branding">
+                    <a href="/" class="logo-link">
+                        <div class="logo-symbol">भा.सा.सं.</div>
+                        <div class="logo-text">
+                            <h1 class="site-title hindi-text">भारतीय साहित्य संग्रह</h1>
+                            <p class="site-tagline">प्राचीन एवं मध्यकालीन साहित्य</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-navigation" aria-label="Main Navigation">
+                    <ul class="nav-menu">
+                        <li class="menu-item"><a href="/">मुखपृष्ठ</a></li>
+                        <li class="menu-item has-dropdown">
+                            <a href="#" aria-haspopup="true" aria-expanded="false">भाषाएँ <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu" aria-label="Languages submenu">
+                                <li><a href="sanskrit.html"><span class="lang-code">सं</span> संस्कृत</a></li>
+                                <li><a href="hindi.html"><span class="lang-code">हि</span> हिन्दी</a></li>
+                                <li><a href="tamil.html"><span class="lang-code">த</span> तमिल</a></li>
+                                <li><a href="bengali.html"><span class="lang-code">ব</span> बांग्ला</a></li>
+                                <li><a href="telugu.html"><span class="lang-code">త</span> तेलुगु</a></li>
+                                <li><a href="kannada.html"><span class="lang-code">ಕ</span> कन्नड़</a></li>
+                                <li><a href="malayalam.html"><span class="lang-code">മ</span> मलयालम</a></li>
+                                <li><a href="marathi.html"><span class="lang-code">म</span> मराठी</a></li>
+                                <li><a href="gujarati.html"><span class="lang-code">ગ</span> गुजराती</a></li>
+                                <li><a href="punjabi.html"><span class="lang-code">ਪ</span> पंजाबी</a></li>
+                                <li><a href="odia.html"><span class="lang-code">ଓ</span> ओड़िया</a></li>
+                                <li><a href="urdu.html"><span class="lang-code">ا</span> उर्दू</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a href="/periods">कालखंड</a></li>
+                        <li class="menu-item"><a href="/genres">विधाएँ</a></li>
+                        <li class="menu-item"><a href="/resources">संसाधन</a></li>
+                        <li class="menu-item"><a href="/about">परिचय</a></li>
+                        <li class="menu-item current-menu-item"><a href="/volunteer">स्वयंसेवक</a></li>
+                        <li class="menu-item search-item">
+                            <button class="search-toggle" aria-label="Open search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" aria-label="Mobile Menu" aria-expanded="false">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation (hidden by default) -->
+    <nav class="mobile-navigation" aria-label="Mobile Navigation">
+        <div class="mobile-menu-container">
+            <div class="mobile-search">
+                <form role="search" method="get" class="search-form" action="/search">
+                    <label for="mobile-search" class="screen-reader-text">Search</label>
+                    <input type="search" id="mobile-search" class="search-field" placeholder="रचनाएँ खोजें..." name="s">
+                    <button type="submit" class="search-submit" aria-label="Submit search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <ul class="mobile-menu">
+                <li><a href="/">मुखपृष्ठ</a></li>
+                <li class="menu-item-has-children">
+                    <a href="/languages">भाषाएँ <i class="fas fa-chevron-down"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="/sanskrit"><span class="lang-code">सं</span> संस्कृत</a></li>
+                        <li><a href="/hindi"><span class="lang-code">हि</span> हिन्दी</a></li>
+                        <li><a href="/tamil"><span class="lang-code">த</span> तमिल</a></li>
+                        <li><a href="/bengali"><span class="lang-code">ব</span> बांग्ला</a></li>
+                        <li><a href="/telugu"><span class="lang-code">త</span> तेलुगु</a></li>
+                        <li><a href="/kannada"><span class="lang-code">ಕ</span> कन्नड़</a></li>
+                        <li><a href="/malayalam"><span class="lang-code">മ</span> मलयालम</a></li>
+                        <li><a href="/marathi"><span class="lang-code">म</span> मराठी</a></li>
+                        <li><a href="/gujarati"><span class="lang-code">ગ</span> गुजराती</a></li>
+                        <li><a href="/punjabi"><span class="lang-code">ਪ</span> पंजाबी</a></li>
+                        <li><a href="/odia"><span class="lang-code">ଓ</span> ओड़िया</a></li>
+                        <li><a href="/urdu"><span class="lang-code">ا</span> उर्दू</a></li>
+                    </ul>
+                </li>
+                <li><a href="/periods">कालखंड</a></li>
+                <li><a href="/genres">विधाएँ</a></li>
+                <li><a href="/resources">संसाधन</a></li>
+                <li><a href="/about">परिचय</a></li>
+                <li><a href="/volunteer">स्वयंसेवक</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section volunteer-hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title hindi-text">भारतीय साहित्यिक विरासत के संरक्षक बनें</h2>
+                <p class="hero-subtitle hindi-text">स्वयंसेवक के रूप में हमारे साथ जुड़ें और प्राचीन भारतीय साहित्य को संरक्षित व प्रसारित करने में सहयोग दें</p>
+                <div class="hero-actions">
+                    <a href="#opportunities" class="btn btn-primary hindi-text">स्वयंसेवा अवसर</a>
+                    <a href="#apply" class="btn btn-secondary hindi-text">आवेदन करें</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Why Volunteer Section -->
+        <section class="section why-volunteer-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title hindi-text">स्वयंसेवक क्यों बनें?</h2>
+                    <p class="section-description hindi-text">एक गैर-लाभकारी पहल के रूप में, हम स्वयंसेवकों पर निर्भर हैं</p>
+                </div>
+                
+                <div class="why-grid">
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3 class="why-title hindi-text">सांस्कृतिक संरक्षण</h3>
+                        <p class="why-text hindi-text">भारत की समृद्ध साहित्यिक विरासत को संरक्षित करने व आने वाली पीढ़ियों तक पहुँचाने में सहयोग दें</p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="why-title hindi-text">ज्ञान अर्जन</h3>
+                        <p class="why-text hindi-text">प्राचीन ग्रंथों व भाषाओं के बारे में गहन ज्ञान प्राप्त करने का अनूठा अवसर</p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="why-title hindi-text">विद्वानों का समुदाय</h3>
+                        <p class="why-text hindi-text">साहित्य, इतिहास व संस्कृति के विद्वानों व उत्साही लोगों के साथ जुड़ने का मौका</p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3 class="why-title hindi-text">पेशेवर अनुभव</h3>
+                        <p class="why-text hindi-text">अनुवाद, शोध, डिजिटलीकरण जैसे क्षेत्रों में व्यावहारिक अनुभव प्राप्त करें</p>
+                    </div>
+                </div>
+                
+                <div class="why-testimonial">
+                    <div class="testimonial-content hindi-text">
+                        <p>"मैं पिछले दो वर्षों से भारतीय साहित्य संग्रह के साथ स्वयंसेवक के रूप में जुड़ा हूँ। संस्कृत ग्रंथों के डिजिटलीकरण में योगदान देने का यह अनुभव न केवल शैक्षणिक रूप से समृद्ध करने वाला रहा, बल्कि मुझे भारतीय साहित्य के प्रति गहरा सम्मान भी दिलाया।"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4 class="author-name hindi-text">डॉ. अमित शर्मा</h4>
+                            <p class="author-title hindi-text">स्वयंसेवक एवं संस्कृत शोधार्थी</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteer Opportunities Section -->
+        <section id="opportunities" class="section opportunities-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title hindi-text">स्वयंसेवा के अवसर</h2>
+                    <p class="section-description hindi-text">विभिन्न क्षेत्रों में योगदान देने के लिए स्वयंसेवकों की आवश्यकता</p>
+                </div>
+                
+                <div class="opportunities-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="language">
+                            <i class="fas fa-language"></i> <span class="hindi-text">भाषा विशेषज्ञ</span>
+                        </button>
+                        <button class="tab-button" data-tab="tech">
+                            <i class="fas fa-laptop-code"></i> <span class="hindi-text">तकनीकी सहयोग</span>
+                        </button>
+                        <button class="tab-button" data-tab="outreach">
+                            <i class="fas fa-bullhorn"></i> <span class="hindi-text">जनसंपर्क</span>
+                        </button>
+                        <button class="tab-button" data-tab="research">
+                            <i class="fas fa-search"></i> <span class="hindi-text">शोध सहायक</span>
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content active" id="language">
+                        <div class="tab-content-inner">
+                            <div class="tab-text">
+                                <h3 class="hindi-text">भाषा विशेषज्ञ स्वयंसेवक</h3>
+                                <div class="bilingual">
+                                    <p class="hindi-text">प्राचीन व मध्यकालीन भारतीय भाषाओं के जानकार स्वयंसेवकों की आवश्यकता:</p>
+                                    <p class="english-text">Volunteers proficient in ancient and medieval Indian languages needed</p>
+                                </div>
+                                
+                                <div class="requirements">
+                                    <h4 class="hindi-text">योग्यताएँ:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">संस्कृत, प्राकृत, अपभ्रंश या किसी प्राचीन भारतीय भाषा में दक्षता</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">अनुवाद, प्रूफरीडिंग या ट्रांसक्रिप्शन का अनुभव</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">साहित्यिक ग्रंथों की समझ</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">सप्ताह में 4-5 घंटे का समय देने की क्षमता</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="tasks">
+                                    <h4 class="hindi-text">कार्यक्षेत्र:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">प्राचीन पांडुलिपियों का आधुनिक भाषाओं में अनुवाद</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">अनुवादों की समीक्षा व संपादन</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">हस्तलिखित ग्रंथों का टाइपिंग/ट्रांसक्रिप्शन</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">भाषाई संदर्भ सामग्री तैयार करना</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-image">
+                                <img src="images/language-volunteer.jpg" alt="Language expert working on manuscript" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="tech">
+                        <div class="tab-content-inner">
+                            <div class="tab-text">
+                                <h3 class="hindi-text">तकनीकी स्वयंसेवक</h3>
+                                <div class="bilingual">
+                                    <p class="hindi-text">हमारी डिजिटल पहल को सहयोग देने के लिए तकनीकी कौशल वाले स्वयंसेवक</p>
+                                    <p class="english-text">Tech-savvy volunteers to support our digital initiatives</p>
+                                </div>
+                                
+                                <div class="requirements">
+                                    <h4 class="hindi-text">योग्यताएँ:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">वेब विकास, डेटाबेस या सॉफ्टवेयर में कौशल</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">OCR तकनीक या डिजिटल संरक्षण का ज्ञान</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">भारतीय भाषाओं के लिए तकनीकी समाधानों में रुचि</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">सप्ताह में 3-4 घंटे का समय देने की क्षमता</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="tasks">
+                                    <h4 class="hindi-text">कार्यक्षेत्र:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">वेबसाइट विकास व रखरखाव</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">डिजिटल पुस्तकालय प्रबंधन</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">भारतीय लिपियों के लिए OCR सिस्टम विकसित करना</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">डेटा विश्लेषण व विज़ुअलाइज़ेशन</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-image">
+                                <img src="images/tech-volunteer.jpg" alt="Tech volunteer working on computer" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="outreach">
+                        <div class="tab-content-inner">
+                            <div class="tab-text">
+                                <h3 class="hindi-text">जनसंपर्क स्वयंसेवक</h3>
+                                <div class="bilingual">
+                                    <p class="hindi-text">हमारे कार्य को विस्तृत दर्शकों तक पहुँचाने में सहायता करें</p>
+                                    <p class="english-text">Help expand our audience reach through outreach activities</p>
+                                </div>
+                                
+                                <div class="requirements">
+                                    <h4 class="hindi-text">योग्यताएँ:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">प्रभावी संचार कौशल</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">सोशल मीडिया या समुदाय संगठन का अनुभव</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">साहित्य व संस्कृति में रुचि</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">सप्ताह में 2-3 घंटे का समय देने की क्षमता</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="tasks">
+                                    <h4 class="hindi-text">कार्यक्षेत्र:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">सोशल मीडिया प्रबंधन</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">समाचार पत्रिकाओं व ब्लॉग्स के लिए सामग्री निर्माण</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">शैक्षणिक संस्थानों व सांस्कृतिक केंद्रों से संपर्क</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">ऑनलाइन व ऑफलाइन कार्यक्रमों का आयोजन</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-image">
+                                <img src="images/outreach-volunteer.jpg" alt="Outreach volunteer conducting workshop" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="research">
+                        <div class="tab-content-inner">
+                            <div class="tab-text">
+                                <h3 class="hindi-text">शोध सहायक स्वयंसेवक</h3>
+                                <div class="bilingual">
+                                    <p class="hindi-text">शैक्षणिक शोध व विश्लेषण में सहयोग करने वाले स्वयंसेवक</p>
+                                    <p class="english-text">Volunteers to assist with academic research and analysis</p>
+                                </div>
+                                
+                                <div class="requirements">
+                                    <h4 class="hindi-text">योग्यताएँ:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">शोध कार्य का अनुभव या शैक्षणिक पृष्ठभूमि</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">साहित्यिक विश्लेषण की क्षमता</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">स्रोत संग्रहण व संदर्भ प्रबंधन का ज्ञान</span></li>
+                                        <li><i class="fas fa-check-circle"></i> <span class="hindi-text">सप्ताह में 5-6 घंटे का समय देने की क्षमता</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="tasks">
+                                    <h4 class="hindi-text">कार्यक्षेत्र:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">प्राचीन ग्रंथों पर शोध सामग्री तैयार करना</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">ऐतिहासिक संदर्भों का संकलन</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">शोध पत्रों व लेखों की समीक्षा</span></li>
+                                        <li><i class="fas fa-arrow-right"></i> <span class="hindi-text">बौद्धिक संपदा अधिकारों पर शोध</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-image">
+                                <img src="images/research-volunteer.jpg" alt="Research volunteer in library" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Projects Section -->
+        <section class="section projects-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title hindi-text">चालू परियोजनाएँ जिनमें सहयोग चाहिए</h2>
+                    <p class="section-description hindi-text">स्वयंसेवकों की आवश्यकता वाली वर्तमान पहल</p>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title hindi-text">संस्कृत नाटकों का हिंदी अनुवाद</h3>
+                            <div class="project-meta">
+                                <span class="project-category hindi-text">भाषा अनुवाद</span>
+                                <span class="project-deadline hindi-text">चालू</span>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description hindi-text">भास, कालिदास व अन्य संस्कृत नाटककारों के नाटकों का सरल हिंदी में अनुवाद। अनुवादकों व प्रूफरीडरों की आवश्यकता।</p>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-label hindi-text">स्वयंसेवक</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">24</span>
+                                    <span class="stat-label hindi-text">नाटक</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#apply" class="project-link hindi-text">सहयोग करें <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title hindi-text">मध्यकालीन भक्ति काव्य डिजिटलीकरण</h3>
+                            <div class="project-meta">
+                                <span class="project-category hindi-text">तकनीकी</span>
+                                <span class="project-deadline hindi-text">चालू</span>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description hindi-text">15वीं-18वीं शताब्दी के भक्ति कवियों की हस्तलिखित पांडुलिपियों का स्कैनिंग व डिजिटल संरक्षण।</p>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">8</span>
+                                    <span class="stat-label hindi-text">स्वयंसेवक</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">500+</span>
+                                    <span class="stat-label hindi-text">पृष्ठ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#apply" class="project-link hindi-text">सहयोग करें <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title hindi-text">साहित्यिक शब्दकोश निर्माण</h3>
+                            <div class="project-meta">
+                                <span class="project-category hindi-text">शोध</span>
+                                <span class="project-deadline hindi-text">नया</span>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description hindi-text">प्राचीन भारतीय साहित्य में प्रयुक्त विशिष्ट शब्दावली का बहुभाषी शब्दकोश तैयार करने की परियोजना।</p>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">5</span>
+                                    <span class="stat-label hindi-text">स्वयंसेवक</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">10</span>
+                                    <span class="stat-label hindi-text">भाषाएँ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#apply" class="project-link hindi-text">सहयोग करें <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteer Benefits Section -->
+        <section class="section benefits-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title hindi-text">स्वयंसेवकों को मिलने वाले लाभ</h2>
+                    <p class="section-description hindi-text">हमारे साथ जुड़ने के विशेषाधिकार</p>
+                </div>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3 class="benefit-title hindi-text">प्रमाणपत्र</h3>
+                        <p class="benefit-text hindi-text">योगदान के आधार पर आधिकारिक प्रमाणपत्र व सिफारिश पत्र</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="benefit-title hindi-text">विशेष पहुँच</h3>
+                        <p class="benefit-text hindi-text">दुर्लभ साहित्यिक संसाधनों व शोध सामग्री तक विशेष पहुँच</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="benefit-title hindi-text">शिक्षण अवसर</h3>
+                        <p class="benefit-text hindi-text">विशेषज्ञों द्वारा भाषा व साहित्य पर निःशुल्क कार्यशालाओं में भाग लेने का अवसर</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="benefit-title hindi-text">नेटवर्किंग</h3>
+                        <p class="benefit-text hindi-text">देश-विदेश के विद्वानों व साहित्यप्रेमियों से जुड़ने का मौका</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3 class="benefit-title hindi-text">प्रशिक्षण</h3>
+                        <p class="benefit-text hindi-text">पांडुलिपि संरक्षण, डिजिटलीकरण व शोध विधियों पर प्रशिक्षण</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="benefit-title hindi-text">उपहार</h3>
+                        <p class="benefit-text hindi-text">नियमित स्वयंसेवकों को हमारे प्रकाशन व स्मृति चिन्ह भेंट</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteer Application Section -->
+        <section id="apply" class="section application-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section
